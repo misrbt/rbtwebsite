@@ -1,0 +1,338 @@
+/* ==========================================================================
+   RBT Bank — Events page sections
+   Requires style.css to be loaded first (design tokens).
+   ========================================================================== */
+
+/* ── Hero ─────────────────────────────────────────────────────────────────── */
+
+.events-hero {
+  background: var(--color-white);
+  padding-block: 0;
+}
+
+.events-hero__banner-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0;
+}
+
+/* ── Shared section heading (lines + blue accent bar) ─────────────────────── */
+
+.events-section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  max-width: 72rem;
+  margin-inline: auto;
+  margin-bottom: var(--space-10);
+}
+
+.events-section-heading__title-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 0.4rem;
+}
+
+.events-section-heading h2 {
+  font-size: var(--font-size-xl);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-navy);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.events-section-heading__accent {
+  display: block;
+  width: 3.5rem;
+  height: 3px;
+  background: var(--color-blue);
+  border-radius: 2px;
+}
+
+.events-section-heading__rule {
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+  min-width: 2rem;
+}
+
+/* ── Event Highlights carousel ────────────────────────────────────────────── */
+
+.events-highlights {
+  background: var(--color-white);
+  padding-block: var(--space-16) var(--space-16);
+}
+
+.events-highlights__carousel {
+  padding-inline: 3.5rem;
+}
+
+.events-highlights__carousel-inner {
+  position: relative;
+}
+
+.events-highlights__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-border);
+  background: var(--color-white);
+  color: var(--color-navy);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.events-highlights__arrow:hover {
+  color: var(--color-blue);
+  border-color: var(--color-blue);
+  box-shadow: var(--shadow-md);
+}
+
+.events-highlights__arrow.swiper-button-disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.events-highlights__arrow--prev {
+  left: -3.5rem;
+}
+
+.events-highlights__arrow--next {
+  right: -3.5rem;
+}
+
+.events-highlights .swiper-slide {
+  height: auto;
+  display: flex;
+}
+
+/* ── Highlight card ───────────────────────────────────────────────────────── */
+
+.events-highlight-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  /* keeps image flush to card edges */
+  box-shadow: 0 4px 20px rgba(7, 26, 47, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  transition:
+    box-shadow var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
+}
+
+.events-highlight-card:hover {
+  box-shadow: 0 8px 32px rgba(7, 26, 47, 0.16);
+  transform: translateY(-4px);
+}
+
+/* Title — inside card, blue, centred, with its own padding */
+.events-highlight-card h3 {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-blue);
+  text-align: center;
+  padding: var(--space-5) var(--space-4) var(--space-4);
+  line-height: 1.4;
+  min-height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Image — flush to card sides, no padding, below title */
+.events-highlight-card__media {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--color-section-tint);
+  flex-shrink: 0;
+}
+
+.events-highlight-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Description — padded, below image, fills remaining card height */
+.events-highlight-card p {
+  font-size: var(--font-size-2xs, 0.75rem);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  flex: 1;
+  margin: 0;
+  padding: var(--space-3) var(--space-4) var(--space-4);
+}
+
+/* ── Timeline ─────────────────────────────────────────────────────────────── */
+
+.events-timeline {
+  background: var(--color-white);
+  padding-block: var(--space-16) var(--space-20);
+}
+
+/* Description paragraph below Timeline heading */
+.events-timeline__desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  line-height: 1.75;
+  max-width: 64rem;
+  margin-inline: auto;
+  margin-bottom: var(--space-10);
+  text-align: center;
+  background-color: white;
+  /* Using the light cyan/blue shade */
+  padding: var(--space-6) var(--space-8);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 20px rgba(0, 119, 182, 0.08);
+  /* subtle blue shadow */
+}
+
+.events-timeline__feature {
+  background: var(--color-light-gray);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  margin-bottom: var(--space-10);
+  box-shadow: inset 0 0 0 1px var(--color-border);
+}
+
+.events-timeline__feature-frame {
+  position: relative;
+  max-width: 22rem;
+  margin-inline: auto;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-md);
+}
+
+.events-timeline__feature-year {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 3.25rem;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg,
+      var(--color-navy) 0%,
+      var(--color-blue) 100%);
+  color: var(--color-white);
+  font-family: var(--font-heading);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
+}
+
+.events-timeline__feature-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+}
+
+.events-timeline__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-5);
+}
+
+.events-timeline-card {
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-4);
+  width: 100%;
+  padding: var(--space-4);
+  text-align: left;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.events-timeline-card:hover {
+  border-color: rgba(0, 119, 182, 0.35);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.events-timeline-card.is-active {
+  border-color: var(--color-blue);
+  box-shadow: 0 0 0 2px rgba(0, 119, 182, 0.15);
+}
+
+.events-timeline-card__thumb {
+  flex: 0 0 5.5rem;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-section-tint);
+}
+
+.events-timeline-card__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 1;
+}
+
+.events-timeline-card__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.events-timeline-card__year {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-blue);
+  line-height: 1.2;
+}
+
+.events-timeline-card__place {
+  display: block;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-navy);
+  margin-bottom: var(--space-2);
+}
+
+.events-timeline-card__desc {
+  font-size: var(--font-size-2xs);
+  color: var(--color-text-muted);
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

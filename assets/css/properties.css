@@ -1,0 +1,526 @@
+/* ==========================================================================
+   RBT Bank — Properties Page (properties.html)
+   Requires style.css to be loaded first (design tokens).
+   ========================================================================== */
+
+/* ---- Hero ----
+   Not the shared .home-hero carousel (see hero-carousel.css) — this page
+   uses a single pre-composited banner (assets/images/properties/hero.jpg)
+   that already bakes in the pale-tint-to-photo blend and headline, so it
+   just runs edge to edge like the branches.html single-slide banner does. */
+.properties-hero {
+  background: var(--color-light-gray);
+  padding-block: 0;
+}
+
+.properties-hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: left center;
+}
+
+/* ---- Search / Advanced Search ---- */
+
+.properties-listings {
+  background: var(--color-white);
+  padding-block: var(--space-12) var(--space-16);
+}
+
+.properties-search {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-8);
+  margin-bottom: var(--space-12);
+}
+
+.properties-search__row {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.properties-search__field {
+  flex: 1;
+  min-width: 240px;
+}
+
+.properties-search__actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--space-3);
+}
+
+.properties-search__actions .btn {
+  min-height: 48px;
+  padding-inline: var(--space-6);
+  font-size: var(--font-size-sm);
+  white-space: nowrap;
+}
+
+.properties-search__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6) var(--space-8);
+  margin-top: var(--space-6);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border);
+}
+
+.properties-search__grid[hidden] {
+  display: none;
+}
+
+/* Shared field component — label + control, reused by the search input and
+   the advanced-search selects. */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.field__label {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--color-navy);
+}
+
+.field__control {
+  position: relative;
+}
+
+.field__control-icon {
+  position: absolute;
+  left: var(--space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.field__control-chevron {
+  position: absolute;
+  right: var(--space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  min-height: 48px;
+  padding-inline: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-white);
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  transition: border-color var(--duration-fast) var(--ease-out);
+}
+
+.field input {
+  padding-left: var(--space-12);
+}
+
+.field select {
+  padding-right: var(--space-12);
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.field input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.field input:focus-visible,
+.field select:focus-visible {
+  outline: none;
+  border-color: var(--color-blue);
+}
+
+/* ---- Acquired Properties heading ---- */
+
+.properties-listings .section-heading__rule {
+  background: var(--color-blue);
+}
+
+/* ---- Empty state ---- */
+
+.properties-grid__empty {
+  display: none;
+  text-align: center;
+  color: var(--color-text-muted);
+  padding-block: var(--space-12);
+}
+
+.properties-grid__empty.is-visible {
+  display: block;
+}
+
+/* ---- Property grid ---- */
+
+.properties-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+  margin-bottom: var(--space-12);
+}
+
+.property-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--duration-base) var(--ease-out);
+}
+
+.property-card[hidden] {
+  display: none;
+}
+
+.property-card[data-hover-lift]:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.property-card__image {
+  aspect-ratio: 4 / 3;
+  background: var(--color-section-tint);
+  overflow: hidden;
+}
+
+.property-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Listings added without a source photo yet — a plain tinted placeholder
+   instead of borrowing another property's image. Left-aligned and padded
+   to match .property-card__body below, so the icon/caption line up with
+   the address/price text instead of sitting centered above it. */
+.property-card__image--placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--space-2);
+  height: 100%;
+  padding: var(--space-6);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+}
+
+.property-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: var(--space-6);
+}
+
+/* Hanging indent (not flex+gap) — with the pin icon as an inline element
+   and a negative text-indent pulling just the first line back over it,
+   a wrapped second line lands under the address text itself instead of
+   snapping back to the far-left edge under the icon.
+   A <button> now (opens the directions modal below, not a navigating
+   <a>), so UA button chrome is reset to keep the same plain-text look. */
+.property-card__location {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  padding-left: 18px;
+  text-indent: -18px;
+  text-align: left;
+  line-height: 1.4;
+  font-size: var(--font-size-2xs);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-3);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.property-card__location:hover,
+.property-card__location:focus-visible {
+  color: var(--color-blue);
+  text-decoration: underline;
+}
+
+.property-card__location svg {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: var(--space-1);
+  vertical-align: -2px;
+  color: var(--color-blue);
+}
+
+.property-card__type {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: var(--color-navy);
+}
+
+.property-card__lot {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.property-card__price {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--font-size-lg);
+  color: var(--color-navy);
+  margin-top: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.property-card__cta {
+  margin-top: auto;
+  width: 100%;
+  min-height: 42px;
+  padding-inline: var(--space-4);
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.02em;
+}
+
+/* ---- Pagination ----
+   Rendered at runtime from the real, current card count (see
+   initPropertyPagination in main.js) — page buttons only exist for pages
+   that actually have cards behind them, and the nav is omitted entirely
+   when everything fits on one page. Page/arrow controls are real
+   <button> elements, with the current page and disabled boundary arrows
+   rendered as inert <span>s instead. */
+
+.properties-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-12);
+}
+
+.properties-pagination__arrow,
+.properties-pagination__page {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  margin: 0;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  color: var(--color-navy);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.properties-pagination__arrow {
+  border-radius: var(--radius-full);
+}
+
+.properties-pagination__page:hover,
+.properties-pagination__arrow:hover {
+  background: var(--color-section-tint);
+}
+
+.properties-pagination__page[aria-current="page"] {
+  background: var(--color-navy);
+  border-color: var(--color-navy);
+  color: var(--color-white);
+}
+
+.properties-pagination__page[aria-disabled="true"],
+.properties-pagination__arrow[aria-disabled="true"] {
+  color: var(--color-text-muted);
+  cursor: default;
+  pointer-events: none;
+}
+
+.properties-pagination__arrow[aria-disabled="true"]:hover {
+  background: var(--color-white);
+}
+
+.properties-pagination__ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: var(--color-text-muted);
+}
+
+/* ---- Interested in a Property? ---- */
+
+.properties-inquire {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-sm);
+}
+
+.properties-inquire__heading {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--space-2);
+}
+
+.properties-inquire__text {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  max-width: 24rem;
+}
+
+.properties-inquire__contact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.properties-inquire__contact li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-navy);
+}
+
+.properties-inquire__contact a {
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.properties-inquire__contact a:hover {
+  color: var(--color-blue);
+}
+
+.properties-inquire__contact-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  background: var(--color-section-tint);
+  color: var(--color-blue);
+}
+
+.properties-inquire__art {
+  flex-shrink: 0;
+  color: rgba(3, 4, 94, 0.18);
+}
+
+/* ==========================================================================
+   Property Location Modal — clicking a card's location opens this in
+   place instead of navigating away, showing a plain pin on that property.
+   Same component as contact.html's .map-modal (contact.css), duplicated
+   here since this page doesn't load contact.css — kept as its own
+   data-property-map-* hooks (see initPropertyMapModal in main.js) so nothing
+   here can collide with the branch directory's modal.
+   ========================================================================== */
+
+.map-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+}
+
+.map-modal[hidden] {
+  display: none;
+}
+
+.map-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(3, 4, 94, 0.6);
+  backdrop-filter: blur(2px);
+}
+
+.map-modal__panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 56rem;
+  height: min(34rem, 80vh);
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+.map-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.map-modal__title {
+  font-size: var(--font-size-lg);
+  color: var(--color-navy);
+}
+
+.map-modal__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--color-navy);
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.map-modal__close:hover {
+  background: var(--color-section-tint);
+}
+
+.map-modal__iframe {
+  flex: 1;
+  width: 100%;
+  border: 0;
+}
+
+.map-modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: var(--space-4) var(--space-6);
+  border-top: 1px solid var(--color-border);
+}
+
+.map-modal__directions {
+  min-height: 40px;
+  padding-inline: var(--space-6);
+  font-size: var(--font-size-sm);
+}

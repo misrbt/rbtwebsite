@@ -1,0 +1,207 @@
+/* ==========================================================================
+   RBT Bank — Navigation
+   Requires style.css to be loaded first (design tokens).
+   ========================================================================== */
+
+/* Header sits in normal flow (not fixed/transparent-over-hero) — the
+   homepage hero is a light section directly below it, not a dark
+   full-bleed backdrop, so there's no "transparent until scrolled" state
+   to manage. It stays a permanent white bar with a hairline border. */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
+  transition:
+    height var(--duration-base) var(--ease-out),
+    background-color var(--duration-base) var(--ease-out),
+    border-color var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
+}
+
+/* Scrolled state — navy fill + white text, the same dark/light pairing
+   already used for the mobile dropdown and .section--dark, so "scrolled
+   nav" reads as one more instance of an existing palette rule rather
+   than a one-off color choice. */
+.site-header.is-scrolled {
+  height: var(--nav-height-shrunk);
+  background: var(--color-navy);
+  border-bottom-color: transparent;
+  box-shadow: var(--shadow-lg);
+}
+
+.site-header.is-scrolled .site-nav__logo-text,
+.site-header.is-scrolled .site-nav__links a,
+.site-header.is-scrolled .site-nav__toggle {
+  color: var(--color-text-inverse);
+}
+
+.site-header.is-scrolled .site-nav__links a::after {
+  background: var(--color-gold);
+}
+
+.site-header.is-scrolled .site-nav__links a:hover {
+  color: var(--color-tint-light);
+}
+
+.site-header.is-scrolled .site-nav__toggle:hover,
+.site-header.is-scrolled .site-nav__toggle:active {
+  background: var(--color-border-inverse);
+}
+
+/* .site-nav also carries .container for consistent edge padding, but
+   .container's max-width + margin-inline:auto centers it on wide screens,
+   leaving a gap before the logo instead of pinning it to the true left
+   edge. The nav should span full width; only the padding should match. */
+.site-header .container {
+  max-width: 100%;
+  padding-left: var(--space-16);
+  padding-right: var(--space-16);
+}
+
+/* flex-start (not space-between) so the logo and links sit close together
+   on the left instead of space-between dumping all leftover width into a
+   single gap right after the logo on wide screens. */
+.site-nav {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-8);
+}
+
+.site-nav__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* Same seal image and treatment as the footer's .site-footer__seal
+   (assets/images/rbt-logo.png) — square source, plain object-fit: cover,
+   no special cropping needed. IMPORTANT: to resize this logo, only ever
+   change --logo-size below. Do not add a separate width value —
+   aspect-ratio keeps the box square structurally. */
+.site-nav__logo img {
+  --logo-size: 68px;
+  height: var(--logo-size);
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid var(--color-white);
+}
+
+.site-nav__logo-text {
+  font-family: var(--font-heading);
+  line-height: 1.2;
+  color: var(--color-navy);
+  transition: color var(--duration-base) var(--ease-out);
+}
+
+.site-nav__logo-text strong {
+  display: block;
+  font-size: var(--font-size-lg);
+  font-weight: 800;
+}
+
+.site-nav__logo-text span {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.site-nav__links {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1;
+  gap: var(--space-12);
+}
+
+.site-nav__links a {
+  position: relative;
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  color: var(--color-navy);
+  padding-block: var(--space-2);
+  transition: color var(--duration-base) var(--ease-out);
+}
+
+.site-nav__links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background: var(--color-blue);
+  transition:
+    width var(--duration-base) var(--ease-out),
+    background-color var(--duration-base) var(--ease-out);
+}
+
+.site-nav__links a:hover {
+  color: var(--color-blue);
+}
+
+.site-nav__links a:hover::after,
+.site-nav__links a[aria-current="page"]::after {
+  width: 100%;
+}
+
+.site-nav__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-left: auto;
+}
+
+.site-nav__actions .btn {
+  font-size: var(--font-size-base);
+  min-height: 52px;
+  padding-inline: var(--space-8);
+}
+
+.site-nav__toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-full);
+  color: var(--color-navy);
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    color var(--duration-base) var(--ease-out);
+}
+
+.site-nav__toggle:hover,
+.site-nav__toggle:active {
+  background: var(--color-light-gray);
+}
+
+.site-nav__toggle-line {
+  transform-origin: center;
+  transition: transform var(--duration-base) var(--ease-out),
+              opacity var(--duration-base) var(--ease-out);
+}
+
+/* Morphs the three bars into an X when the panel is open — driven by the
+   same aria-expanded attribute screen readers use, so the visual and
+   accessible state can never drift apart. */
+.site-nav__toggle[aria-expanded="true"] .site-nav__toggle-line--top {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.site-nav__toggle[aria-expanded="true"] .site-nav__toggle-line--mid {
+  opacity: 0;
+}
+
+.site-nav__toggle[aria-expanded="true"] .site-nav__toggle-line--bottom {
+  transform: translateY(-6px) rotate(-45deg);
+}

@@ -1,0 +1,387 @@
+/* ==========================================================================
+   RBT Bank — Site Footer + Back to Top
+   Requires style.css to be loaded first (design tokens).
+   ========================================================================== */
+
+/* Brand-blue footer. Unlike navy, this mid-tone blue doesn't have enough
+   contrast against --color-text-inverse-muted (~2.8:1, fails WCAG AA) —
+   only full white clears AA here, so every text element below uses
+   --color-text-inverse rather than a dimmed/muted variant. */
+.site-footer {
+  background: var(--color-navy);
+  color: var(--color-text-inverse);
+  padding-block: var(--space-16) var(--space-8);
+}
+
+/* Same reasoning as .site-header .container: .container's max-width
+   centers it on wide screens, which would leave the footer's edges
+   inset from the nav bar's true-edge content above it. Left/right padding
+   is kept in sync with .site-header .container so the footer's edges
+   line up exactly with the nav bar's above it. */
+.site-footer .container {
+  max-width: 100%;
+  padding-left: var(--space-16);
+  padding-right: var(--space-16);
+}
+
+/* Moved here from the old standalone homepage "Contact CTA" section —
+   reads as the footer's own closing CTA instead of a separate section,
+   using the same flex row / dark-CTA-band pattern as "Apply for a Loan
+   Online" (text left, actions right). */
+.site-footer__cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+  padding-bottom: var(--space-12);
+  margin-bottom: var(--space-12);
+  border-bottom: 1px solid var(--color-border-inverse);
+}
+
+.site-footer__cta h2 {
+  color: var(--color-text-inverse);
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--space-2);
+}
+
+.site-footer__cta p {
+  max-width: 34rem;
+}
+
+.site-footer__cta-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+.site-footer__grid {
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  padding-bottom: var(--space-12);
+  border-bottom: 1px solid var(--color-border-inverse);
+}
+
+.site-footer__logo {
+  margin-bottom: var(--space-4);
+}
+
+/* Same aspect-ratio approach as .site-nav__logo img — see that comment. */
+.site-footer__logo img {
+  --logo-size: 88px;
+  height: var(--logo-size);
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: left center;
+}
+
+.site-footer h5 {
+  color: var(--color-text-inverse);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--space-4);
+}
+
+/* One link per row, full column width — each row carries its own bottom
+   divider and a trailing chevron pushed to the right edge (space-between),
+   matching the source design's list-row treatment rather than a plain
+   stacked link list. */
+.site-footer__links {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+}
+
+.site-footer__links li:not(:last-child) {
+  border-bottom: 1px solid var(--color-border-inverse);
+}
+
+.site-footer__links a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  font-size: var(--font-size-base);
+  color: var(--color-text-inverse);
+  padding-block: var(--space-3);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.site-footer__links a svg {
+  flex-shrink: 0;
+  color: var(--color-text-inverse-muted);
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.site-footer__links a:hover {
+  color: var(--color-tint-light);
+}
+
+.site-footer__links a:hover svg {
+  color: var(--color-gold);
+  transform: translateX(2px);
+}
+
+.site-footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--color-border-inverse);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-inverse);
+}
+
+.site-footer__legal {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--color-text-inverse-muted);
+}
+
+.site-footer__legal a {
+  color: var(--color-text-inverse-muted);
+}
+
+.site-footer__legal a:hover {
+  color: var(--color-text-inverse);
+}
+
+.site-footer__social {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  color: var(--color-text-inverse);
+}
+
+/* ---- Simplified footer (real homepage) — mirrors .site-nav's layout:
+   a flex row, logo/brand pinned left, everything else left-aligned and
+   spread across the row instead of stacked centered columns. ---- */
+
+.site-footer__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-8) var(--space-12);
+  padding-bottom: var(--space-8);
+  text-align: left;
+}
+
+.site-footer__col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1 1 200px;
+}
+
+/* Brand column carries the most content (seal + two paragraphs) and would
+   otherwise dominate the row's width — cap it so the four columns read as
+   an even set instead of one oversized column plus three narrow ones. */
+.site-footer__top > .site-footer__col:first-child {
+  flex: 0 1 380px;
+  max-width: 380px;
+}
+
+.site-footer__col p {
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--space-3);
+}
+
+.site-footer__col p a {
+  color: var(--color-text-inverse);
+  text-decoration: underline;
+}
+
+.site-footer__seal {
+  --logo-size: 64px;
+  height: var(--logo-size);
+  width: var(--logo-size);
+  object-fit: cover;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid var(--color-white);
+}
+
+/* Seal + name/tagline sit inline as one row, not stacked — matches the
+   source design, where the brand text sits beside the logo, not below it. */
+.site-footer__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.site-footer__divider {
+  width: 1px;
+  align-self: stretch;
+  background: var(--color-border-inverse);
+}
+
+/* align-items: flex-end (not flex-start) — the DPO badge's image is taller
+   than the BSP/PDIC ones (see .site-footer__badge--dpo), so top-aligning
+   the figures left its caption sitting lower than the other two. Bottom-
+   aligning keeps all three figcaptions on the same line regardless of how
+   tall each image renders. */
+.site-footer__badges {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.site-footer__badges figure {
+  margin: 0;
+  width: 64px;
+  text-align: center;
+}
+
+.site-footer__badges img {
+  height: 52px;
+  width: 52px;
+  object-fit: contain;
+  margin-bottom: var(--space-2);
+}
+
+.site-footer__pdic-desc {
+  font-size: var(--font-size-2xs);
+  color: var(--color-white);
+  opacity: 0.95;
+  margin-top: var(--space-3);
+  margin-bottom: 0;
+  text-align: center;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+/* The DPO/DPS badge artwork is wider than tall (unlike the roughly-square
+   BSP/PDIC marks) and object-fit: contain scales by the limiting
+   dimension — at the same 52px box it renders visibly smaller/shorter
+   than the other two. Sizing its box up compensates so all three badges
+   read as the same visual weight in the row. */
+.site-footer__badge--dpo {
+  width: 76px;
+}
+
+.site-footer__badge--dpo img {
+  width: 72px;
+  height: 72px;
+}
+
+.site-footer__badges figcaption {
+  font-size: 11px;
+  line-height: 1.3;
+  color: var(--color-text-inverse-muted);
+}
+
+/* Brand name/tagline sit directly under the seal, above the regulatory
+   paragraphs — bold name first, softer tagline second, matching the source
+   design's brand block. */
+.site-footer__brand-name {
+  color: var(--color-text-inverse);
+  font-size: var(--font-size-lg);
+}
+
+.site-footer__tagline {
+  color: var(--color-text-inverse-muted);
+  font-size: var(--font-size-sm);
+}
+
+/* Short accent rule under each column heading/paragraph group — reuses the
+   same "small underline" language as .section-heading__rule, just left
+   aligned and in the cyan accent (reads better than navy on this dark bg). */
+.site-footer__rule {
+  display: block;
+  width: 40px;
+  height: 3px;
+  margin-block: var(--space-2) var(--space-4);
+  background: var(--color-gold);
+  border-radius: var(--radius-full);
+}
+
+.site-footer__contact-btn {
+  margin-top: var(--space-2);
+  gap: var(--space-2);
+}
+
+/* Horizontal rule between the Follow Us and Regulated & Insured By groups,
+   which now share a single column. */
+.site-footer__col-divider {
+  width: 100%;
+  height: 1px;
+  margin-block: var(--space-6);
+  background: var(--color-border-inverse);
+}
+
+.site-footer__social a {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-inverse);
+}
+
+/* The icon file (favebook.webp) is already a complete circular badge —
+   flat color + white "f" baked in — so unlike the old inline-SVG version
+   this needs no background/color of its own, just sizing. */
+.site-footer__social-icon {
+  display: block;
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Back to Top
+   ========================================================================== */
+
+/* Hidden by default (opacity/visibility), not display:none — so it can
+   transition in/out smoothly instead of popping. main.js toggles
+   .is-visible once the user has scrolled past the fold. */
+.back-to-top {
+  position: fixed;
+  right: var(--space-6);
+  bottom: calc(var(--space-6) + 64px);
+  z-index: 90;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  border: none;
+  background: var(--color-navy);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition:
+    opacity var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    visibility 0s var(--duration-base);
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition:
+    opacity var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    visibility 0s;
+}
+
+.back-to-top:hover {
+  background: var(--color-blue);
+}

@@ -1,0 +1,196 @@
+<svg viewBox="0 0 1200 1560" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <linearGradient id="hdrGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#12314F"/>
+      <stop offset="100%" stop-color="#1B4A73"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Page background -->
+  <rect x="0" y="0" width="1200" height="1560" fill="#FFFFFF"/>
+
+  <!-- Header -->
+  <rect x="0" y="0" width="1200" height="200" fill="url(#hdrGrad)"/>
+  <rect x="0" y="196" width="1200" height="4" fill="#E8A33D"/>
+  <text x="600" y="78" text-anchor="middle" font-size="38" font-weight="700" fill="#FFFFFF" letter-spacing="1">BARANGAY MANAGEMENT SYSTEM</text>
+  <text x="600" y="114" text-anchor="middle" font-size="17" fill="#E8A33D" font-weight="600">A Web-Based Digital Transformation Proposal for Barangay Operations</text>
+  <text x="600" y="150" text-anchor="middle" font-size="13" fill="#CBD5E1">Prepared by: [Your Name / Team]     |     Date: July 2026     |     For: Barangay LGU &amp; Academic Review Panel</text>
+  <text x="600" y="175" text-anchor="middle" font-size="11" fill="#93A9C2" font-style="italic">Executive Summary — full 30–50 page technical proposal available separately</text>
+
+  <!-- Executive Summary -->
+  <rect x="60" y="228" width="1080" height="120" fill="#F4F6F8"/>
+  <rect x="60" y="228" width="6" height="120" fill="#1B4A73"/>
+  <text x="90" y="256" font-size="15" font-weight="700" fill="#12314F" letter-spacing="0.5">EXECUTIVE SUMMARY</text>
+  <text x="90" y="282" font-size="13.5" fill="#374151">The Barangay Management System (BMS) replaces manual, paper-based barangay record-keeping with a</text>
+  <text x="90" y="303" font-size="13.5" fill="#374151">centralized, secure digital platform covering resident and household records, certificate issuance,</text>
+  <text x="90" y="324" font-size="13.5" fill="#374151">blotter and complaint tracking, and real-time reporting — for faster, more transparent public service.</text>
+
+  <!-- Problems (left) -->
+  <text x="60" y="382" font-size="15" font-weight="700" fill="#12314F">KEY PROBLEMS ADDRESSED</text>
+  <g font-size="13" fill="#374151">
+    <rect x="60" y="398" width="8" height="8" fill="#C0392B"/>
+    <text x="78" y="406">Manual, paper-based record keeping</text>
+    <rect x="60" y="425" width="8" height="8" fill="#C0392B"/>
+    <text x="78" y="433">Slow processing of certificates &amp; requests</text>
+    <rect x="60" y="452" width="8" height="8" fill="#C0392B"/>
+    <text x="78" y="460">Difficulty searching / retrieving resident records</text>
+    <rect x="60" y="479" width="8" height="8" fill="#C0392B"/>
+    <text x="78" y="487">Duplicate &amp; inconsistent data across logbooks</text>
+    <rect x="60" y="506" width="8" height="8" fill="#C0392B"/>
+    <text x="78" y="514">Lost or damaged files, no centralized data</text>
+  </g>
+
+  <!-- Objectives (right) -->
+  <text x="630" y="382" font-size="15" font-weight="700" fill="#12314F">PROJECT OBJECTIVES</text>
+  <text x="630" y="400" font-size="12.5" fill="#374151" font-style="italic">General: Build a centralized digital system for core barangay operations.</text>
+  <g font-size="13" fill="#374151">
+    <rect x="630" y="416" width="8" height="8" fill="#1B8C6F"/>
+    <text x="648" y="424">Digitize resident &amp; household records</text>
+    <rect x="630" y="443" width="8" height="8" fill="#1B8C6F"/>
+    <text x="648" y="451">Automate certificate generation (PDF + QR)</text>
+    <rect x="630" y="470" width="8" height="8" fill="#1B8C6F"/>
+    <text x="648" y="478">Centralize blotter &amp; complaint tracking</text>
+    <rect x="630" y="497" width="8" height="8" fill="#1B8C6F"/>
+    <text x="648" y="505">Generate real-time reports &amp; analytics</text>
+    <rect x="630" y="524" width="8" height="8" fill="#1B8C6F"/>
+    <text x="648" y="532">Enforce role-based access &amp; audit trails</text>
+  </g>
+
+  <!-- Core Modules -->
+  <text x="600" y="580" text-anchor="middle" font-size="15" font-weight="700" fill="#12314F" letter-spacing="0.5">CORE SYSTEM MODULES</text>
+  <rect x="500" y="590" width="200" height="3" fill="#E8A33D"/>
+
+  <g font-size="12.5" fill="#1F2937">
+    <!-- row 1 -->
+    <rect x="60" y="612" width="250" height="52" rx="6" fill="#FFFFFF" stroke="#E5E7EB"/>
+    <circle cx="86" cy="638" r="14" fill="#1B4A73"/><text x="86" y="643" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">D</text>
+    <text x="112" y="642">Dashboard</text>
+
+    <rect x="323" y="612" width="250" height="52" rx="6" fill="#FFFFFF" stroke="#E5E7EB"/>
+    <circle cx="349" cy="638" r="14" fill="#1B4A73"/><text x="349" y="643" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">R</text>
+    <text x="375" y="642">Resident Management</text>
+
+    <rect x="586" y="612" width="250" height="52" rx="6" fill="#FFFFFF" stroke="#E5E7EB"/>
+    <circle cx="612" cy="638" r="14" fill="#1B4A73"/><text x="612" y="643" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">H</text>
+    <text x="638" y="642">Household Management</text>
+
+    <rect x="849" y="612" width="291" height="52" rx="6" fill="#FFFFFF" stroke="#E5E7EB"/>
+    <circle cx="875" cy="638" r="14" fill="#1B4A73"/><text x="875" y="643" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">C</text>
+    <text x="901" y="642">Certificate Management</text>
+
+    <!-- row 2 -->
+    <rect x="60" y="674" width="250" height="52" rx="6" fill="#FFFFFF" stroke="#E5E7EB"/>
+    <circle cx="86" cy="700" r="14" fill="#1B8C6F"/><text x="86" y="705" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">B</text>
+    <text x="112" y="704">Blotter Management</text>
+
+    <rect x="323" y="674" width="250" height="52" rx="6" fill="#FFFFFF" stroke="#E5E7EB"/>
+    <circle cx="349" cy="700" r="14" fill="#1B8C6F"/><text x="349" y="705" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">C</text>
+    <text x="375" y="704">Complaint Management</text>
+
+    <rect x="586" y="674" width="250" height="52" rx="6" fill="#FFFFFF" stroke="#E5E7EB"/>
+    <circle cx="612" cy="700" r="14" fill="#1B8C6F"/><text x="612" y="705" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">O</text>
+    <text x="638" y="704">Officials Management</text>
+
+    <rect x="849" y="674" width="291" height="52" rx="6" fill="#FFFFFF" stroke="#E5E7EB"/>
+    <circle cx="875" cy="700" r="14" fill="#1B8C6F"/><text x="875" y="705" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">A</text>
+    <text x="901" y="704">Announcements</text>
+
+    <!-- row 3 -->
+    <rect x="60" y="736" width="250" height="52" rx="6" fill="#FFFFFF" stroke="#E5E7EB"/>
+    <circle cx="86" cy="762" r="14" fill="#E8A33D"/><text x="86" y="767" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">R</text>
+    <text x="112" y="766">Reports &amp; Analytics</text>
+
+    <rect x="323" y="736" width="250" height="52" rx="6" fill="#FFFFFF" stroke="#E5E7EB"/>
+    <circle cx="349" cy="762" r="14" fill="#E8A33D"/><text x="349" y="767" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">U</text>
+    <text x="375" y="766">User Management</text>
+
+    <rect x="586" y="736" width="250" height="52" rx="6" fill="#FFFFFF" stroke="#E5E7EB"/>
+    <circle cx="612" cy="762" r="14" fill="#E8A33D"/><text x="612" y="767" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">A</text>
+    <text x="638" y="766">Audit Trail</text>
+
+    <rect x="849" y="736" width="291" height="52" rx="6" fill="#FFFFFF" stroke="#E5E7EB"/>
+    <circle cx="875" cy="762" r="14" fill="#E8A33D"/><text x="875" y="767" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">B</text>
+    <text x="901" y="766">Backup &amp; Restore</text>
+  </g>
+
+  <!-- Target Users + Tech Stack -->
+  <rect x="60" y="812" width="530" height="150" fill="#F4F6F8"/>
+  <text x="85" y="840" font-size="14" font-weight="700" fill="#12314F">TARGET USERS</text>
+  <g font-size="12" fill="#374151">
+    <text x="85" y="866">• Barangay Captain</text>
+    <text x="85" y="888">• Barangay Secretary</text>
+    <text x="85" y="910">• Barangay Treasurer</text>
+    <text x="330" y="866">• Barangay Kagawad</text>
+    <text x="330" y="888">• Barangay Staff</text>
+    <text x="330" y="910">• System Administrator</text>
+    <text x="85" y="938" fill="#6B7280" font-style="italic">(Optional: Resident self-service request portal)</text>
+  </g>
+
+  <rect x="610" y="812" width="530" height="150" fill="#F4F6F8"/>
+  <text x="635" y="840" font-size="14" font-weight="700" fill="#12314F">TECHNOLOGY STACK</text>
+  <g font-size="12" fill="#374151">
+    <text x="635" y="866">• Laravel (Backend)</text>
+    <text x="635" y="888">• MySQL (Database)</text>
+    <text x="635" y="910">• Tailwind CSS (Frontend)</text>
+    <text x="870" y="866">• DomPDF (Certificates)</text>
+    <text x="870" y="888">• Chart.js (Reports)</text>
+    <text x="870" y="910">• GitHub (Version Control)</text>
+    <text x="635" y="938" fill="#6B7280" font-style="italic">Hosted on Linux VPS · Laravel Breeze authentication</text>
+  </g>
+
+  <!-- Expected Benefits -->
+  <text x="600" y="1000" text-anchor="middle" font-size="15" font-weight="700" fill="#12314F" letter-spacing="0.5">EXPECTED BENEFITS</text>
+  <rect x="510" y="1010" width="180" height="3" fill="#E8A33D"/>
+
+  <g font-size="12.5">
+    <circle cx="150" cy="1055" r="26" fill="#1B4A73"/>
+    <text x="150" y="1061" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">R</text>
+    <text x="150" y="1098" text-anchor="middle" fill="#1F2937" font-weight="600">Residents</text>
+    <text x="150" y="1116" text-anchor="middle" fill="#6B7280" font-size="11">Faster, easier</text>
+    <text x="150" y="1130" text-anchor="middle" fill="#6B7280" font-size="11">service requests</text>
+
+    <circle cx="450" cy="1055" r="26" fill="#1B8C6F"/>
+    <text x="450" y="1061" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">O</text>
+    <text x="450" y="1098" text-anchor="middle" fill="#1F2937" font-weight="600">Officials</text>
+    <text x="450" y="1116" text-anchor="middle" fill="#6B7280" font-size="11">Less paperwork,</text>
+    <text x="450" y="1130" text-anchor="middle" fill="#6B7280" font-size="11">faster workflows</text>
+
+    <circle cx="750" cy="1055" r="26" fill="#E8A33D"/>
+    <text x="750" y="1061" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">L</text>
+    <text x="750" y="1098" text-anchor="middle" fill="#1F2937" font-weight="600">LGU</text>
+    <text x="750" y="1116" text-anchor="middle" fill="#6B7280" font-size="11">Transparency &amp;</text>
+    <text x="750" y="1130" text-anchor="middle" fill="#6B7280" font-size="11">data-driven decisions</text>
+
+    <circle cx="1050" cy="1055" r="26" fill="#C0392B"/>
+    <text x="1050" y="1061" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">D</text>
+    <text x="1050" y="1098" text-anchor="middle" fill="#1F2937" font-weight="600">Data</text>
+    <text x="1050" y="1116" text-anchor="middle" fill="#6B7280" font-size="11">Secure, centralized,</text>
+    <text x="1050" y="1130" text-anchor="middle" fill="#6B7280" font-size="11">backed up records</text>
+  </g>
+
+  <!-- Timeline -->
+  <text x="600" y="1195" text-anchor="middle" font-size="15" font-weight="700" fill="#12314F" letter-spacing="0.5">INDICATIVE TIMELINE (APPROX. 6–8 MONTHS)</text>
+
+  <g font-size="11.5" fill="#FFFFFF" font-weight="600">
+    <rect x="60" y="1215" width="196" height="34" fill="#12314F"/>
+    <text x="158" y="1237" text-anchor="middle">Planning &amp; Requirements</text>
+
+    <rect x="264" y="1215" width="196" height="34" fill="#1B4A73"/>
+    <text x="362" y="1237" text-anchor="middle">UI/UX &amp; DB Design</text>
+
+    <rect x="468" y="1215" width="264" height="34" fill="#1B6A9C"/>
+    <text x="600" y="1237" text-anchor="middle">Development</text>
+
+    <rect x="740" y="1215" width="196" height="34" fill="#1B8C6F"/>
+    <text x="838" y="1237" text-anchor="middle">Testing</text>
+
+    <rect x="944" y="1215" width="196" height="34" fill="#E8A33D"/>
+    <text x="1042" y="1237" text-anchor="middle" fill="#12314F">Deployment &amp; Training</text>
+  </g>
+
+  <!-- Footer -->
+  <rect x="0" y="1460" width="1200" height="100" fill="url(#hdrGrad)"/>
+  <text x="600" y="1495" text-anchor="middle" font-size="13" fill="#FFFFFF" font-weight="600">This is a one-page executive summary.</text>
+  <text x="600" y="1516" text-anchor="middle" font-size="12" fill="#CBD5E1">Full proposal (functional &amp; non-functional requirements, system architecture, ER diagram, budget breakdown, risk assessment, Gantt chart) available as a separate document.</text>
+  <text x="600" y="1540" text-anchor="middle" font-size="11" fill="#93A9C2">Barangay Management System Proposal — Executive Summary · v1.0</text>
+</svg>

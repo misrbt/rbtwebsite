@@ -1,0 +1,512 @@
+/* ==========================================================================
+   RBT Bank — Products & Services Page (products-services.html)
+   Requires style.css to be loaded first (design tokens).
+   ========================================================================== */
+
+#deposit-products,
+#loan-products,
+#digital-services,
+#other-services,
+#remittance {
+  scroll-margin-top: var(--nav-height);
+}
+
+.section-heading__rule--left {
+  margin-inline: 0;
+}
+
+/* ---- Deposit Products ---- */
+
+.products-deposit {
+  background: var(--color-white);
+}
+
+/* Intro column and the two-card group are all equal width (three even
+   columns), matching the source design's near-equal thirds. */
+.products-deposit__layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--space-12);
+  align-items: center;
+}
+
+.products-deposit__intro {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.products-deposit__icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-navy) 100%);
+  color: var(--color-white);
+}
+
+.products-deposit__intro h2 {
+  font-size: var(--font-size-2xl);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.products-deposit__intro p {
+  color: var(--color-navy);
+  font-size: var(--font-size-base);
+  margin-top: var(--space-3);
+}
+
+.products-deposit__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+}
+
+/* Icon-left / copy-right row, chevron pinned to the card's bottom-right —
+   matches the source design rather than the icon-on-top card pattern used
+   elsewhere on the site. */
+.product-tile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  min-height: 9rem;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8) var(--space-6);
+  padding-bottom: var(--space-10);
+  box-shadow: var(--shadow-sm);
+  transition:
+    box-shadow var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
+}
+
+/* Same 64px footprint as .products-deposit__icon so all three Deposit
+   Products icons (intro badge + the two card icons) read as equal size. */
+.product-tile__icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  color: var(--color-navy);
+}
+
+.product-tile__body {
+  padding-right: var(--space-6);
+}
+
+.product-tile h3 {
+  font-size: var(--font-size-base);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  margin-bottom: var(--space-2);
+}
+
+.product-tile p {
+  color: var(--color-navy);
+  font-size: var(--font-size-sm);
+}
+
+.product-tile__arrow {
+  position: absolute;
+  right: var(--space-6);
+  bottom: var(--space-6);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  color: var(--color-blue);
+}
+
+/* ---- Loan Products carousel ---- */
+
+.products-loans {
+  background: var(--color-section-tint);
+  padding-block: var(--space-16);
+}
+
+/* Arrows sit relative to the same max-width column as the card row (not
+   the full-bleed section), so they hug the content instead of the true
+   viewport edges. */
+.products-loans__carousel-inner {
+  position: relative;
+}
+
+.products-loans__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  color: var(--color-navy);
+  box-shadow: var(--shadow-sm);
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.products-loans__arrow:hover {
+  color: var(--color-blue);
+  box-shadow: var(--shadow-md);
+}
+
+.products-loans__arrow.swiper-button-disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* Offset by the button's own size plus a gap so it floats just outside
+   the card row instead of overlapping the first/last card. */
+.products-loans__arrow--prev {
+  left: calc((44px + var(--space-4)) * -1);
+}
+
+.products-loans__arrow--next {
+  right: calc((44px + var(--space-4)) * -1);
+}
+
+.products-loans .swiper {
+  padding-block: var(--space-2);
+}
+
+/* Swiper only stretches slides to a shared height when the slide itself is
+   a flex box with height:auto — without this, each card just sizes to its
+   own text length and the row looks ragged. */
+.products-loans .swiper-slide {
+  height: auto;
+  display: flex;
+}
+
+.loan-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8) var(--space-6);
+  box-shadow: var(--shadow-sm);
+  transition:
+    box-shadow var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
+}
+
+.loan-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+
+.loan-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: var(--color-section-tint);
+  color: var(--color-blue);
+  margin-bottom: var(--space-6);
+}
+
+.loan-card h3 {
+  font-size: var(--font-size-base);
+  margin-bottom: var(--space-2);
+}
+
+.loan-card p {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.loan-card__rule {
+  display: block;
+  width: 32px;
+  height: 2px;
+  margin-top: auto;
+  margin-inline: auto;
+  padding-top: var(--space-5);
+  background: var(--color-gold);
+  background-clip: content-box;
+  border-radius: var(--radius-full);
+}
+
+/* ---- Digital & Other Services ---- */
+
+.products-extra {
+  background: var(--color-white);
+}
+
+.products-extra__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-8);
+  align-items: stretch;
+}
+
+/* Colored box is the full background — illustration/heading sit
+   directly on it, and only the items list below gets its own white
+   card (see .products-extra__items). */
+.products-extra__box {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-lg);
+  padding: var(--space-10);
+  box-shadow: var(--shadow-md);
+}
+
+.products-extra__box--digital {
+  background: var(--color-section-tint);
+}
+
+/* Pale yellow sampled directly from the client's source mockup for this
+   specific card. CLAUDE.md's brand palette has no gold/yellow accent —
+   this is a deliberate, explicit exception requested for this one
+   decorative section background, not a reintroduced brand accent color. */
+.products-extra__box--other {
+  background: #fdfde6;
+}
+
+/* Illustration sits beside the heading as one row (matches the source
+   design), rather than a small icon stacked above the text. */
+/* flex-start (not center) — the two boxes' paragraphs are different
+   lengths, so centering let the taller row push its heading down
+   relative to the other box's heading. Starting both flush at the top
+   keeps "DIGITAL SERVICES" and "OTHER SERVICES" level with each other. */
+.products-extra__box-head {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-6);
+  padding-top: var(--space-16);
+  margin-bottom: var(--space-12);
+}
+
+.products-extra__box-illustration {
+  flex-shrink: 0;
+  display: block;
+  width: 120px;
+  height: auto;
+  border-radius: var(--radius-md);
+}
+
+.products-extra__box h2 {
+  font-size: var(--font-size-xl);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+.products-extra__box-head p {
+  color: var(--color-navy);
+  margin-top: var(--space-4);
+}
+
+/* This white panel is a separate elevated card sitting on top of the
+   colored box (not flush/flat with it) — its own shadow is what gives
+   the two-layer look from the source design. */
+.products-extra__items {
+  flex: 1;
+  align-content: start;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  background: var(--color-white);
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-md);
+  padding: var(--space-12) var(--space-6) var(--space-8);
+  min-height: 10rem;
+}
+
+/* Thin vertical rules between the three columns, matching the source
+   design's divided panel (not separate boxed cards). */
+.products-extra__item {
+  position: relative;
+  text-align: center;
+  padding-inline: var(--space-2);
+}
+
+.products-extra__item:not(:last-child) {
+  border-right: 1px solid var(--color-border);
+}
+
+.products-extra__anchor {
+  position: absolute;
+  scroll-margin-top: var(--nav-height);
+}
+
+/* Plain glyph, no colored chip behind it — matches the source design,
+   where these small icons sit directly on the white panel. */
+.products-extra__item-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  color: var(--color-navy);
+  margin-bottom: var(--space-3);
+}
+
+.products-extra__item-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* GCash/Maya ship as flat-background logo lockups (not transparent PNGs),
+   so they're shown as small badges rather than icon-style glyphs. Sized
+   to sit inside .products-extra__item-icon's box (same box the other
+   items' icons use) so every item's heading starts at the same height,
+   regardless of whether it's an icon or a logo above it. */
+.products-extra__brand-logo {
+  display: block;
+  height: 36px;
+  width: auto;
+  border-radius: var(--radius-sm);
+}
+
+/* Both logos as circular badges. GCash's source is already a square
+   app-icon mark, so it fills the circle edge to edge. Maya's source is a
+   wide wordmark on a black background — object-fit:contain shrinks the
+   whole wordmark to fit inside the circle (no cropped letters), with its
+   own black background naturally filling the rest of the circle. */
+.products-extra__brand-logo--round {
+  height: 68px;
+  width: 68px;
+  object-fit: contain;
+  background: #000;
+  border-radius: 50%;
+}
+
+/* Reserves room for two lines so a wrapping heading (e.g. "MORESCO II
+   PAYMENTS") doesn't push its own paragraph down relative to the other
+   items in the row, in both the Digital and Other Services panels. */
+.products-extra__item h4 {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-navy);
+  margin-bottom: var(--space-2);
+  min-height: 2.4rem;
+}
+
+.products-extra__item p {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+}
+
+/* ---- More Than a Financial Services ---- */
+
+.products-trust {
+  background: var(--color-white);
+  padding-block: var(--space-16) var(--space-24);
+}
+
+.products-trust__card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-12);
+  flex-wrap: wrap;
+  min-height: 12rem;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-12);
+  box-shadow: var(--shadow-sm);
+}
+
+.products-trust__intro {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  flex: 1 1 22rem;
+  min-width: 0;
+}
+
+.products-trust__icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--color-navy);
+  color: var(--color-white);
+}
+
+.products-trust__icon svg {
+  width: 34px;
+  height: 34px;
+}
+
+.products-trust__intro h2 {
+  font-size: var(--font-size-2xl);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.products-trust__intro p {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-base);
+  margin-top: var(--space-4);
+  max-width: 32rem;
+}
+
+.products-trust__stats {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.products-trust__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  text-align: center;
+  padding-inline: var(--space-8);
+  font-family: var(--font-heading);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-navy);
+  max-width: 9rem;
+}
+
+.products-trust__stat:not(:last-child) {
+  border-right: 1px solid var(--color-border);
+}
+
+.products-trust__stat-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: var(--color-section-tint);
+  color: var(--color-blue);
+}
+
+.products-trust__stat-icon svg {
+  width: 38px;
+  height: 38px;
+}

@@ -1,0 +1,397 @@
+/* ==========================================================================
+   RBT Bank — Design Tokens
+   Single source of truth for color, type, spacing, shadows, glass, motion.
+   Components below must consume these variables — no hardcoded raw values.
+   This file must be loaded FIRST on every page — every other stylesheet
+   (nav.css, footer.css, home.css, about.css, products-services.css,
+   responsive.css, animations.css) depends on these custom properties and
+   on the base/layout rules below.
+   ========================================================================== */
+
+:root {
+  /* Brand palette — from assets/images/color palette.png. No gold in this
+     brand; --color-gold is kept as a token name (52 existing consumers)
+     but repurposed to the cyan accent below. */
+  --color-blue: #0077b6; /* primary — actions, links, focus */
+  --color-navy: #03045e; /* dark backgrounds — header/hero/footer */
+  --color-gold: #00b4d8; /* accent — cyan, used sparingly for CTAs/highlights */
+  --color-white: #ffffff;
+  --color-light-gray: #caf0f8; /* section backgrounds on light pages */
+
+  /* Derived shades (for gradients, hover states, borders) */
+  --color-blue-600: #00669e;
+  --color-blue-700: #005580;
+  --color-navy-800: #020340;
+  --color-navy-700: #020347;
+  --color-gold-600: #007a94; /* darker than --color-gold for AA contrast on white (eyebrows) */
+  --color-tint-light: #90e0ef; /* lighter section tint, between light-gray and white */
+  --color-section-tint: #eef9fc; /* very pale blue section background (Explore our Services) */
+
+  --color-text: #12233b; /* headings/body on light backgrounds */
+  --color-text-muted: #55647a; /* secondary text on light backgrounds */
+  --color-text-inverse: #ffffff; /* text on navy/dark backgrounds */
+  --color-text-inverse-muted: #b9c4d6;
+
+  --color-border: rgba(0, 119, 182, 0.12);
+  --color-border-inverse: rgba(255, 255, 255, 0.14);
+
+  /* Functional colors — status only, never decorative */
+  --color-success: #157a4a;
+  --color-danger: #b3261e;
+  --color-warning: #97650a;
+
+  /* Type */
+  --font-heading:
+    "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-body:
+    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --font-size-2xs: 0.75rem; /* 12px */
+  --font-size-xs: 0.8125rem; /* 13px */
+  --font-size-sm: 0.9375rem; /* 15px */
+  --font-size-base: 1rem; /* 16px */
+  --font-size-lg: 1.25rem; /* 20px */
+  --font-size-xl: 1.625rem; /* 26px */
+  --font-size-2xl: 2.0625rem; /* 33px */
+  --font-size-3xl: 2.75rem; /* 44px */
+  --font-size-4xl: 3.5rem; /* 56px */
+
+  --line-height-tight: 1.15;
+  --line-height-base: 1.6;
+
+  /* Spacing — 4px unit */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* Elevation + glass */
+  --shadow-sm: 0 2px 8px rgba(7, 26, 47, 0.06);
+  --shadow-md: 0 8px 24px rgba(7, 26, 47, 0.1);
+  --shadow-lg: 0 20px 48px rgba(7, 26, 47, 0.16);
+  --shadow-gold: 0 8px 24px rgba(0, 180, 216, 0.25);
+
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-bg-dark: rgba(7, 26, 47, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.35);
+  --glass-blur: 16px;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
+  --radius-full: 999px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 450ms;
+
+  --nav-height: 108px;
+  --nav-height-shrunk: 92px;
+}
+
+/* ==========================================================================
+   Reset + base
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--color-text);
+  background: var(--color-white);
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+figure {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: var(--font-heading);
+  line-height: var(--line-height-tight);
+  font-weight: 700;
+  color: var(--color-navy);
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Visible, consistent focus state for keyboard users. */
+:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 2px;
+}
+
+/* Cross-document View Transitions — zero JS, zero dependency. Degrades
+   gracefully: unsupported browsers just navigate normally. */
+@view-transition {
+  navigation: auto;
+}
+
+/* ==========================================================================
+   Layout
+   ========================================================================== */
+
+.container {
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
+section {
+  padding-block: var(--space-24);
+}
+
+.section-heading {
+  max-width: 40rem;
+  margin-bottom: var(--space-12);
+}
+
+.section-eyebrow {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: var(--font-size-lg);
+  font-weight: 200;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-gold-600);
+  margin-bottom: var(--space-3);
+}
+
+.section-heading h2 {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-4);
+}
+
+.section-heading p {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-lg);
+}
+
+.section--dark {
+  background: linear-gradient(
+    180deg,
+    var(--color-navy) 0%,
+    var(--color-navy-800) 100%
+  );
+  color: var(--color-text-inverse);
+}
+
+.section--dark h2,
+.section--dark h3,
+.section--dark h4 {
+  color: var(--color-text-inverse);
+}
+
+.section--dark .section-heading p {
+  color: var(--color-text-inverse-muted);
+}
+
+.section--light {
+  background: var(--color-light-gray);
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.grid--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid--4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.grid--2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* Centered variant — used by any section-heading that isn't left-aligned
+   (About Page, Loan Products, Board of Directors, etc.). */
+.section-heading--center {
+  max-width: 48rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.section-heading__rule {
+  display: block;
+  width: 56px;
+  height: 3px;
+  margin: var(--space-4) auto 0;
+  background: var(--color-navy);
+  border-radius: var(--radius-full);
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.btn {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 48px;
+  padding-inline: var(--space-8);
+  border-radius: var(--radius-full);
+  border: 1px solid transparent;
+  font-family: var(--font-heading);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  transition:
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn--primary {
+  background: linear-gradient(
+    135deg,
+    var(--color-blue) 0%,
+    var(--color-blue-700) 100%
+  );
+  color: var(--color-white);
+  box-shadow: var(--shadow-md);
+}
+
+.btn--primary:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.btn--gold {
+  background: linear-gradient(
+    135deg,
+    var(--color-gold) 0%,
+    var(--color-gold-600) 100%
+  );
+  color: var(--color-navy);
+  box-shadow: var(--shadow-gold);
+}
+
+.btn--gold:hover {
+  transform: translateY(-2px);
+}
+
+.btn--ghost {
+  background: transparent;
+  border-color: var(--color-border-inverse);
+  color: var(--color-text-inverse);
+}
+
+.btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.btn--outline {
+  background: transparent;
+  border-color: var(--color-border);
+  color: var(--color-navy);
+}
+
+.btn--outline:hover {
+  background: var(--color-light-gray);
+}
+
+.btn--navy {
+  background: linear-gradient(
+    135deg,
+    var(--color-navy) 0%,
+    var(--color-navy-800) 100%
+  );
+  color: var(--color-white);
+  box-shadow: var(--shadow-md);
+}
+
+.btn--navy:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+/* Ripple effect — element added by assets/js/main.js on click */
+.btn__ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: scale(0);
+  pointer-events: none;
+  animation: ripple 600ms var(--ease-out);
+}
+
+/* ==========================================================================
+   Glass utility
+   ========================================================================== */
+
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+}
+
+.glass--dark {
+  background: var(--glass-bg-dark);
+  border-color: rgba(255, 255, 255, 0.1);
+}

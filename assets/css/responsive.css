@@ -1,0 +1,787 @@
+/* ==========================================================================
+   RBT Bank — Responsive overrides
+   Mobile-first content already works via CSS Grid's auto behavior in most
+   places; these breakpoints handle layout collapses and the mobile nav.
+   ========================================================================== */
+
+/* Laptop / small desktop */
+@media (max-width: 1180px) {
+  .hero__title {
+    font-size: var(--font-size-3xl);
+  }
+
+  .quick-services__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* 2x2 grid: right-border on the left column, bottom-border on the top
+     row, replacing the single-row's right-only divider scheme. */
+  .why-us__band {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: var(--space-8);
+  }
+
+  .why-us__stat {
+    padding-inline: var(--space-8);
+    border-right: none;
+  }
+
+  .why-us__stat:nth-child(odd) {
+    border-right: 1px solid var(--color-border);
+  }
+
+  .why-us__stat:nth-child(1),
+  .why-us__stat:nth-child(2) {
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: var(--space-8);
+  }
+
+  .why-us__stat:nth-child(1),
+  .why-us__stat:nth-child(3) {
+    padding-left: 0;
+  }
+
+  .why-us__stat:nth-child(2),
+  .why-us__stat:nth-child(4) {
+    padding-right: 0;
+  }
+
+  .products__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .branch-apply__list,
+  .branches-directory__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .site-footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+  }
+
+  .home-hero__title {
+    font-size: var(--font-size-3xl);
+  }
+
+  .site-footer__divider {
+    display: none;
+  }
+
+  .products-deposit__layout {
+    grid-template-columns: 1fr 1.4fr;
+  }
+
+  .properties-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .properties-search__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Nav switches to the hamburger/fixed-panel pattern at the same
+     breakpoint as every other laptop-width collapse above, not at 900px.
+     Between 900–1180px all 7 links + the logo genuinely don't fit on one
+     row (nowrap flex was overflowing/crowding the header) — the old 900px
+     threshold left a ~280px dead zone of cramped nav before the mobile
+     menu kicked in. */
+  .site-nav__links {
+    position: fixed;
+    top: var(--nav-height);
+    left: 0;
+    right: 0;
+    max-height: calc(100vh - var(--nav-height));
+    overflow-y: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+    padding: var(--space-6);
+    background: var(--color-navy);
+    border-bottom: 1px solid var(--glass-border);
+    transform: translateY(-8px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity var(--duration-base) var(--ease-out),
+                transform var(--duration-base) var(--ease-out),
+                visibility 0s var(--duration-base);
+  }
+
+  .site-header.is-scrolled .site-nav__links {
+    top: var(--nav-height-shrunk);
+    max-height: calc(100vh - var(--nav-height-shrunk));
+  }
+
+  .site-nav__links[data-open="true"] {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+    transition: opacity var(--duration-base) var(--ease-out),
+                transform var(--duration-base) var(--ease-out),
+                visibility 0s;
+  }
+
+  .site-nav__links a {
+    padding-block: var(--space-3);
+    width: 100%;
+    color: var(--color-white);
+  }
+
+  .site-nav__links a:hover {
+    color: var(--color-tint-light);
+  }
+
+  /* .site-nav__links switches to position:fixed above, which takes it out
+     of this flex row entirely — without an explicit margin-left:auto here,
+     the toggle collapses left next to the logo instead of sitting on the
+     right edge where users expect a hamburger button. */
+  .site-nav__toggle {
+    display: inline-flex;
+    margin-left: auto;
+  }
+
+  .site-nav__actions .btn--ghost {
+    display: none;
+  }
+
+  /* Tightened side padding once the nav is down to just logo + hamburger
+     (no more 7-link row to justify the desktop's generous space-16
+     gutter) — keeps the logo lockup from crowding the toggle button as
+     the viewport narrows toward phone widths. */
+  .site-header .container {
+    padding-left: var(--space-6);
+    padding-right: var(--space-6);
+  }
+
+  /* Tracks .site-header .container's padding-left above so the hero
+     title/stats keep lining up with the nav logo as it tightens. */
+  .about-hero__content {
+    padding-left: var(--space-6);
+  }
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .digital-banking,
+  .security,
+  .branch-locator,
+  .contact,
+  .calculator {
+    grid-template-columns: 1fr;
+  }
+
+  .digital-banking__visual,
+  .security__visual {
+    order: -1;
+  }
+
+  .quick-services__grid,
+  .products__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sitemap-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* :not(--banner) — the banner variant is a full-bleed promo image with an
+     absolutely-positioned CTA on top of it; this padding/centering was
+     written for the older text+portrait slide and, applied to the banner,
+     pushed the edge-to-edge image in from the top/bottom on every screen
+     ≤900px, breaking the full-bleed look only on mobile/tablet (desktop
+     never hit this rule). */
+  .home-hero__slide:not(.home-hero__slide--banner) {
+    flex-direction: column;
+    text-align: center;
+    min-height: 0;
+    padding-block: var(--space-16) var(--space-8);
+  }
+
+  .home-hero__eyebrow {
+    justify-content: center;
+  }
+
+  .home-hero__visual {
+    order: -1;
+    justify-content: center;
+  }
+
+  .home-hero__visual img {
+    max-height: 20rem;
+  }
+
+  /* Tuned for the older text+portrait slide variant. The banner variant's
+     arrow centering is handled unconditionally in style.css via a
+     viewport-width formula (higher specificity, so it wins here too). */
+  .home-hero__arrow {
+    top: 20%;
+  }
+
+  .home-services__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .home-properties__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .careers-why__grid,
+  .careers-jobs__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .home-about__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-info__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-form__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-map__layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: 12rem 20rem;
+    height: auto;
+  }
+
+  .contact-branches__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-about__stats {
+    grid-template-columns: 1fr;
+    row-gap: var(--space-6);
+  }
+
+  .home-about__stat:not(:last-child) {
+    border-right: none;
+    padding-bottom: var(--space-6);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .home-events__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .home-events__more {
+    flex-wrap: wrap;
+    text-align: center;
+  }
+
+  .home-events__more-copy {
+    flex-basis: 100%;
+  }
+
+  .home-events__more .btn {
+    margin-inline: auto;
+  }
+
+  .about-values__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-hero {
+    min-height: 32rem;
+  }
+
+  .about-hero__content {
+    max-width: 100%;
+  }
+
+  .about-hero__stats {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: var(--space-4);
+    border-radius: var(--radius-lg);
+  }
+
+  .about-hero__stat:first-child {
+    padding-inline-start: var(--space-3);
+  }
+
+  .about-hero__stat:last-child {
+    padding-inline-end: var(--space-3);
+  }
+
+  .about-hero__stat:not(:last-child) {
+    border-right: none;
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .about-mission__card {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .about-mission__divider {
+    display: none;
+  }
+
+  /* Single-column timeline: the alternating left/right split and the
+     center spine no longer make sense, so every card lands in the one
+     column and the connecting line/dots disappear. */
+  .about-history__timeline::before {
+    display: none;
+  }
+
+  .about-history__item,
+  .about-history__item--left .about-history__card,
+  .about-history__item--right .about-history__card {
+    grid-template-columns: 1fr;
+    grid-column: 1;
+  }
+
+  .about-history__item::before {
+    display: none;
+  }
+
+  .about-history__card {
+    max-width: 100%;
+  }
+
+  .about-board__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .products-deposit__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .products-extra__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .products-trust__card {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .products-trust__intro {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .products-trust__stats {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    row-gap: var(--space-6);
+  }
+
+  .properties-search__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .properties-inquire {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .properties-inquire__art {
+    display: none;
+  }
+
+  /* Events hero: collapse to single-column on tablet, image on top */
+  .events-hero__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .events-hero__media {
+    order: -1;
+  }
+
+  .events-hero__content {
+    align-items: center;
+    text-align: center;
+  }
+
+  .events-hero__desc {
+    max-width: 100%;
+  }
+
+  /* The hero banner's headline/copy is baked into the image itself — at
+     full aspect ratio (2.7:1) it scales down with the viewport just like
+     any other image, and past this width that shrinks the baked-in text
+     to the point of being unreadable. Capping the height and switching to
+     object-fit:cover (object-position already set to "left center" in
+     properties.css) crops in on just the text panel instead of shrinking
+     the whole banner, keeping the headline legible. */
+  .properties-hero img {
+    height: 380px;
+    object-fit: cover;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  section {
+    padding-block: var(--space-16);
+  }
+
+  .sitemap-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Shorter bar + smaller badge + tighter gutter: the desktop header's
+     108px height and 68px logo badge were sized for the full 7-link row
+     next to them — with only the logo and hamburger left at this width,
+     the tall bar just ate vertical space and crowded the badge/text/
+     toggle into a narrow strip. */
+  .site-header,
+  .site-header.is-scrolled {
+    height: 72px;
+  }
+
+  .site-header .container {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+
+  /* Tracks .site-header .container's padding-left above (see the same
+     rule at the 1180px breakpoint) so the hero content keeps lining up
+     with the nav logo at phone widths too. */
+  .about-hero__content {
+    padding-left: var(--space-4);
+  }
+
+  .site-nav {
+    gap: var(--space-3);
+  }
+
+  .site-nav__logo img {
+    --logo-size: 44px;
+  }
+
+  .site-nav__logo-text strong {
+    font-size: var(--font-size-base);
+  }
+
+  .site-nav__logo-text span {
+    font-size: 0.75rem;
+  }
+
+  .site-nav__links,
+  .site-header.is-scrolled .site-nav__links {
+    top: 72px;
+    max-height: calc(100vh - 72px);
+  }
+
+  .hero__title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .hero__actions {
+    flex-direction: column;
+  }
+
+  .hero__stats {
+    flex-wrap: wrap;
+    gap: var(--space-6);
+  }
+
+  .quick-services__grid,
+  .products__grid,
+  .site-footer__grid,
+  .branch-apply__list,
+  .branches-directory__grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .about-board__card {
+    max-width: 100%;
+  }
+
+  .about-board__grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Single column: every divider becomes a bottom rule instead of a
+     right/bottom mix, and the horizontal padding collapses to 0 since
+     items no longer sit side-by-side. */
+  .why-us__band {
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--space-6);
+  }
+
+  .why-us__stat {
+    padding: 0 0 var(--space-6);
+    border-right: none !important;
+  }
+
+  .why-us__stat:not(:last-child) {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .home-apply-online__inner {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .site-footer__cta {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .home-trust__inner {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .quick-services__grid {
+    margin-top: var(--space-8);
+  }
+
+  .calculator {
+    padding: var(--space-6);
+  }
+
+  .converter__row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .converter__swap {
+    align-self: center;
+  }
+
+  .site-footer__bottom {
+    flex-direction: column;
+    gap: var(--space-4);
+    text-align: center;
+  }
+
+  .home-services__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-properties__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-branches__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-property-card__image {
+    flex: none;
+    aspect-ratio: 4 / 3;
+  }
+
+  .careers-why__grid,
+  .careers-jobs__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .careers-jobs__heading {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .careers-jobs__rule {
+    width: 3rem;
+    flex: none;
+  }
+
+  .site-footer__top {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .site-footer__col {
+    align-items: center;
+  }
+
+  /* Matches the desktop rule's selector specificity (.site-footer__top >
+     .site-footer__col:first-child) so this override actually wins instead
+     of losing to it despite coming later in the cascade. */
+  .site-footer__top > .site-footer__col:first-child {
+    max-width: 100%;
+  }
+
+  .site-footer__brand {
+    flex-direction: column;
+  }
+
+  .site-footer__social a {
+    justify-content: center;
+  }
+
+  .site-footer__badges {
+    justify-content: center;
+  }
+
+  .site-footer__links a {
+    justify-content: center;
+  }
+
+  .site-footer__legal {
+    justify-content: center;
+  }
+
+  .home-hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .home-events__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .events-section-heading {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .events-section-heading__rule {
+    width: 3rem;
+    flex: none;
+  }
+
+  .events-timeline__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .events-highlights__carousel {
+    padding-inline: 0;
+  }
+
+  .events-highlights__arrow {
+    width: 36px;
+    height: 36px;
+  }
+
+  .events-highlights__arrow--prev {
+    left: var(--space-2);
+  }
+
+  .events-highlights__arrow--next {
+    right: var(--space-2);
+  }
+
+  /* Tighter corner offset on phones, matching common mobile chat-widget
+     placement; also makes .chatbot__panel's width formula in style.css
+     (100vw - space-8) land symmetric instead of the desktop offset's
+     lopsided margin. .back-to-top's bottom offset stays in sync with the
+     toggle-stacking math in style.css (toggle height + gap). */
+  .chatbot {
+    right: var(--space-4);
+    bottom: var(--space-4);
+  }
+
+  .back-to-top {
+    right: var(--space-4);
+    bottom: calc(var(--space-4) + 64px);
+  }
+
+  .products-deposit__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .products-loans__arrow {
+    width: 36px;
+    height: 36px;
+  }
+
+  .products-extra__box {
+    padding: var(--space-6);
+  }
+
+  .products-extra__box-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .products-extra__box-illustration {
+    width: 96px;
+  }
+
+  .products-extra__items {
+    grid-template-columns: 1fr;
+  }
+
+  .products-trust__card {
+    flex-direction: column;
+    align-items: stretch;
+    padding: var(--space-6);
+  }
+
+  .products-trust__intro {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .products-trust__stats {
+    justify-content: space-between;
+  }
+
+  .products-trust__stat {
+    border-right: none !important;
+    max-width: none;
+  }
+
+  .properties-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Shorter crop than the 900px breakpoint — see the comment on this rule
+     there for why the hero switches to object-fit:cover at all. */
+  .properties-hero img {
+    height: 260px;
+  }
+
+  .properties-search {
+    padding: var(--space-6);
+  }
+
+  .properties-search__row {
+    align-items: stretch;
+  }
+
+  /* min-width:240px on .properties-search__field (set for desktop/tablet
+     wrapping) is wider than the usable content box on the smallest phone
+     screens once the card's own padding is subtracted — stack every field
+     to full width instead of relying on wrap to avoid a narrow overflow.
+     flex-basis:100% (not just width) — the base rule's flex:1 sets
+     flex-basis:0%, which wins over a plain width and was still splitting
+     the row 50/50 despite width:100% here. */
+  .properties-search__field {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+
+  /* Side-by-side flex:1 buttons squeezed "Show/Hide Advanced Search"
+     (a long label) into half-width next to "Clear All", wrapping awkwardly
+     on narrow phones — stack both full-width instead. */
+  .properties-search__actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .properties-search__actions .btn {
+    width: 100%;
+  }
+
+  .properties-pagination {
+    flex-wrap: wrap;
+  }
+
+  /* Icon + two tel: links + a "/" separator as flex items on one row can
+     overflow a narrow card — let them wrap instead. */
+  .properties-inquire__contact li {
+    flex-wrap: wrap;
+  }
+}

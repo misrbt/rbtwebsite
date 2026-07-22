@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "threejs-devtools-mcp": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "threejs-devtools-mcp"
+      ],
+      "env": {}
+    },
+    "stitch": {
+      "command": "npx",
+      "args": ["@_davideast/stitch-mcp", "proxy"]
+    }
+  }
+}

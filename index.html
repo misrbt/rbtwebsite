@@ -1,0 +1,889 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RBT Bank, Inc. — A Rural Bank</title>
+  <meta name="description"
+    content="RBT Bank Inc., a rural bank serving Filipino communities since 1966. Deposit and loan products, regulated by the Bangko Sentral ng Pilipinas, deposits insured by PDIC." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/nav.css" />
+  <link rel="stylesheet" href="assets/css/hero-carousel.css" />
+  <link rel="stylesheet" href="assets/css/home.css" />
+  <link rel="stylesheet" href="assets/css/footer.css" />
+  <link rel="stylesheet" href="assets/css/chatbot.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+  <link rel="stylesheet" href="assets/css/animations.css" />
+</head>
+
+<body>
+  <!-- ==================== Header / Navigation ==================== -->
+  <header class="site-header" data-site-header>
+    <nav class="site-nav container" aria-label="Primary">
+      <a href="index.html" class="site-nav__logo">
+        <img src="assets/images/rbt-logo.png" alt="RBT Bank, Inc. — A Rural Bank, est. 1966" />
+        <span class="site-nav__logo-text">
+          <strong>RBT BANK INC.</strong>
+          <span>A Rural Bank</span>
+        </span>
+      </a>
+
+      <ul class="site-nav__links" data-nav-links>
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="products-services.html">Products &amp; Services</a></li>
+        <li><a href="properties.html">Properties</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <button class="site-nav__toggle" type="button" data-nav-toggle aria-label="Toggle menu" aria-expanded="false">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round">
+          <line class="site-nav__toggle-line site-nav__toggle-line--top" x1="3" y1="6" x2="21" y2="6" />
+          <line class="site-nav__toggle-line site-nav__toggle-line--mid" x1="3" y1="12" x2="21" y2="12" />
+          <line class="site-nav__toggle-line site-nav__toggle-line--bottom" x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ==================== Hero ==================== -->
+    <section class="home-hero">
+      <button type="button" class="home-hero__arrow home-hero__arrow--prev" data-hero-prev aria-label="Previous slide">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </button>
+      <button type="button" class="home-hero__arrow home-hero__arrow--next" data-hero-next aria-label="Next slide">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 6l6 6-6 6" />
+        </svg>
+      </button>
+
+      <div class="container">
+        <div class="swiper" data-hero-slider>
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="home-hero__slide home-hero__slide--banner">
+                <img src="assets/images/home/1.jpg" alt="Grow your Business with Us" width="851" height="315" />
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="home-hero__slide home-hero__slide--banner">
+                <img src="assets/images/home/2.jpg"
+                  alt="Start Something Loan-tastic — RBT Bank's loan services are now available online in all branches!"
+                  width="851" height="315" />
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="home-hero__slide home-hero__slide--banner">
+                <img src="assets/images/home/3.jpg"
+                  alt="Looking for a safe place to grow your money? Open a Regular Savings or Time Deposit account today!"
+                  width="851" height="315" />
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="home-hero__slide home-hero__slide--banner">
+                <img src="assets/images/4.jpg"
+                  alt="Every successful entrepreneur started somewhere, and that somewhere is here." width="851"
+                  height="315" />
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="home-hero__slide home-hero__slide--banner">
+                <img src="assets/images/5.jpg" alt="This is Loans! Scan now — We are blessed to bless." width="851"
+                  height="315" />
+              </div>
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== Featured Products ==================== -->
+    <section class="home-services">
+      <div class="container">
+        <div class="section-heading section-heading--center" data-aos="fade-up">
+          <span class="section-eyebrow">Services</span>
+          <h2>Featured Products</h2>
+          <p>Banking solutions designed in every step of your journey</p>
+          <span class="section-heading__rule" aria-hidden="true"></span>
+        </div>
+
+        <div class="grid home-services__grid">
+          <a href="products-services.html#deposit-products" class="service-photo-card" data-aos="fade-up">
+            <div class="service-photo-card__media">
+              <img src="assets/images/savings deposit products.png"
+                alt="Deposit Products — Grow your savings with secured and flexible deposit options secured by PDIC." />
+            </div>
+            <div class="service-photo-card__scrim" aria-hidden="true"></div>
+            <div class="service-photo-card__body">
+              <span class="service-photo-card__eyebrow">Savings</span>
+              <h3 class="service-photo-card__title">Deposit Products</h3>
+              <p class="service-photo-card__desc">
+                Grow your savings with secured and flexible deposit options
+                secured by PDIC.
+              </p>
+              <span class="service-photo-card__link">
+                Learn more
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </span>
+            </div>
+          </a>
+
+          <a href="products-services.html#loan-products" class="service-photo-card" data-aos="fade-up"
+            data-aos-delay="100">
+            <div class="service-photo-card__media">
+              <img src="assets/images/LOAN PRODUCTS.png"
+                alt="Loan Products — Achieve your goals either personal or business solution." />
+            </div>
+            <div class="service-photo-card__scrim" aria-hidden="true"></div>
+            <div class="service-photo-card__body">
+              <span class="service-photo-card__eyebrow">Loan</span>
+              <h3 class="service-photo-card__title">Loan Products</h3>
+              <p class="service-photo-card__desc">
+                Achieve your goals either personal or business solution.
+              </p>
+              <span class="service-photo-card__link">
+                Learn more
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </span>
+            </div>
+          </a>
+
+          <a href="products-services.html#remittance" class="service-photo-card" data-aos="fade-up"
+            data-aos-delay="150">
+            <div class="service-photo-card__media">
+              <img src="assets/images/REMITTANCE.jpg"
+                alt="Remittance — Enjoy convenient services like GCash, Maya, PESONet." />
+            </div>
+            <div class="service-photo-card__scrim" aria-hidden="true"></div>
+            <div class="service-photo-card__body">
+              <span class="service-photo-card__eyebrow">Remittances</span>
+              <h3 class="service-photo-card__title">Remittance</h3>
+              <p class="service-photo-card__desc">
+                Enjoy convenient services like GCash, Maya, PESONet.
+              </p>
+              <span class="service-photo-card__link">
+                Learn more
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </span>
+            </div>
+          </a>
+
+          <a href="products-services.html#other-services" class="service-photo-card" data-aos="fade-up"
+            data-aos-delay="200">
+            <div class="service-photo-card__media">
+              <img src="assets/images/OTHER SERVICES.png" alt="Other Services — MORESCO II, Loan Origination, POS." />
+            </div>
+            <div class="service-photo-card__scrim" aria-hidden="true"></div>
+            <div class="service-photo-card__body">
+              <span class="service-photo-card__eyebrow">Other</span>
+              <h3 class="service-photo-card__title">Other Services</h3>
+              <p class="service-photo-card__desc">
+                MORESCO II, Loan Origination, POS.
+              </p>
+              <span class="service-photo-card__link">
+                Learn more
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== Properties ==================== -->
+    <section class="home-properties">
+      <div class="container">
+        <div class="section-heading section-heading--center" data-aos="fade-up">
+          <span class="section-eyebrow">Properties</span>
+          <h2>Acquired Properties for Sale</h2>
+          <p>Foreclosed properties in great locations at affordable prices</p>
+          <span class="section-heading__rule" aria-hidden="true"></span>
+        </div>
+
+        <div class="home-properties__grid">
+          <article class="home-property-card" data-aos="fade-up">
+            <div class="home-property-card__image">
+              <img src="assets/images/properties/property-1.jpg"
+                alt="Agri-residential lot in Poblacion, Talisayan, Misamis Oriental" loading="lazy" />
+              <span class="home-property-card__badge">Agri-Residential</span>
+            </div>
+            <div class="home-property-card__body">
+              <p class="home-property-card__location">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z" />
+                  <circle cx="12" cy="9" r="2.5" />
+                </svg>
+                Poblacion, Talisayan, Misamis Oriental
+              </p>
+              <p class="home-property-card__lot">Lot Area: 6,008 sqm</p>
+              <p class="home-property-card__price">PHP 900,000.00</p>
+            </div>
+          </article>
+
+          <article class="home-property-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="home-property-card__image">
+              <img src="assets/images/properties/property-2.jpg"
+                alt="Agricultural lot in Tagbocboc, Talisayan, Misamis Oriental" loading="lazy" />
+              <span class="home-property-card__badge">Agricultural</span>
+            </div>
+            <div class="home-property-card__body">
+              <p class="home-property-card__location">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z" />
+                  <circle cx="12" cy="9" r="2.5" />
+                </svg>
+                Tagbocboc, Talisayan, Misamis Oriental
+              </p>
+              <p class="home-property-card__lot">Lot Area: 9,504 sqm</p>
+              <p class="home-property-card__price">PHP 130,000.00</p>
+            </div>
+          </article>
+
+          <article class="home-property-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="home-property-card__image">
+              <img src="assets/images/properties/property-3.jpg"
+                alt="Residential lot in Poblacion, Salay, Misamis Oriental" loading="lazy" />
+              <span class="home-property-card__badge">Residential</span>
+            </div>
+            <div class="home-property-card__body">
+              <p class="home-property-card__location">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z" />
+                  <circle cx="12" cy="9" r="2.5" />
+                </svg>
+                Poblacion, Salay, Misamis Oriental
+              </p>
+              <p class="home-property-card__lot">Lot Area: 666 sqm</p>
+              <p class="home-property-card__price">PHP 100,000,000.00</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="home-properties__cta" data-aos="fade-up">
+          <a href="properties.html" class="btn btn--primary">
+            View All Properties <span aria-hidden="true">&gt;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== Branch Network Map ====================
+           Same real Google My Maps embed as contact.html's "Find Us Across
+           the Region" section (custom RBT-logo pins, built by hand in
+           mymaps.google.com — see CLAUDE.md). The iframe is rendered taller
+           than its visible container and shifted up to crop out Google's
+           fixed title/owner bar — see .home-branch-map__embed in home.css. -->
+    <section class="home-branch-map">
+      <div class="container">
+        <div class="section-heading section-heading--center" data-aos="fade-up">
+          <span class="section-eyebrow">Branch Network</span>
+          <h2>Find Us Across the Region</h2>
+          <span class="section-heading__rule" aria-hidden="true"></span>
+        </div>
+
+        <div class="home-branch-map__embed" data-aos="fade-up">
+          <iframe
+            src="https://www.google.com/maps/d/embed?mid=1lGG7xpUJ88PQZnmwsSyDY3ANim24tUg&ll=8.503854739459566,125.07633044999997&z=8"
+            title="RBT Bank branch map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <p class="home-branch-map__note">
+          Tap any pin to see that branch's exact location, or visit our
+          <a href="contact.html#branches">full branch directory</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- ==================== Events ==================== -->
+    <section class="home-events" id="events">
+      <div class="container">
+        <div class="section-heading section-heading--center" data-aos="fade-up">
+          <span class="section-eyebrow">Events</span>
+          <h2>Events &amp; Highlights</h2>
+        </div>
+
+        <div class="home-events__grid">
+          <article class="event-card" data-aos="fade-up">
+            <div class="event-card__visual">
+              <img src="assets/images/events 1.jpg"
+                alt="RBT Bank Inc. officers and staff at the bank's 60th anniversary celebration" />
+            </div>
+            <div class="event-card__body">
+              <span class="event-card__date">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  aria-hidden="true">
+                  <rect x="3" y="4" width="18" height="18" rx="2" />
+                  <path d="M16 2v4M8 2v4M3 10h18" />
+                </svg>
+                March 12, 2026
+              </span>
+              <h3 class="event-card__title">60th Anniversary Celebration</h3>
+              <p class="event-card__desc">
+                Celebrating 60 years of service, trust, and commitment to our
+                communities.
+              </p>
+              <a href="events.html" class="event-card__link">View photos →</a>
+            </div>
+          </article>
+
+          <article class="event-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="event-card__visual">
+              <img src="assets/images/event-mangrove-planting.jpg"
+                alt="RBT Bank Inc. staff and volunteers planting mangroves along the coast" />
+            </div>
+            <div class="event-card__body">
+              <span class="event-card__date">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  aria-hidden="true">
+                  <rect x="3" y="4" width="18" height="18" rx="2" />
+                  <path d="M16 2v4M8 2v4M3 10h18" />
+                </svg>
+                March 14, 2026
+              </span>
+              <h3 class="event-card__title">Mangrove Planting</h3>
+              <p class="event-card__desc">
+                Recognizing the vital role of environmental stewardship, RBT
+                Bank actively supports mangrove planting activities in the
+                coastal areas of Guiwanon and Tagbocboc, Talisayan.
+              </p>
+              <a href="events.html" class="event-card__link">View photos →</a>
+            </div>
+          </article>
+
+          <article class="event-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="event-card__visual">
+              <img src="assets/images/event-medical-mission.jpg"
+                alt="Free medical and dental clinic volunteers attending to community members" />
+            </div>
+            <div class="event-card__body">
+              <span class="event-card__date">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  aria-hidden="true">
+                  <rect x="3" y="4" width="18" height="18" rx="2" />
+                  <path d="M16 2v4M8 2v4M3 10h18" />
+                </svg>
+                March 16, 2026
+              </span>
+              <h3 class="event-card__title">Bringing Health and Hope to Communities</h3>
+              <p class="event-card__desc">
+                One of the Bank's flagship CSR initiatives is the Free Medical
+                and Dental Clinic conducted in its areas of operation.
+              </p>
+              <a href="events.html" class="event-card__link">View photos →</a>
+            </div>
+          </article>
+
+          <article class="event-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="event-card__visual">
+              <img src="assets/images/events 1.jpg"
+                alt="RBT Bank Inc. officers and staff at a bank branch opening ceremony" />
+            </div>
+            <div class="event-card__body">
+              <span class="event-card__date">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  aria-hidden="true">
+                  <rect x="3" y="4" width="18" height="18" rx="2" />
+                  <path d="M16 2v4M8 2v4M3 10h18" />
+                </svg>
+                January 19, 2025
+              </span>
+              <h3 class="event-card__title">Branch Lite – Kibawe Opening</h3>
+              <p class="event-card__desc">
+                RBT Bank expanded its reach with the opening of its BLU
+                Kibawe on January 19, 2025, located along Sayre Highway in
+                Poblacion, West Kibawe, Bukidnon.
+              </p>
+              <a href="events.html" class="event-card__link">View photos →</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="home-events__more" data-aos="fade-up">
+          <span class="home-events__more-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="4" y="4" width="16" height="16" rx="2" transform="rotate(-6 12 12)" />
+              <circle cx="9" cy="10" r="1.5" fill="currentColor" stroke="none" />
+              <path d="M6 16l4-4 3 3 4-5 2 3" />
+            </svg>
+          </span>
+          <div class="home-events__more-copy">
+            <strong>Explore More</strong>
+            <p>
+              Explore more of our past events and moments that make our
+              journey meaningful!
+            </p>
+          </div>
+          <a href="events.html" class="btn btn--primary">View Events →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== Apply Online ==================== -->
+    <section id="apply-online" class="home-apply-online section--dark">
+      <div class="container home-apply-online__inner" data-aos="fade-up">
+        <div>
+          <h2>
+            Apply for a Loan
+            <span class="home-apply-online__accent">Online</span>
+          </h2>
+          <p>
+            Start your loan application anytime, anywhere, right from your
+            phone or computer. You'll still visit a branch to complete
+            requirements and release your loan.
+          </p>
+          <button type="button" class="btn btn--primary home-apply-online__toggle" data-branch-toggle
+            aria-expanded="false" aria-controls="branch-apply-list">
+            <span>View Links</span>
+            <svg class="home-apply-online__toggle-icon" width="18" height="18" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+              aria-hidden="true">
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </button>
+        </div>
+        <div class="home-apply-online__qr">
+          <img src="assets/images/loan-application-qr.png"
+            alt="QR code linking to RBT Bank Inc.'s online loan application" width="220" height="220" />
+        </div>
+      </div>
+
+      <div class="branch-apply" data-branch-wrapper>
+        <div class="container branch-apply__list" id="branch-apply-list" data-branch-list>
+          <a href="https://rbtbankinc.goodloan.com.ph/branch/partner/001-main" target="_blank" rel="noopener"
+            class="branch-card">
+            <span class="branch-card__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z" />
+                <circle cx="12" cy="9" r="2.5" />
+              </svg>
+            </span>
+            <span class="branch-card__name">Main Office</span>
+            <svg class="branch-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M7 17L17 7M17 7H9M17 7v8" />
+            </svg>
+          </a>
+          <a href="https://rbtbankinc.goodloan.com.ph/partner/002-JAS" target="_blank" rel="noopener"
+            class="branch-card">
+            <span class="branch-card__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z" />
+                <circle cx="12" cy="9" r="2.5" />
+              </svg>
+            </span>
+            <span class="branch-card__name">Jasaan Branch</span>
+            <svg class="branch-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M7 17L17 7M17 7H9M17 7v8" />
+            </svg>
+          </a>
+          <a href="https://rbtbankinc.goodloan.com.ph/branch/003-SALAY" target="_blank" rel="noopener"
+            class="branch-card">
+            <span class="branch-card__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z" />
+                <circle cx="12" cy="9" r="2.5" />
+              </svg>
+            </span>
+            <span class="branch-card__name">Salay Branch</span>
+            <svg class="branch-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M7 17L17 7M17 7H9M17 7v8" />
+            </svg>
+          </a>
+          <a href="https://rbtbankinc.goodloan.com.ph/partner/004-CDO" target="_blank" rel="noopener"
+            class="branch-card">
+            <span class="branch-card__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z" />
+                <circle cx="12" cy="9" r="2.5" />
+              </svg>
+            </span>
+            <span class="branch-card__name">CDO Branch</span>
+            <svg class="branch-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M7 17L17 7M17 7H9M17 7v8" />
+            </svg>
+          </a>
+          <a href="https://rbtbankinc.goodloan.com.ph/branch/005-MRMG" target="_blank" rel="noopener"
+            class="branch-card">
+            <span class="branch-card__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z" />
+                <circle cx="12" cy="9" r="2.5" />
+              </svg>
+            </span>
+            <span class="branch-card__name">Maramag Branch</span>
+            <svg class="branch-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M7 17L17 7M17 7H9M17 7v8" />
+            </svg>
+          </a>
+          <a href="https://rbtbankinc.goodloan.com.ph/branch/006-GINGOOG" target="_blank" rel="noopener"
+            class="branch-card">
+            <span class="branch-card__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z" />
+                <circle cx="12" cy="9" r="2.5" />
+              </svg>
+            </span>
+            <span class="branch-card__name">Gingoog Branch
+              <span class="branch-card__badge">Lite</span></span>
+            <svg class="branch-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M7 17L17 7M17 7H9M17 7v8" />
+            </svg>
+          </a>
+          <a href="https://rbtbankinc.goodloan.com.ph/branch/007-CAMIGUIN" target="_blank" rel="noopener"
+            class="branch-card">
+            <span class="branch-card__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z" />
+                <circle cx="12" cy="9" r="2.5" />
+              </svg>
+            </span>
+            <span class="branch-card__name">Camiguin Branch
+              <span class="branch-card__badge">Lite</span></span>
+            <svg class="branch-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M7 17L17 7M17 7H9M17 7v8" />
+            </svg>
+          </a>
+          <a href="https://rbtbankinc.goodloan.com.ph/branch/008-BUTUAN" target="_blank" rel="noopener"
+            class="branch-card">
+            <span class="branch-card__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z" />
+                <circle cx="12" cy="9" r="2.5" />
+              </svg>
+            </span>
+            <span class="branch-card__name">Butuan Branch
+              <span class="branch-card__badge">Lite</span></span>
+            <svg class="branch-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M7 17L17 7M17 7H9M17 7v8" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== About Us ==================== -->
+    <section class="home-about">
+      <div class="container home-about__layout">
+        <div class="home-about__copy" data-aos="fade-right">
+          <span class="section-eyebrow">About Us</span>
+          <h2 class="home-about__title">We Are Blessed<br />to Bless</h2>
+          <p class="home-about__body">
+            <strong>RBT BANK INC.,</strong> A Rural Bank dedicated to
+            providing accessible and reliable financial solutions to
+            empower individuals, families, and businesses.
+          </p>
+          <p class="home-about__body">
+            For six decades, we have remained faithful to our mission of
+            uplifting communities and helping Filipinos achieve their
+            financial goals.
+          </p>
+          <a href="about.html" class="btn btn--primary home-about__cta">Learn More About Us <span
+              aria-hidden="true">&gt;</span></a>
+        </div>
+        <div class="home-about__visual" data-aos="fade-left">
+          <img src="assets/images/rbtbuilding.png" alt="RBT Bank Inc. branch building" />
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="home-about__stats">
+          <div class="home-about__stat" data-aos="fade-up">
+            <svg class="home-about__stat-icon" width="40" height="40" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 12a9 9 0 1 0 3-6.7L3 8" />
+              <path d="M3 3v5h5" />
+              <path d="M12 7v5l4 2" />
+            </svg>
+            <div>
+              <div class="home-about__stat-value">60</div>
+              <p class="home-about__stat-label">Years of Service</p>
+              <p class="home-about__stat-desc">Serving Filipino communities since 1966.</p>
+            </div>
+          </div>
+
+          <div class="home-about__stat" data-aos="fade-up" data-aos-delay="100">
+            <svg class="home-about__stat-icon" width="40" height="40" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 9 5.1 4.5A2 2 0 0 1 7 3h10a2 2 0 0 1 1.9 1.5L20 9" />
+              <path d="M4 9a2 2 0 0 0 4 0 2 2 0 0 0 4 0 2 2 0 0 0 4 0 2 2 0 0 0 4 0" />
+              <path d="M5 9v9a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9" />
+              <path d="M9 21v-4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4" />
+            </svg>
+            <div>
+              <div class="home-about__stat-value">12</div>
+              <p class="home-about__stat-label">Offices &amp; Branches</p>
+              <p class="home-about__stat-desc">Across strategic locations.</p>
+            </div>
+          </div>
+
+          <div class="home-about__stat" data-aos="fade-up" data-aos-delay="200">
+            <svg class="home-about__stat-icon" width="40" height="40" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 20h16" />
+              <path d="M7 20v-5" />
+              <path d="M12 20v-8" />
+              <path d="M17 20v-11" />
+              <path d="M4 11 9 6l4 3 7-7" />
+              <path d="M17 2h3v3" />
+            </svg>
+            <div>
+              <div class="home-about__stat-value">1B+</div>
+              <p class="home-about__stat-label">Assets</p>
+              <p class="home-about__stat-desc">A strong and growing institution.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== Footer ==================== -->
+  <footer class="site-footer">
+    <div class="container site-footer__top">
+      <div class="site-footer__col">
+        <div class="site-footer__brand">
+          <img src="assets/images/rbt-logo.png" alt="RBT Bank, Inc. — A Rural Bank, est. 1966"
+            class="site-footer__seal" />
+          <div>
+            <h4 class="site-footer__brand-name">RBT BANK INC., A Rural Bank</h4>
+            <p class="site-footer__tagline">We are blessed to bless</p>
+          </div>
+        </div>
+        <p>
+          RBT BANK INC., A Rural Bank is regulated by the Bangko Sentral ng
+          Pilipinas.
+          <a href="https://www.bsp.gov.ph" target="_blank" rel="noopener">https://www.bsp.gov.ph</a>
+        </p>
+        <span class="site-footer__rule" aria-hidden="true"></span>
+        <p>
+          For concerns, please reach us through any of the channels listed in
+          the <a href="contact.html">RBT BANK</a> page
+        </p>
+        <a href="contact.html" class="btn btn--primary site-footer__contact-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 13a8 8 0 0 1 16 0" />
+            <rect x="2" y="13" width="5" height="7" rx="1.5" />
+            <rect x="17" y="13" width="5" height="7" rx="1.5" />
+            <path d="M20 20v1a2 2 0 0 1-2 2h-4" />
+          </svg>
+          Contact Us <span aria-hidden="true">&gt;</span>
+        </a>
+      </div>
+
+      <div class="site-footer__divider" aria-hidden="true"></div>
+
+      <div class="site-footer__col">
+        <h5>Quick Links</h5>
+        <span class="site-footer__rule" aria-hidden="true"></span>
+        <ul class="site-footer__links">
+          <li>
+            <a href="products-services.html">
+              Products &amp; Services
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                aria-hidden="true">
+                <path d="M9 6l6 6-6 6" />
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a href="properties.html">
+              Properties
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                aria-hidden="true">
+                <path d="M9 6l6 6-6 6" />
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a href="index.html#apply-online">
+              Apply for a loan online
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                aria-hidden="true">
+                <path d="M9 6l6 6-6 6" />
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a href="careers.html">
+              Careers
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                aria-hidden="true">
+                <path d="M9 6l6 6-6 6" />
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a href="events.html">
+              Events
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                aria-hidden="true">
+                <path d="M9 6l6 6-6 6" />
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="site-footer__divider" aria-hidden="true"></div>
+
+      <div class="site-footer__col">
+        <h5>Follow Us</h5>
+        <span class="site-footer__rule" aria-hidden="true"></span>
+        <div class="site-footer__social">
+          <a href="https://www.facebook.com/Rbtbankinc" target="_blank" rel="noopener" aria-label="Facebook">
+            <img src="assets/icons/favebook.webp" alt="" class="site-footer__social-icon" />
+            RBT BANK INC., A Rural Bank
+          </a>
+        </div>
+
+        <span class="site-footer__col-divider" aria-hidden="true"></span>
+
+        <h5>Regulated &amp; Insured By:</h5>
+        <span class="site-footer__rule" aria-hidden="true"></span>
+        <div class="site-footer__badges">
+          <figure>
+            <img src="assets/images/bsp-logonew.png" alt="Bangko Sentral ng Pilipinas" />
+            <figcaption>Bangko Sentral ng Pilipinas</figcaption>
+          </figure>
+          <figure class="site-footer__badge--dpo">
+            <img src="assets/images/dpo%20logo.png" alt="National Privacy Commission — DPO/DPS Registered" />
+            <figcaption>DPO/DPS Registered</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/images/pdic%20logo.png" alt="PDIC — deposits insured up to ₱1 Million per depositor" />
+            <figcaption>Deposits insured by PDIC</figcaption>
+          </figure>
+            <p class="site-footer__pdic-desc">Deposits are insured by PDIC up to ₱1 Million per depositor.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container site-footer__bottom">
+      <p>&copy; 2026 RBT Bank Inc. All rights reserved.</p>
+      <div class="site-footer__legal">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <span aria-hidden="true">|</span>
+        <a href="terms-conditions.html">Terms &amp; Conditions</a>
+        <span aria-hidden="true">|</span>
+        <a href="sitemap.html">Sitemap</a>
+      </div>
+    </div>
+  </footer>
+
+  <button type="button" class="back-to-top" data-back-to-top aria-label="Back to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 19V5M5 12l7-7 7 7" />
+    </svg>
+  </button>
+
+  <!-- ==================== FAQ Chatbot ====================
+         Rule-based, no backend (assets/js/chatbot.js) — never claims to be
+         a human agent, never asks for account numbers/passwords. -->
+  <div class="chatbot" data-chatbot>
+    <button type="button" class="chatbot__toggle" data-chatbot-toggle aria-expanded="false"
+      aria-label="Chat with RBT Bank">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path
+          d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+      </svg>
+    </button>
+
+    <div class="chatbot__panel" data-chatbot-panel data-open="false" role="dialog" aria-label="RBT Bank chat assistant">
+      <div class="chatbot__header">
+        <span class="chatbot__header-title">RBT Bank Assistant</span>
+        <button type="button" class="chatbot__close" data-chatbot-close aria-label="Close chat">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="chatbot__messages" data-chatbot-messages>
+        <div class="chatbot__message chatbot__message--bot">
+          <p>Hi! I'm the RBT Bank virtual assistant. Ask me about branches, loans, deposits, or anything else — or tap a
+            question below.</p>
+        </div>
+      </div>
+
+      <div class="chatbot__chips">
+        <button type="button" class="chatbot__chip" data-chatbot-chip>Branch hours</button>
+        <button type="button" class="chatbot__chip" data-chatbot-chip>Loan products</button>
+        <button type="button" class="chatbot__chip" data-chatbot-chip>Deposit accounts</button>
+        <button type="button" class="chatbot__chip" data-chatbot-chip>Contact us</button>
+      </div>
+
+      <form class="chatbot__form" data-chatbot-form>
+        <input type="text" class="chatbot__input" data-chatbot-input placeholder="Type a message..." autocomplete="off"
+          aria-label="Type a message" />
+        <button type="submit" class="chatbot__send" aria-label="Send message">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z" />
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script src="assets/js/slider.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/chatbot.js"></script>
+  <script src="assets/js/animations.js"></script>
+</body>
+
+</html>

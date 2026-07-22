@@ -1,0 +1,207 @@
+/* ==========================================================================
+   RBT Bank — Careers page sections
+   Requires style.css to be loaded first (design tokens), plus
+   hero-carousel.css for the shared .home-hero banner component.
+   ========================================================================== */
+
+/* ---- Why Join RBT Bank? ---- */
+
+.careers-why {
+  background: var(--color-white);
+}
+
+.careers-why__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-10);
+}
+
+.careers-why__item {
+  text-align: center;
+}
+
+.careers-why__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 112px;
+  height: 112px;
+  color: var(--color-navy);
+  margin-bottom: var(--space-5);
+}
+
+.careers-why__icon svg {
+  width: 72px;
+  height: 72px;
+}
+
+.careers-why__item h3 {
+  font-size: var(--font-size-lg);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  margin-bottom: var(--space-3);
+}
+
+.careers-why__item p {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+/* ---- Open Positions ---- */
+
+.careers-jobs {
+  background: var(--color-section-tint);
+}
+
+.careers-jobs__heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  max-width: 56rem;
+  margin-inline: auto;
+}
+
+.careers-jobs__heading h2 {
+  font-size: var(--font-size-2xl);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  flex-shrink: 0;
+}
+
+.careers-jobs__rule {
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+  min-width: 2rem;
+}
+
+.careers-jobs__subtitle {
+  text-align: center;
+  color: var(--color-text-muted);
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-12);
+}
+
+.careers-jobs__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+}
+
+.job-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8) var(--space-6);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--duration-base) var(--ease-out);
+}
+
+/* Shadow deepens alongside the JS-driven lift (data-hover-lift, wired in
+   animations.js) — the transform is handled there, this is just the
+   matching shadow half of the effect. */
+.job-card[data-hover-lift]:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+/* font-size-sm (not the larger default heading size) + nowrap — the
+   longest title in this grid ("Business Development Officer") wrapped to
+   two lines at the larger size within the card's ~242px content width,
+   making that one card's header a different height from the rest. Sized
+   down until it fits on one line at any title length instead. */
+.job-card h3 {
+  font-size: var(--font-size-sm);
+  white-space: nowrap;
+  text-align: center;
+  color: var(--color-navy);
+  margin-bottom: var(--space-5);
+}
+
+/* Nested inside the heading (not a flex-item sibling) — .job-card is a
+   flex column, and a sibling <span> there was being cross-axis-centered
+   as its own flex item instead of sitting on its own line under the
+   heading text. Living inside the h3 avoids that entirely. */
+.job-card h3::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 2px;
+  margin: var(--space-3) auto 0;
+  background: var(--color-gold);
+  border-radius: var(--radius-full);
+}
+
+.job-card__label {
+  padding-block: var(--space-2);
+  font-weight: 700;
+  font-size: var(--font-size-sm);
+  color: var(--color-navy);
+  margin-bottom: var(--space-3);
+}
+
+.job-card__list {
+  list-style: none;
+  margin: 0 0 var(--space-6);
+  padding: 0;
+  flex: 1;
+}
+
+.job-card__list li {
+  position: relative;
+  padding-left: var(--space-4);
+  margin-bottom: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.job-card__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-blue);
+}
+
+.job-card__cta {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+/* ---- How to Apply ---- */
+
+.careers-apply {
+  background: var(--color-white);
+}
+
+.careers-apply__body {
+  max-width: 44rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.careers-apply__body p {
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-3);
+}
+
+.careers-apply__org {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--color-navy);
+  font-size: var(--font-size-lg);
+}
+
+.careers-apply__body a {
+  font-weight: 700;
+  color: var(--color-blue);
+}
+
+.careers-apply__body a:hover {
+  text-decoration: underline;
+}

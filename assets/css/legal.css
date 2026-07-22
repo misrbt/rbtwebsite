@@ -1,0 +1,115 @@
+/* ==========================================================================
+   RBT Bank — Legal/utility pages (Privacy Policy, Terms & Conditions, Sitemap)
+   Requires style.css to be loaded first (design tokens). Same "plain title
+   band, no hero" pattern as contact.css's .contact-title — these are text
+   pages, not marketing banners, so hero-carousel.css/Swiper aren't loaded
+   here either. Shared by all three legal-ish pages rather than one file
+   each, since they're all just a title band + a prose/link column.
+   ========================================================================== */
+
+.legal-title {
+  background: var(--color-section-tint);
+  padding-block: var(--space-16);
+  text-align: center;
+}
+
+.legal-title__heading {
+  font-size: var(--font-size-4xl);
+  color: var(--color-navy);
+}
+
+.legal-title__meta {
+  margin-top: var(--space-3);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+/* ==========================================================================
+   Prose column
+   ========================================================================== */
+
+.legal-content {
+  background: var(--color-white);
+}
+
+.legal-content__inner {
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.legal-content__inner h2 {
+  margin-top: var(--space-12);
+  margin-bottom: var(--space-4);
+  font-size: var(--font-size-xl);
+  color: var(--color-navy);
+}
+
+.legal-content__inner h2:first-child {
+  margin-top: 0;
+}
+
+.legal-content__inner h3 {
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-3);
+  font-size: var(--font-size-lg);
+  color: var(--color-text);
+}
+
+.legal-content__inner p {
+  margin-bottom: var(--space-4);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-base);
+}
+
+.legal-content__inner ul,
+.legal-content__inner ol {
+  margin: 0 0 var(--space-4);
+  padding-left: var(--space-6);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-base);
+}
+
+.legal-content__inner li {
+  margin-bottom: var(--space-2);
+}
+
+.legal-content__inner a {
+  color: var(--color-blue);
+  font-weight: 600;
+}
+
+.legal-content__inner strong {
+  color: var(--color-text);
+}
+
+/* ==========================================================================
+   Sitemap page — grouped link columns
+   ========================================================================== */
+
+.sitemap-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-8);
+}
+
+.sitemap-group__title {
+  margin-bottom: var(--space-3);
+  font-size: var(--font-size-base);
+  color: var(--color-navy);
+}
+
+.sitemap-group__links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.sitemap-group__links a {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.sitemap-group__links a:hover {
+  color: var(--color-blue);
+}

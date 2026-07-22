@@ -1,0 +1,67 @@
+/* ==========================================================================
+   RBT Bank — Animation keyframes + utility classes
+   GSAP/AOS handle most motion from JS; this file holds pure-CSS keyframes
+   (float, ripple, shimmer) and the reduced-motion baseline that every
+   animation in this project must respect.
+   ========================================================================== */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--color-light-gray) 25%, #eef1f8 50%, var(--color-light-gray) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+/* Elements entrance-animated by GSAP (assets/js/animations.js) start hidden
+   only via inline style set at runtime — never via this stylesheet, so the
+   page is fully visible if JavaScript fails to load. */
+
+/* Respect reduced-motion as a baseline rule, not a per-component afterthought.
+   View-transition pseudo-elements live outside the normal DOM tree, so the
+   universal selector below doesn't reach them — they need their own rule. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+
+  html {
+    scroll-behavior: auto !important;
+  }
+}

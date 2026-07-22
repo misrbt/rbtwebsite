@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Properties for Sale — RBT Bank, Inc.</title>
+    <meta
+      name="description"
+      content="Browse RBT Bank Inc.'s acquired properties for sale — foreclosed agricultural and residential lots in great locations at affordable prices."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+    />
+
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/nav.css" />
+    <link rel="stylesheet" href="assets/css/properties.css" />
+    <link rel="stylesheet" href="assets/css/footer.css" />
+    <link rel="stylesheet" href="assets/css/chatbot.css" />
+    <link rel="stylesheet" href="assets/css/responsive.css" />
+    <link rel="stylesheet" href="assets/css/animations.css" />
+  </head>
+  <body>
+    <!-- ==================== Header / Navigation ==================== -->
+    <header class="site-header" data-site-header>
+      <nav class="site-nav container" aria-label="Primary">
+        <a href="index.html" class="site-nav__logo">
+          <img
+            src="assets/images/rbt-logo.png"
+            alt="RBT Bank, Inc. — A Rural Bank, est. 1966"
+          />
+          <span class="site-nav__logo-text">
+            <strong>RBT BANK INC.</strong>
+            <span>A Rural Bank</span>
+          </span>
+        </a>
+
+        <ul class="site-nav__links" data-nav-links>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="products-services.html">Products &amp; Services</a></li>
+          <li><a href="properties.html" aria-current="page">Properties</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+        <button
+          class="site-nav__toggle"
+          type="button"
+          data-nav-toggle
+          aria-label="Toggle menu"
+          aria-expanded="false"
+        >
+          <svg
+            width="26"
+            height="26"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          >
+            <line
+              class="site-nav__toggle-line site-nav__toggle-line--top"
+              x1="3"
+              y1="6"
+              x2="21"
+              y2="6"
+            />
+            <line
+              class="site-nav__toggle-line site-nav__toggle-line--mid"
+              x1="3"
+              y1="12"
+              x2="21"
+              y2="12"
+            />
+            <line
+              class="site-nav__toggle-line site-nav__toggle-line--bottom"
+              x1="3"
+              y1="18"
+              x2="21"
+              y2="18"
+            />
+          </svg>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <!-- ==================== Properties Hero ====================
+           Single pre-composited banner — the pale-tint-to-photo blend and
+           headline are baked into the image itself, so this just runs it
+           edge to edge (same pattern as contact.html's single-slide
+           .home-hero banner, but without the Swiper wrapper since there's
+           only ever the one image here). -->
+      <section class="properties-hero">
+        <img
+          src="assets/images/properties/hero.jpg"
+          alt="Find Your Next Property with Us — RBT Bank offers foreclosed properties for sale. Great locations, affordable prices, trusted deals."
+          width="5700"
+          height="2109"
+        />
+      </section>
+
+      <!-- ==================== Search + Listings ==================== -->
+      <section class="properties-listings">
+        <div class="container">
+          <!-- ---- Search / Advanced Search ---- -->
+          <div class="properties-search" data-aos="fade-up">
+            <div class="properties-search__row">
+              <div class="field properties-search__field">
+                <label class="field__label" for="property-search">Search</label>
+                <div class="field__control">
+                  <svg class="field__control-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="11" cy="11" r="7" />
+                    <path d="m21 21-4.3-4.3" />
+                  </svg>
+                  <input
+                    type="search"
+                    id="property-search"
+                    placeholder="Search a property"
+                    data-property-search
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+
+              <div class="field properties-search__field">
+                <label class="field__label" for="filter-branch">Branch</label>
+                <div class="field__control">
+                  <select id="filter-branch" data-property-filter="town">
+                    <option value="">Select Branch</option>
+                    <option value="talisayan">Talisayan</option>
+                    <option value="salay">Salay</option>
+                    <option value="bukidnon">Bukidnon</option>
+                    <option value="binuangan">Binuangan</option>
+                    <option value="tagoloan">Tagoloan</option>
+                    <option value="cagayan-de-oro">Cagayan de Oro</option>
+                  </select>
+                  <svg class="field__control-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+                </div>
+              </div>
+
+              <div class="properties-search__actions">
+                <button type="button" class="btn btn--outline" data-property-clear>
+                  Clear All
+                </button>
+                <button
+                  type="button"
+                  class="btn btn--navy"
+                  data-advanced-toggle
+                  aria-expanded="false"
+                  aria-controls="advanced-search-grid"
+                >
+                  <span data-advanced-toggle-label>Show Advanced Search</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Collapsed by default — the normal/default search is just
+                 Search + Branch (above); Classification, Property Type,
+                 and Price Range only show once the user opts into
+                 Advanced Search. -->
+            <div class="properties-search__grid" id="advanced-search-grid" hidden>
+              <div class="field">
+                <label class="field__label" for="filter-classification">Classification</label>
+                <div class="field__control">
+                  <select id="filter-classification" data-property-filter="classification">
+                    <option value="">Select Classification</option>
+                    <option value="agri-residential">Agri-Residential</option>
+                    <option value="agricultural">Agricultural</option>
+                    <option value="residential">Residential</option>
+                  </select>
+                  <svg class="field__control-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+                </div>
+              </div>
+
+              <div class="field">
+                <label class="field__label" for="filter-type">Property Type</label>
+                <div class="field__control">
+                  <select id="filter-type" data-property-filter="type">
+                    <option value="">Select Property Type</option>
+                    <option value="lot-with-improvement">Lot with Improvement</option>
+                    <option value="vacant-lot">Vacant Lot</option>
+                  </select>
+                  <svg class="field__control-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+                </div>
+              </div>
+
+              <div class="field">
+                <label class="field__label" for="filter-price">Price Range</label>
+                <div class="field__control">
+                  <select id="filter-price" data-property-filter="price">
+                    <option value="">Select Price Range</option>
+                    <option value="0-150000">Under &#8369;150,000</option>
+                    <option value="150000-500000">&#8369;150,000 &ndash; &#8369;500,000</option>
+                    <option value="500000-5000000">&#8369;500,000 &ndash; &#8369;5,000,000</option>
+                    <option value="5000000-">Above &#8369;5,000,000</option>
+                  </select>
+                  <svg class="field__control-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ---- Acquired Properties Grid ---- -->
+          <div class="section-heading section-heading--center" data-aos="fade-up">
+            <h2>Acquired Properties for Sale</h2>
+            <span class="section-heading__rule" aria-hidden="true"></span>
+          </div>
+
+          <div class="properties-grid" data-property-grid>
+            <article
+              class="property-card"
+              data-hover-lift
+              data-property-item
+              data-classification="agri-residential"
+              data-type="vacant-lot"
+              data-town="talisayan"
+              data-price="900000"
+              data-aos="fade-up"
+            >
+              <div class="property-card__image">
+                <img src="assets/images/properties/property-1.jpg" alt="Agri-residential lot in Poblacion, Talisayan, Misamis Oriental" loading="lazy" />
+              </div>
+              <div class="property-card__body">
+                <button type="button" class="property-card__location" data-property-map-toggle data-property-map-query="Poblacion, Talisayan, Misamis Oriental" data-property-map-name="Poblacion, Talisayan, Misamis Oriental">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z" /><circle cx="12" cy="9" r="2.5" /></svg>
+                  Poblacion, Talisayan, Misamis Oriental
+                </button>
+                <p class="property-card__type">Agri-Residential</p>
+                <p class="property-card__lot">Lot Area: 6,008 sqm</p>
+                <p class="property-card__price">PHP 900,000.00</p>
+                <a href="#" class="btn btn--outline property-card__cta">
+                  View Details <span aria-hidden="true">&gt;</span>
+                </a>
+              </div>
+            </article>
+
+            <article
+              class="property-card"
+              data-hover-lift
+              data-property-item
+              data-classification="agricultural"
+              data-type="vacant-lot"
+              data-town="talisayan"
+              data-price="130000"
+              data-aos="fade-up"
+              data-aos-delay="50"
+            >
+              <div class="property-card__image">
+                <img src="assets/images/properties/property-2.jpg" alt="Agricultural lot in Tagbocboc, Talisayan, Misamis Oriental" loading="lazy" />
+              </div>
+              <div class="property-card__body">
+                <button type="button" class="property-card__location" data-property-map-toggle data-property-map-query="Tagbocboc, Talisayan, Misamis Oriental" data-property-map-name="Tagbocboc, Talisayan, Misamis Oriental">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z" /><circle cx="12" cy="9" r="2.5" /></svg>
+                  Tagbocboc, Talisayan, Misamis Oriental
+                </button>
+                <p class="property-card__type">Agricultural</p>
+                <p class="property-card__lot">Lot Area: 9,504 sqm</p>
+                <p class="property-card__price">PHP 130,000.00</p>
+                <a href="#" class="btn btn--outline property-card__cta">
+                  View Details <span aria-hidden="true">&gt;</span>
+                </a>
+              </div>
+            </article>
+
+            <article
+              class="property-card"
+              data-hover-lift
+              data-property-item
+              data-classification="residential"
+              data-type="vacant-lot"
+              data-town="salay"
+              data-price="100000000"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <div class="property-card__image">
+                <img src="assets/images/properties/property-3.jpg" alt="Residential lot in Poblacion, Salay, Misamis Oriental" loading="lazy" />
+              </div>
+              <div class="property-card__body">
+                <button type="button" class="property-card__location" data-property-map-toggle data-property-map-query="Poblacion, Salay, Misamis Oriental" data-property-map-name="Poblacion, Salay, Misamis Oriental">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z" /><circle cx="12" cy="9" r="2.5" /></svg>
+                  Poblacion, Salay, Misamis Oriental
+                </button>
+                <p class="property-card__type">Residential</p>
+                <p class="property-card__lot">Lot Area: 666 sqm</p>
+                <p class="property-card__price">PHP 100,000,000.00</p>
+                <a href="#" class="btn btn--outline property-card__cta">
+                  View Details <span aria-hidden="true">&gt;</span>
+                </a>
+              </div>
+            </article>
+
+            <article
+              class="property-card"
+              data-hover-lift
+              data-property-item
+              data-classification="agricultural"
+              data-type="vacant-lot"
+              data-town="bukidnon"
+              data-price="400000"
+              data-aos="fade-up"
+              data-aos-delay="150"
+            >
+              <div class="property-card__image">
+                <img src="assets/images/properties/property-4.jpg" alt="Agricultural lot in Baungon, Bukidnon" loading="lazy" />
+              </div>
+              <div class="property-card__body">
+                <button type="button" class="property-card__location" data-property-map-toggle data-property-map-query="Baungon, Bukidnon" data-property-map-name="Baungon, Bukidnon">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z" /><circle cx="12" cy="9" r="2.5" /></svg>
+                  Baungon, Bukidnon
+                </button>
+                <p class="property-card__type">Agricultural</p>
+                <p class="property-card__lot">Lot Area: 19,462 sqm</p>
+                <p class="property-card__price">PHP 400,000.00</p>
+                <a href="#" class="btn btn--outline property-card__cta">
+                  View Details <span aria-hidden="true">&gt;</span>
+                </a>
+              </div>
+            </article>
+
+            <article
+              class="property-card"
+              data-hover-lift
+              data-property-item
+              data-classification="agricultural"
+              data-type="vacant-lot"
+              data-town="binuangan"
+              data-price="120000"
+              data-aos="fade-up"
+            >
+              <div class="property-card__image">
+                <img src="assets/images/properties/property-5.jpg" alt="Agricultural lot in Kitamban, Binuangan, Misamis Oriental" loading="lazy" />
+              </div>
+              <div class="property-card__body">
+                <button type="button" class="property-card__location" data-property-map-toggle data-property-map-query="Kitamban, Binuangan, Misamis Oriental" data-property-map-name="Kitamban, Binuangan, Misamis Oriental">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z" /><circle cx="12" cy="9" r="2.5" /></svg>
+                  Kitamban, Binuangan, Misamis Oriental
+                </button>
+                <p class="property-card__type">Agricultural</p>
+                <p class="property-card__lot">Lot Area: 5,935 sqm</p>
+                <p class="property-card__price">PHP 120,000.00</p>
+                <a href="#" class="btn btn--outline property-card__cta">
+                  View Details <span aria-hidden="true">&gt;</span>
+                </a>
+              </div>
+            </article>
+
+            <article
+              class="property-card"
+              data-hover-lift
+              data-property-item
+              data-classification="agricultural"
+              data-type="vacant-lot"
+              data-town="binuangan"
+              data-price="80000"
+              data-aos="fade-up"
+              data-aos-delay="50"
+            >
+              <div class="property-card__image">
+                <img src="assets/images/properties/property-6.jpg" alt="Agricultural lot in Kitambis, Binuangan, Misamis Oriental" loading="lazy" />
+              </div>
+              <div class="property-card__body">
+                <button type="button" class="property-card__location" data-property-map-toggle data-property-map-query="Kitambis, Binuangan, Misamis Oriental" data-property-map-name="Kitambis, Binuangan, Misamis Oriental">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z" /><circle cx="12" cy="9" r="2.5" /></svg>
+                  Kitambis, Binuangan, Misamis Oriental
+                </button>
+                <p class="property-card__type">Agricultural</p>
+                <p class="property-card__lot">Lot Area: 3,705 sqm</p>
+                <p class="property-card__price">PHP 80,000.00</p>
+                <a href="#" class="btn btn--outline property-card__cta">
+                  View Details <span aria-hidden="true">&gt;</span>
+                </a>
+              </div>
+            </article>
+
+            <article
+              class="property-card"
+              data-hover-lift
+              data-property-item
+              data-classification="residential"
+              data-type="vacant-lot"
+              data-town="tagoloan"
+              data-price="220000"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <div class="property-card__image">
+                <img src="assets/images/properties/property-7.jpg" alt="Residential lot in Poblacion, Tagoloan, Misamis Oriental" loading="lazy" />
+              </div>
+              <div class="property-card__body">
+                <button type="button" class="property-card__location" data-property-map-toggle data-property-map-query="Poblacion, Tagoloan, Misamis Oriental" data-property-map-name="Poblacion, Tagoloan, Misamis Oriental">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z" /><circle cx="12" cy="9" r="2.5" /></svg>
+                  Poblacion, Tagoloan, Misamis Oriental
+                </button>
+                <p class="property-card__type">Residential</p>
+                <p class="property-card__lot">Lot Area: 360 sqm</p>
+                <p class="property-card__price">PHP 220,000.00</p>
+                <a href="#" class="btn btn--outline property-card__cta">
+                  View Details <span aria-hidden="true">&gt;</span>
+                </a>
+              </div>
+            </article>
+
+            <article
+              class="property-card"
+              data-hover-lift
+              data-property-item
+              data-classification="residential"
+              data-type="vacant-lot"
+              data-town="cagayan-de-oro"
+              data-price="486000"
+              data-aos="fade-up"
+            >
+              <!-- Stand-in photo (reused from the Tagbocboc listing) — this
+                   listing was added after the original design mockup, so
+                   there's no actual source photo of this specific lot yet.
+                   Swap in the real photo when available. -->
+              <div class="property-card__image">
+                <img src="assets/images/properties/property-2.jpg" alt="Residential lot in Tambo, Macasandig, Cagayan de Oro City" loading="lazy" />
+              </div>
+              <div class="property-card__body">
+                <button type="button" class="property-card__location" data-property-map-toggle data-property-map-query="Tambo, Macasandig, Cagayan de Oro City" data-property-map-name="Tambo, Macasandig, Cagayan de Oro City">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z" /><circle cx="12" cy="9" r="2.5" /></svg>
+                  Tambo, Macasandig, Cagayan de Oro City
+                </button>
+                <p class="property-card__type">Residential</p>
+                <p class="property-card__lot">Lot Area: 486 sqm</p>
+                <p class="property-card__price">PHP 486,000.00</p>
+                <a href="#" class="btn btn--outline property-card__cta">
+                  View Details <span aria-hidden="true">&gt;</span>
+                </a>
+              </div>
+            </article>
+          </div>
+
+          <p class="properties-grid__empty" data-property-empty>
+            No properties match your search. Try clearing a filter.
+          </p>
+
+          <!-- ---- Pagination ----
+               Built from the real card count (data-property-pagination),
+               not a hardcoded page list — see initPropertyPagination in
+               main.js. Page buttons are rendered/wired at runtime; this
+               nav is empty until then. -->
+          <nav class="properties-pagination" aria-label="Properties pages" data-property-pagination></nav>
+
+          <!-- ---- Interested in a Property? ---- -->
+          <div class="properties-inquire" data-aos="fade-up">
+            <div>
+              <h3 class="properties-inquire__heading">Interested in a Property?</h3>
+              <p class="properties-inquire__text">
+                We're here to help you find the right one. Inquire now!
+              </p>
+            </div>
+
+            <ul class="properties-inquire__contact">
+              <li>
+                <span class="properties-inquire__contact-icon" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13a8 8 0 0 1 16 0" /><rect x="2" y="13" width="5" height="7" rx="1.5" /><rect x="17" y="13" width="5" height="7" rx="1.5" /><path d="M20 20v1a2 2 0 0 1-2 2h-4" /></svg>
+                </span>
+                <a href="tel:+63885575115">(088) 557-5115</a> / <a href="tel:+639178951326">09178951326</a>
+              </li>
+              <li>
+                <span class="properties-inquire__contact-icon" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></svg>
+                </span>
+                <a href="mailto:headoffice@rbtbank.com">headoffice@rbtbank.com</a>
+              </li>
+              <li>
+                <span class="properties-inquire__contact-icon" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7" /></svg>
+                </span>
+                Mr. Clint B. Fernandez
+              </li>
+            </ul>
+
+            <svg class="properties-inquire__art" width="88" height="70" viewBox="0 0 88 70" fill="none" aria-hidden="true">
+              <path d="M4 40 24 18l20 22" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M40 40 60 14l24 26" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+              <rect x="52" y="40" width="16" height="20" rx="2" stroke="currentColor" stroke-width="4" />
+            </svg>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ==================== Footer ==================== -->
+    <footer class="site-footer">
+      <div class="container site-footer__top">
+        <div class="site-footer__col">
+          <div class="site-footer__brand">
+            <img
+              src="assets/images/rbt-logo.png"
+              alt="RBT Bank, Inc. — A Rural Bank, est. 1966"
+              class="site-footer__seal"
+            />
+            <div>
+              <h4 class="site-footer__brand-name">RBT BANK INC., A Rural Bank</h4>
+              <p class="site-footer__tagline">We are blessed to bless</p>
+            </div>
+          </div>
+          <p>
+            RBT BANK INC., A Rural Bank is regulated by the Bangko Sentral ng
+            Pilipinas.
+            <a href="https://www.bsp.gov.ph" target="_blank" rel="noopener"
+              >https://www.bsp.gov.ph</a
+            >
+          </p>
+          <span class="site-footer__rule" aria-hidden="true"></span>
+          <p>
+            For concerns, please reach us through any of the channels listed in
+            the <a href="contact.html">RBT BANK</a> page
+          </p>
+          <a href="contact.html" class="btn btn--primary site-footer__contact-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 13a8 8 0 0 1 16 0" />
+              <rect x="2" y="13" width="5" height="7" rx="1.5" />
+              <rect x="17" y="13" width="5" height="7" rx="1.5" />
+              <path d="M20 20v1a2 2 0 0 1-2 2h-4" />
+            </svg>
+            Contact Us <span aria-hidden="true">&gt;</span>
+          </a>
+        </div>
+
+        <div class="site-footer__divider" aria-hidden="true"></div>
+
+        <div class="site-footer__col">
+          <h5>Quick Links</h5>
+          <span class="site-footer__rule" aria-hidden="true"></span>
+          <ul class="site-footer__links">
+            <li>
+              <a href="products-services.html">
+                Products &amp; Services
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+              </a>
+            </li>
+            <li>
+              <a href="properties.html" aria-current="page">
+                Properties
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+              </a>
+            </li>
+            <li>
+              <a href="index.html#apply-online">
+                Apply for a loan online
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+              </a>
+            </li>
+            <li>
+              <a href="careers.html">
+                Careers
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+              </a>
+            </li>
+            <li>
+              <a href="events.html">
+                Events
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="site-footer__divider" aria-hidden="true"></div>
+
+        <div class="site-footer__col">
+          <h5>Follow Us</h5>
+          <span class="site-footer__rule" aria-hidden="true"></span>
+          <div class="site-footer__social">
+            <a href="https://www.facebook.com/Rbtbankinc" target="_blank" rel="noopener" aria-label="Facebook">
+              <img
+                src="assets/icons/favebook.webp"
+                alt=""
+                class="site-footer__social-icon"
+              />
+              RBT BANK INC., A Rural Bank
+            </a>
+          </div>
+
+          <span class="site-footer__col-divider" aria-hidden="true"></span>
+
+          <h5>Regulated &amp; Insured By:</h5>
+          <span class="site-footer__rule" aria-hidden="true"></span>
+          <div class="site-footer__badges">
+            <figure>
+              <img
+                src="assets/images/bsp-logonew.png"
+                alt="Bangko Sentral ng Pilipinas"
+              />
+              <figcaption>Bangko Sentral ng Pilipinas</figcaption>
+            </figure>
+            <figure class="site-footer__badge--dpo">
+              <img
+                src="assets/images/dpo%20logo.png"
+                alt="National Privacy Commission — DPO/DPS Registered"
+              />
+              <figcaption>DPO/DPS Registered</figcaption>
+            </figure>
+            <figure>
+              <img
+                src="assets/images/pdic%20logo.png"
+                alt="PDIC — deposits insured up to ₱1 Million per depositor"
+              />
+              <figcaption>Deposits insured by PDIC</figcaption>
+            </figure>
+            <p class="site-footer__pdic-desc">Deposits are insured by PDIC up to ₱1 Million per depositor.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="container site-footer__bottom">
+        <p>&copy; 2026 RBT Bank Inc. All rights reserved.</p>
+        <div class="site-footer__legal">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <span aria-hidden="true">|</span>
+          <a href="terms-conditions.html">Terms &amp; Conditions</a>
+          <span aria-hidden="true">|</span>
+          <a href="sitemap.html">Sitemap</a>
+        </div>
+      </div>
+    </footer>
+
+    <button
+      type="button"
+      class="back-to-top"
+      data-back-to-top
+      aria-label="Back to top"
+    >
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M12 19V5M5 12l7-7 7 7" />
+      </svg>
+    </button>
+
+    <!-- ==================== FAQ Chatbot ====================
+         Rule-based, no backend (assets/js/chatbot.js) — never claims to be
+         a human agent, never asks for account numbers/passwords. -->
+    <div class="chatbot" data-chatbot>
+      <button
+        type="button"
+        class="chatbot__toggle"
+        data-chatbot-toggle
+        aria-expanded="false"
+        aria-label="Chat with RBT Bank"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+        </svg>
+      </button>
+
+      <div class="chatbot__panel" data-chatbot-panel data-open="false" role="dialog" aria-label="RBT Bank chat assistant">
+        <div class="chatbot__header">
+          <span class="chatbot__header-title">RBT Bank Assistant</span>
+          <button type="button" class="chatbot__close" data-chatbot-close aria-label="Close chat">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M6 6l12 12M18 6L6 18" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="chatbot__messages" data-chatbot-messages>
+          <div class="chatbot__message chatbot__message--bot">
+            <p>Hi! I'm the RBT Bank virtual assistant. Ask me about branches, loans, deposits, or anything else — or tap a question below.</p>
+          </div>
+        </div>
+
+        <div class="chatbot__chips">
+          <button type="button" class="chatbot__chip" data-chatbot-chip>Branch hours</button>
+          <button type="button" class="chatbot__chip" data-chatbot-chip>Loan products</button>
+          <button type="button" class="chatbot__chip" data-chatbot-chip>Deposit accounts</button>
+          <button type="button" class="chatbot__chip" data-chatbot-chip>Contact us</button>
+        </div>
+
+        <form class="chatbot__form" data-chatbot-form>
+          <input type="text" class="chatbot__input" data-chatbot-input placeholder="Type a message..." autocomplete="off" aria-label="Type a message" />
+          <button type="submit" class="chatbot__send" aria-label="Send message">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z" />
+            </svg>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ==================== Property Location Modal ====================
+         Single shared instance — clicking a card's location sets the
+         iframe src to a plain pin on that property and opens this in
+         place, instead of navigating away to Google Maps. -->
+    <div class="map-modal" data-property-map-modal hidden>
+      <div class="map-modal__backdrop" data-property-map-modal-close></div>
+      <div class="map-modal__panel" role="dialog" aria-modal="true" aria-label="Property location">
+        <div class="map-modal__header">
+          <h3 class="map-modal__title" data-property-map-modal-title>Property Location</h3>
+          <button type="button" class="map-modal__close" data-property-map-modal-close aria-label="Close map">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M6 6l12 12M18 6L6 18" />
+            </svg>
+          </button>
+        </div>
+        <iframe
+          class="map-modal__iframe"
+          data-property-map-modal-iframe
+          src=""
+          title="Property location"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+        <div class="map-modal__footer">
+          <a
+            href="#"
+            target="_blank"
+            rel="noopener"
+            class="btn btn--primary map-modal__directions"
+            data-property-map-modal-directions
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 11l18-8-8 18-2-8-8-2z" />
+            </svg>
+            Open in Google Maps
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/chatbot.js"></script>
+    <script src="assets/js/animations.js"></script>
+  </body>
+</html>

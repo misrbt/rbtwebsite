@@ -1,0 +1,228 @@
+/* ==========================================================================
+   RBT Bank — Shared Hero Carousel (.home-hero*)
+   The banner-slide Swiper hero component, reused as-is on both the
+   homepage (index.html) and the Products & Services hero. Requires
+   style.css to be loaded first (design tokens).
+   ========================================================================== */
+
+.home-hero {
+  position: relative;
+  background: var(--color-white);
+  padding-block: 0 var(--space-16);
+  overflow: hidden;
+}
+
+/* No side padding — the banner slide runs edge to edge; the arrows are
+   positioned off the section itself (see .home-hero__arrow), not this
+   container, so they still hug the viewport edges above the image. */
+.home-hero .container {
+  max-width: 100%;
+  padding-inline: 0;
+}
+
+/* Flex (not grid) so the text block and image size to their own content
+   and sit together as one centered group in the wide container — a grid
+   with 1fr/1fr columns stretched them to the far edges, leaving a large
+   dead gap between them instead of a balanced, centered pair. */
+.home-hero__slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-16);
+  min-height: 26rem;
+}
+
+.home-hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-heading);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-blue);
+  margin-bottom: var(--space-4);
+}
+
+.home-hero__title {
+  font-size: var(--font-size-4xl);
+  color: var(--color-navy);
+  margin-bottom: var(--space-8);
+}
+
+.home-hero__visual {
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Full-width promo banner variant — the image carries its own headline/logo,
+   so unlike the text+portrait slide this one is just the image, edge to edge. */
+.home-hero__slide--banner {
+  position: relative;
+  display: block;
+  min-height: 0;
+}
+
+.home-hero__slide--banner img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Real-photo variant (events.html) — unlike --banner, the image is a real
+   photograph with no baked-in text, so the eyebrow/title/copy are overlaid
+   here in CSS on top of a gradient scrim. Own fixed min-height (rather than
+   the aspect-ratio-driven banner) since these photos have no consistent
+   native ratio to size the slide from. */
+.home-hero__slide--photo {
+  position: relative;
+  display: block;
+  min-height: 32rem;
+  overflow: hidden;
+}
+
+.home-hero__slide--photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home-hero__slide-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(3, 4, 94, 0.1) 0%,
+    rgba(3, 4, 94, 0.8) 100%
+  );
+}
+
+.home-hero__slide-copy {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 0 var(--space-8) var(--space-12);
+  text-align: center;
+}
+
+.home-hero__slide-copy .home-hero__eyebrow {
+  color: var(--color-tint-light);
+}
+
+.home-hero__slide-copy .home-hero__title {
+  color: var(--color-text-inverse);
+  margin-bottom: var(--space-3);
+}
+
+.home-hero__slide-copy p {
+  color: var(--color-text-inverse-muted);
+  font-size: var(--font-size-lg);
+}
+
+/* Fixed min-height (not the banner's viewport-relative aspect-ratio calc)
+   so the arrows center on the --photo slide's own known height instead. */
+.home-hero:has(.home-hero__slide--photo) .home-hero__arrow {
+  top: 16rem;
+}
+
+/* Static row below the slider instead of a per-slide overlay button —
+   each banner's own clear "safe zone" for a button varies too much
+   (some are full art with no dead space at all), so one persistent
+   pair of actions here is far more robust than 5 hand-tuned positions. */
+.home-hero__actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+}
+
+.home-hero__visual img {
+  max-height: 34rem;
+  width: auto;
+  align-self: flex-end;
+}
+
+/* Positioned relative to the full-bleed section (not .container), so the
+   chevrons hug the true viewport edges the way the reference design does
+   instead of sitting at the centered content column's edges. */
+.home-hero__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  color: var(--color-navy);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.home-hero__arrow:hover {
+  color: var(--color-blue);
+}
+
+.home-hero__arrow.swiper-button-disabled {
+  pointer-events: none;
+}
+
+.home-hero__arrow--prev {
+  left: var(--space-12);
+}
+
+.home-hero__arrow--next {
+  right: var(--space-12);
+}
+
+/* The banner variant's image is the only thing that determines the slide's
+   visual center, but the arrows are positioned relative to the whole
+   section — which also includes the pagination row and the section's own
+   bottom padding below the image. A flat top:50% (or any single fixed
+   breakpoint override) drifts off-center as soon as that extra height
+   changes. Since the image is always a fixed 851:315 ratio at 100% of this
+   full-bleed section's width, its half-height can be derived directly from
+   viewport width instead of guessed per breakpoint — this stays correct at
+   every screen size, including ones no one explicitly tested. */
+.home-hero:has(.home-hero__slide--banner) .home-hero__arrow {
+  top: calc(50vw * 315 / 851);
+}
+
+/* Pagination sits below the banner artwork (not overlaid on it), same as
+   every other carousel on the site — plain blue dots, bottom of the slide. */
+.home-hero .swiper-pagination {
+  position: static;
+  margin-top: var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+.home-hero .swiper-pagination-bullet-active {
+  opacity: 1;
+}
+
+/* Generic Swiper library overrides — the home-hero carousel uses Swiper's
+   own default pagination bullets (just repositioned above), so this bullet
+   color needs to be set globally rather than scoped to one component. */
+.swiper-pagination-bullet {
+  background: var(--color-blue) !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--color-blue) !important;
+}

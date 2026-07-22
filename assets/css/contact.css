@@ -1,0 +1,609 @@
+/* ==========================================================================
+   RBT Bank — Contact page sections
+   Requires style.css to be loaded first (design tokens). Unlike the other
+   marketing pages, this one deliberately has no hero photo/carousel (a
+   plain title band instead) — it's a utility page (info + form +
+   directory), not a banner moment — so hero-carousel.css/Swiper aren't
+   loaded here at all.
+   ========================================================================== */
+
+/* ==========================================================================
+   Contact Title — plain heading band, no hero image
+   ========================================================================== */
+
+.contact-title {
+  background: var(--color-section-tint);
+  padding-block: var(--space-16);
+}
+
+.contact-title__heading {
+  font-size: var(--font-size-4xl);
+  color: var(--color-navy);
+  text-align: center;
+}
+
+/* ==========================================================================
+   Get in Touch — contact info + form, two columns
+   ========================================================================== */
+
+.contact-info {
+  background: var(--color-white);
+}
+
+.contact-info__layout {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: var(--space-16);
+  align-items: start;
+}
+
+.contact-channels {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.contact-channel {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  background: var(--color-section-tint);
+  border-radius: var(--radius-md);
+}
+
+.contact-channel__icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  background: var(--color-white);
+  color: var(--color-blue);
+  box-shadow: var(--shadow-sm);
+}
+
+.contact-channel__label {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--font-size-sm);
+  color: var(--color-navy);
+  margin-bottom: var(--space-1);
+}
+
+.contact-channel__value {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-base);
+}
+
+.contact-channel__value a {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.contact-channel__value a:hover {
+  color: var(--color-blue);
+}
+
+/* ---- Form ---- */
+
+.contact-form {
+  padding: var(--space-8);
+  background: var(--color-section-tint);
+  border-radius: var(--radius-lg);
+}
+
+.contact-form__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+  margin-bottom: var(--space-6);
+}
+
+.contact-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.contact-form__field--full {
+  grid-column: 1 / -1;
+}
+
+.contact-form__field label {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--font-size-sm);
+  color: var(--color-navy);
+}
+
+.contact-form__field input,
+.contact-form__field textarea {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-white);
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  transition: border-color var(--duration-fast) var(--ease-out);
+}
+
+.contact-form__field input {
+  min-height: 48px;
+}
+
+.contact-form__field textarea {
+  min-height: 128px;
+  resize: vertical;
+}
+
+.contact-form__field input::placeholder,
+.contact-form__field textarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+.contact-form__field input:focus-visible,
+.contact-form__field textarea:focus-visible {
+  outline: none;
+  border-color: var(--color-blue);
+}
+
+.contact-form__field.is-invalid input,
+.contact-form__field.is-invalid textarea {
+  border-color: var(--color-danger);
+}
+
+.contact-form__error {
+  display: none;
+  font-size: var(--font-size-xs);
+  color: var(--color-danger);
+}
+
+.contact-form__field.is-invalid .contact-form__error {
+  display: block;
+}
+
+.contact-form__success {
+  display: none;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-sm);
+  background: rgba(21, 122, 74, 0.1);
+  color: var(--color-success);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.contact-form__success.is-visible {
+  display: flex;
+}
+
+/* ==========================================================================
+   Branch Directory — name + shared head-office line + "View Map"
+   ========================================================================== */
+
+.contact-branches {
+  background: var(--color-section-tint);
+}
+
+.contact-branches__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+}
+
+.branch-tile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--duration-base) var(--ease-out);
+}
+
+.branch-tile[data-hover-lift]:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.branch-tile__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.branch-tile__icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 3px;
+  border-radius: var(--radius-full);
+  background: var(--color-section-tint);
+}
+
+.branch-tile__icon img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.branch-tile__name {
+  font-weight: 700;
+  color: var(--color-navy);
+}
+
+/* padding-left + a floated icon (rather than plain inline) gives wrapped
+   second lines of a multi-line address a proper hanging indent under the
+   text, instead of sliding back under the icon — the classic "icon +
+   paragraph" alignment tell. */
+.branch-tile__address {
+  padding-left: 20px;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-base);
+}
+
+.branch-tile__contact {
+  padding-left: 20px;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.branch-tile__contact a {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.branch-tile__line-icon {
+  float: left;
+  margin-left: -20px;
+  margin-top: 3px;
+  color: var(--color-blue);
+}
+
+/* Full-width, compact size — the default .btn is sized for standalone CTAs
+   (48px min-height, generous inline padding), which reads oversized as a
+   secondary action tucked at the bottom of a narrow card. */
+.branch-tile__map-btn {
+  width: 100%;
+  min-height: 40px;
+  padding-inline: var(--space-5);
+  font-size: var(--font-size-sm);
+  margin-top: auto;
+}
+
+/* ==========================================================================
+   All-Branches Map — a real Google My Maps embed with custom logo pins
+   (built by hand in mymaps.google.com — see CLAUDE.md). Self-contained and
+   interactive, so just one full-width panel — no branch-list sidebar
+   needed here.
+   ========================================================================== */
+
+.contact-map {
+  background: var(--color-white);
+}
+
+.contact-map__layout {
+  display: grid;
+  grid-template-columns: 20rem 1fr;
+  gap: var(--space-6);
+  height: 32rem;
+}
+
+.contact-map__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: var(--color-section-tint);
+  border-radius: var(--radius-lg);
+  overflow-y: auto;
+}
+
+.contact-map__list-hint {
+  padding: var(--space-2) var(--space-3) var(--space-3);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-base);
+}
+
+.contact-map__list-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  text-align: left;
+  line-height: var(--line-height-tight);
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.contact-map__list-item:hover {
+  background: var(--color-white);
+}
+
+.contact-map__list-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+/* Touch/no-hover devices (phones, tablets) can't preview a branch via
+   mouseover, so tapping it also expands this inline panel with the same
+   address + phone shown in the desktop hover tooltip below — toggled by
+   initRegionMap in main.js via [data-open] on the wrapping entry. Collapsed
+   by default and harmless on hover-capable devices since JS never opens it
+   there (see initRegionMap's hover: hover check). */
+.contact-map__list-panel {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height var(--duration-base) var(--ease-in-out);
+}
+
+.contact-map__list-entry[data-open="true"] .contact-map__list-panel {
+  max-height: 11rem;
+}
+
+.contact-map__list-panel-inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: 0 var(--space-4) var(--space-3) calc(var(--space-4) + 24px + var(--space-3));
+}
+
+.contact-map__list-panel-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-base);
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+.contact-map__list-panel-row a {
+  color: var(--color-blue);
+  font-weight: 600;
+}
+
+.contact-map__list-panel-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--color-blue);
+}
+
+/* Chevron affordance only shown where the panel is actually reachable
+   (no real hover input) so desktop mice aren't shown a control that does
+   nothing there. */
+@media (hover: none) {
+  .contact-map__list-entry .contact-map__list-item {
+    position: relative;
+    padding-right: var(--space-8);
+  }
+
+  .contact-map__list-entry .contact-map__list-item::after {
+    content: "";
+    position: absolute;
+    right: var(--space-4);
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid var(--color-text-muted);
+    border-bottom: 2px solid var(--color-text-muted);
+    transform: translateY(-70%) rotate(45deg);
+    transition: transform var(--duration-fast) var(--ease-out);
+  }
+
+  .contact-map__list-entry[data-open="true"] .contact-map__list-item::after {
+    transform: translateY(-30%) rotate(-135deg);
+  }
+}
+
+/* Floating hover/focus card built by initRegionMap in main.js — shows a
+   branch's address + phone without leaving the list. position: fixed and
+   appended to <body> so it escapes .contact-map__list's overflow-y clipping
+   and JS positions it off the hovered item's real viewport rect. */
+.contact-map__tooltip {
+  position: fixed;
+  z-index: 120;
+  width: 16rem;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-white);
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  transition:
+    opacity var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+  pointer-events: none;
+}
+
+.contact-map__tooltip.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.contact-map__tooltip-name {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-family: var(--font-heading);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  color: var(--color-navy);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.contact-map__tooltip-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-base);
+  color: var(--color-text-muted);
+}
+
+.contact-map__tooltip-row + .contact-map__tooltip-row {
+  margin-top: var(--space-1);
+}
+
+.contact-map__tooltip-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--color-blue);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-map__tooltip {
+    transition: none;
+  }
+}
+
+.contact-map__embed {
+  height: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.contact-map__embed iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Google's My Maps embed always renders a fixed title/owner bar (map name,
+   creator's profile photo/name, "Made with Google My Maps") at its own top
+   edge — that's inside Google's iframe content, so it can't be removed or
+   restyled from our side (cross-origin). Instead, the iframe itself is
+   rendered taller than this visible container and shifted up by that same
+   amount, so the owner bar sits above the clipped/visible area and never
+   shows — only the map content below it does. Doesn't affect Google's
+   attribution footer (bottom-left), which stays visible. Scoped to
+   .is-mymaps only — the plain per-branch search embed (initRegionMap in
+   main.js) has no such bar, and would get its top wrongly clipped if this
+   applied unconditionally. */
+.contact-map__embed iframe.is-mymaps {
+  height: calc(100% + 72px);
+  margin-top: -72px;
+}
+
+.contact-map__note {
+  margin-top: var(--space-6);
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+/* ==========================================================================
+   Branch Map Modal — keeps "View Map" on this page instead of navigating
+   to Google Maps in a new tab. Same component as branches.html used to
+   ship (properties.html carries its own copy too, for the same reason —
+   each page that needs it duplicates this block rather than cross-loading
+   another page's stylesheet).
+   ========================================================================== */
+
+.map-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+}
+
+.map-modal[hidden] {
+  display: none;
+}
+
+.map-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(3, 4, 94, 0.6);
+  backdrop-filter: blur(2px);
+}
+
+.map-modal__panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 56rem;
+  height: min(34rem, 80vh);
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+.map-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.map-modal__title {
+  font-size: var(--font-size-lg);
+  color: var(--color-navy);
+}
+
+.map-modal__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--color-navy);
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.map-modal__close:hover {
+  background: var(--color-section-tint);
+}
+
+.map-modal__iframe {
+  flex: 1;
+  width: 100%;
+  border: 0;
+}
+
+.map-modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: var(--space-4) var(--space-6);
+  border-top: 1px solid var(--color-border);
+}
+
+.map-modal__directions {
+  min-height: 40px;
+  padding-inline: var(--space-6);
+  font-size: var(--font-size-sm);
+}

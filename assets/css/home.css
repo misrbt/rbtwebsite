@@ -1,0 +1,734 @@
+/* ==========================================================================
+   RBT Bank — Homepage (index.html) sections
+   Requires style.css to be loaded first (design tokens). The hero carousel
+   itself (.home-hero*) lives in hero-carousel.css since it's shared with
+   the Products & Services page — load that file too.
+   ========================================================================== */
+
+/* ==========================================================================
+   Home — Trust Bar
+   ========================================================================== */
+
+.home-trust {
+  padding-block: var(--space-6);
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.home-trust__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-4) var(--space-8);
+}
+
+.home-trust__text {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.home-trust__badges {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.home-trust__badges img {
+  height: 36px;
+  width: 36px;
+  object-fit: contain;
+}
+
+/* ==========================================================================
+   Home — Explore our Services
+   ========================================================================== */
+
+.home-services {
+  background: var(--color-section-tint);
+}
+
+.home-services__grid {
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-8);
+}
+
+/* ==========================================================================
+   Home — Properties Teaser
+   Reuses the same photo/classification/lot-area/price data as the first 3
+   listings on properties.html, in a lighter card (no search/filter/map
+   interactivity — that lives on the full Properties page).
+   ========================================================================== */
+
+.home-properties {
+  background: var(--color-white);
+}
+
+/* Clean, uniform 3-column grid — the standard, utility-first pattern for
+   property listings (scannable, consistent card sizing, no competing
+   visual treatments), rather than a novelty layout. Generous gap for
+   breathing room between cards. */
+.home-properties__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-8);
+  margin-bottom: var(--space-10);
+}
+
+.home-property-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition:
+    transform var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
+}
+
+.home-property-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+
+.home-property-card__image {
+  position: relative;
+}
+
+.home-property-card__image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.home-property-card__badge {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+  background: var(--color-navy);
+  color: var(--color-text-inverse);
+  font-size: var(--font-size-2xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+}
+
+.home-property-card__body {
+  padding: var(--space-6);
+}
+
+.home-property-card__location {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: var(--space-3);
+}
+
+.home-property-card__location svg {
+  flex-shrink: 0;
+  color: var(--color-blue);
+  margin-top: 2px;
+}
+
+.home-property-card__lot {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-2);
+}
+
+.home-property-card__price {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--font-size-lg);
+  color: var(--color-navy);
+}
+
+.home-properties__cta {
+  display: flex;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   Home — Branch Network Map
+   Same real Google My Maps embed as contact.html's "Find Us Across the
+   Region" section (see CLAUDE.md) — duplicated here rather than shared,
+   same pattern as .map-modal across other pages.
+   ========================================================================== */
+
+.home-branch-map {
+  background: var(--color-white);
+}
+
+.home-branch-map__embed {
+  height: 32rem;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Google's My Maps embed always renders a fixed title/owner bar at its own
+   top edge — that's inside Google's iframe content, so it can't be removed
+   or restyled from our side (cross-origin). Instead the iframe is rendered
+   taller than this visible container and shifted up by that same amount,
+   so the owner bar sits above the clipped/visible area and never shows —
+   only the map content below it does. Doesn't affect Google's attribution
+   footer (bottom-left), which stays visible. */
+.home-branch-map__embed iframe {
+  height: calc(100% + 72px);
+  margin-top: -72px;
+  display: block;
+  width: 100%;
+  border: 0;
+}
+
+.home-branch-map__note {
+  margin-top: var(--space-6);
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.home-branch-map__note a {
+  color: var(--color-blue);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Home — About Teaser
+   ========================================================================== */
+
+.home-about {
+  background: var(--color-white);
+}
+
+/* Copy left, photo right — mirrors .home-events__layout (text left, photo
+   right) so the two two-column sections on this page read consistently.
+   Wrapped in .container (same as every other section) so the photo's right
+   edge lines up with the stats band below it and the rest of the page,
+   instead of bleeding to the viewport edge.
+   minmax(0, 1fr) (not bare 1fr) on both tracks — a bare 1fr track still
+   respects its content's intrinsic min-width, and the full-res photo's
+   natural width is far wider than either column, which was blowing the
+   whole row out past the container and forcing a horizontal scrollbar. */
+.home-about__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-12);
+  margin-bottom: var(--space-16);
+}
+
+.home-about__copy {
+  min-width: 0;
+}
+
+/* Fixed aspect-ratio keeps the photo a sane, predictable size that tracks
+   the column width instead of the image's own tall natural aspect ratio
+   (which, under grid stretch, was making the photo taller than the text
+   block and overhanging past its bottom). */
+.home-about__visual {
+  min-width: 0;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.home-about__visual img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.home-about__title {
+  font-size: var(--font-size-4xl);
+  text-transform: uppercase;
+  margin-block: var(--space-3) var(--space-6);
+}
+
+.home-about__body strong {
+  color: var(--color-navy);
+}
+
+.home-about__cta {
+  gap: var(--space-1);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.home-about__body {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-base);
+  max-width: 32rem;
+  margin-bottom: var(--space-4);
+}
+
+.home-about__body + .btn {
+  margin-top: var(--space-4);
+}
+
+.home-about__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-8);
+  padding: var(--space-12) var(--space-8);
+  background: var(--color-section-tint);
+  border-radius: var(--radius-lg);
+}
+
+.home-about__stat {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding-inline: var(--space-4);
+}
+
+.home-about__stat:not(:last-child) {
+  border-right: 1px solid var(--color-border);
+}
+
+.home-about__stat-icon {
+  flex-shrink: 0;
+  color: var(--color-blue);
+}
+
+.home-about__stat-value {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--color-navy);
+  line-height: 1;
+}
+
+.home-about__stat-label {
+  font-weight: 600;
+  color: var(--color-navy);
+  margin-top: var(--space-1);
+}
+
+.home-about__stat-desc {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  margin-top: var(--space-1);
+}
+
+/* ==========================================================================
+   Home — Featured Products
+   ========================================================================== */
+
+.home-services .section-heading h2 {
+  font-size: var(--font-size-3xl);
+}
+
+/* Full-bleed photo with a bottom-up navy scrim and real HTML/CSS caption
+   overlaid on top — matches the original design (photo behind, gradient
+   dark at the bottom fading to transparent up top) but with real text
+   instead of one flattened into the JPG, so spacing/type can be tuned
+   here directly. */
+.service-photo-card {
+  position: relative;
+  display: block;
+  aspect-ratio: 286 / 375;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
+}
+
+.service-photo-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+.service-photo-card__media {
+  position: absolute;
+  inset: 0;
+}
+
+.service-photo-card__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--duration-slow) var(--ease-out);
+}
+
+.service-photo-card:hover .service-photo-card__media img {
+  transform: scale(1.05);
+}
+
+.service-photo-card__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.95) 0%,
+    rgba(0, 0, 0, 0.9) 25%,
+    rgba(0, 0, 0, 0.45) 50%,
+    rgba(0, 0, 0, 0) 70%
+  );
+}
+
+.service-photo-card__body {
+  position: absolute;
+  z-index: 1;
+  inset-inline: 0;
+  bottom: 0;
+  padding: var(--space-10) var(--space-6) var(--space-6);
+}
+
+.service-photo-card__eyebrow {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: var(--space-2);
+}
+
+.service-photo-card__title {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-tight);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: var(--color-text-inverse);
+  /* "Deposit Products" wraps to 2 lines while the other 3 titles fit on
+     1 — reserve 2 lines' worth of height on every card so the description
+     and "Learn more" line don't shift down only on that card. */
+  min-height: calc(var(--font-size-lg) * var(--line-height-tight) * 2);
+}
+
+.service-photo-card__desc {
+  color: var(--color-text-inverse-muted);
+  font-size: var(--font-size-sm);
+  line-height: 1.2;
+  /* Reserves 3 lines' worth of height regardless of actual text length —
+     the Deposit Products copy wraps to 3 lines at this card width while
+     the other 3 cards wrap to 2, so 3 is the tallest case to reserve for.
+     Since the whole caption block is bottom-anchored, under-reserving
+     here is what pushes a shorter card's eyebrow/title up out of
+     alignment with the rest. */
+  min-height: calc(var(--font-size-sm) * 1.2 * 3);
+}
+
+.service-photo-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-gold);
+  transition: gap var(--duration-fast) var(--ease-out);
+}
+
+.service-photo-card:hover .service-photo-card__link {
+  gap: var(--space-3);
+  color: var(--color-text-inverse);
+}
+
+/* ==========================================================================
+   Home — Apply Online
+   ========================================================================== */
+
+.home-apply-online {
+  padding-block: var(--space-16);
+}
+
+.home-apply-online__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+  flex-wrap: wrap;
+}
+
+.home-apply-online__inner h2 {
+  font-size: var(--font-size-3xl);
+  margin-bottom: var(--space-4);
+}
+
+.home-apply-online__accent {
+  color: var(--color-gold);
+}
+
+.home-apply-online__inner p {
+  color: var(--color-text-inverse-muted);
+  max-width: 34rem;
+  margin-bottom: var(--space-6);
+}
+
+.home-apply-online__inner .btn {
+  flex-shrink: 0;
+}
+
+.home-apply-online__qr {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.home-apply-online__qr img {
+  display: block;
+  width: 220px;
+  height: 220px;
+}
+
+/* Chevron flips to point up while the branch list is open — same "state
+   is always visible" logic as the FAQ accordion's icon morph. */
+.home-apply-online__toggle {
+  gap: var(--space-2);
+}
+
+.home-apply-online__toggle-icon {
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.home-apply-online__toggle[aria-expanded="true"] .home-apply-online__toggle-icon {
+  transform: rotate(180deg);
+}
+
+/* Height-animated wrapper (not just hidden/shown) so opening the list reads
+   as a reveal, not a jump cut — max-height is generous enough to clear two
+   rows of cards at any content length without needing exact measurement. */
+.branch-apply {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--duration-slow) var(--ease-in-out);
+}
+
+.branch-apply[data-open="true"] {
+  max-height: 40rem;
+}
+
+.branch-apply__list {
+  padding-top: var(--space-8);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+}
+
+.branch-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--color-border-inverse);
+  color: var(--color-text-inverse);
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.branch-card:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--color-gold);
+  transform: translateY(-3px);
+}
+
+.branch-card__icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background: rgba(0, 180, 216, 0.16);
+  color: var(--color-gold);
+}
+
+.branch-card__name {
+  flex: 1;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.branch-card__badge {
+  display: inline-block;
+  margin-left: var(--space-2);
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-full);
+  background: rgba(0, 180, 216, 0.18);
+  color: var(--color-gold);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  vertical-align: middle;
+}
+
+.branch-card__arrow {
+  flex-shrink: 0;
+  color: var(--color-text-inverse-muted);
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.branch-card:hover .branch-card__arrow {
+  color: var(--color-gold);
+  transform: translate(2px, -2px);
+}
+
+/* ==========================================================================
+   Home — Events
+   ========================================================================== */
+
+.home-events {
+  position: relative;
+  background: var(--color-white);
+}
+
+.home-events__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+
+.event-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition:
+    box-shadow var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
+}
+
+.event-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-6px);
+}
+
+.event-card__visual {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(
+    135deg,
+    var(--color-blue) 0%,
+    var(--color-navy) 100%
+  );
+}
+
+.event-card__visual img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.event-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: var(--space-4) var(--space-6) var(--space-6);
+}
+
+.event-card__date {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-xs);
+  color: var(--color-blue);
+  font-weight: 600;
+  margin-bottom: var(--space-3);
+}
+
+.event-card__title {
+  font-size: var(--font-size-base);
+  color: var(--color-navy);
+  margin-bottom: var(--space-2);
+}
+
+.event-card__desc {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  flex: 1;
+  margin-bottom: var(--space-4);
+}
+
+.event-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-blue);
+  transition: gap var(--duration-fast) var(--ease-out);
+}
+
+.event-card__link:hover {
+  gap: var(--space-2);
+  color: var(--color-navy);
+}
+
+.home-events__more {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-8) var(--space-12);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.home-events__more-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  background: var(--color-section-tint);
+  color: var(--color-blue);
+}
+
+.home-events__more-copy {
+  flex: 1;
+}
+
+.home-events__more-copy strong {
+  display: block;
+  color: var(--color-navy);
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--space-2);
+}
+
+.home-events__more-copy p {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-base);
+  margin: 0;
+}
+
+.home-events__more .btn {
+  flex-shrink: 0;
+}
