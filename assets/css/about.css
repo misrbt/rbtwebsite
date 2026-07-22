@@ -407,8 +407,12 @@
 }
 
 .about-board {
-  background: var(--color-white);
-  padding-block: var(--space-16);
+  /* Very soft wash rather than flat white, so the section reads as its own
+     chapter and the white cards have something to lift off. */
+  background:
+    radial-gradient(48rem 24rem at 50% 0%, rgba(0, 180, 216, 0.07) 0%, transparent 70%),
+    linear-gradient(180deg, var(--color-white) 0%, var(--color-section-tint) 100%);
+  padding-block: var(--space-16) var(--space-20);
 }
 
 .about-board .section-heading h2 {
@@ -418,7 +422,7 @@
 .about-board__chair {
   display: flex;
   justify-content: center;
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-8);
 }
 
 .about-board__grid {
@@ -430,19 +434,70 @@
 /* Horizontal card — rounded-square photo left, name/title right — matches
    the source design, not a centered stacked-avatar card. */
 .about-board__card {
+  position: relative;
   display: flex;
   align-items: center;
   gap: var(--space-6);
   background: var(--color-white);
-  border: 1px solid var(--color-border);
+  /* Inset ring instead of a 1px border: it defines the edge without the
+     wireframe look, and leaves the real border free for the accent below. */
+  border: 0;
   border-radius: var(--radius-lg);
   padding: var(--space-6);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--ring), var(--shadow-sm);
+  overflow: hidden;
+  transition: box-shadow var(--duration-base) var(--ease-out);
 }
 
-.about-board__card--chair {
-  max-width: 28rem;
+/* Accent spine down the leading edge, drawn in on hover.
+   ::after, NOT ::before — the pointer-tracked spotlight in animations.css
+   already owns ::before on every card carrying [data-spotlight]. */
+.about-board__card::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  width: 4px;
+  background: linear-gradient(180deg, var(--color-blue) 0%, var(--color-gold) 100%);
+  transform: scaleY(0);
+  transform-origin: 50% 0;
+  transition: transform var(--duration-slow) var(--ease-emphasized);
 }
+
+.about-board__card:hover::after {
+  transform: scaleY(1);
+}
+
+/* ── Chairman ────────────────────────────────────────────────────────────
+   The board's anchor, so it gets the dark treatment rather than just more
+   width — hierarchy you can read at a glance instead of by comparing
+   card sizes. */
+.about-board__card--chair {
+  max-width: 30rem;
+  background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-blue-700) 100%);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Doubled class (0,2,1) on purpose: the generic `.about-board__card h3`
+   and `p` rules further down carry the same single-class specificity and
+   would otherwise win on source order, leaving navy text on the navy card. */
+.about-board__card.about-board__card--chair h3 {
+  color: var(--color-text-inverse);
+}
+
+/* The role is a plain <p> in the markup — no extra class needed.
+   tint-light, not the cyan accent: the card is a gradient, and cyan only
+   manages 3.26:1 against its lighter end — below AA. tint-light holds
+   5.4:1 there and more against the navy end. */
+.about-board__card.about-board__card--chair p {
+  color: var(--color-tint-light);
+}
+
+.about-board__card--chair::after {
+  background: linear-gradient(180deg, var(--color-gold) 0%, var(--color-tint-light) 100%);
+}
+
+/* ── Portrait ────────────────────────────────────────────────────────── */
 
 .about-board__avatar {
   flex-shrink: 0;
@@ -452,20 +507,58 @@
   object-fit: cover;
   object-position: top center;
   background: var(--color-section-tint);
+  /* Double ring: a white gap, then a soft brand halo — the portrait reads
+     as framed rather than pasted onto the card. */
+  box-shadow:
+    0 0 0 3px var(--color-white),
+    0 0 0 4px rgba(0, 119, 182, 0.18),
+    var(--shadow-sm);
+  transition:
+    transform var(--duration-slow) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
+}
+
+.about-board__card:hover .about-board__avatar {
+  transform: scale(1.04);
+  box-shadow:
+    0 0 0 3px var(--color-white),
+    0 0 0 4px var(--color-gold),
+    var(--shadow-md);
 }
 
 .about-board__card--chair .about-board__avatar {
-  width: 120px;
-  height: 120px;
+  width: 124px;
+  height: 124px;
+  box-shadow:
+    0 0 0 3px rgba(255, 255, 255, 0.16),
+    0 0 0 4px rgba(0, 180, 216, 0.55),
+    var(--shadow-md);
 }
+
+.about-board__card--chair:hover .about-board__avatar {
+  box-shadow:
+    0 0 0 3px rgba(255, 255, 255, 0.24),
+    0 0 0 4px var(--color-gold),
+    var(--shadow-lg);
+}
+
+/* ── Name + role ─────────────────────────────────────────────────────── */
 
 .about-board__card h3 {
   font-size: var(--font-size-lg);
   color: var(--color-navy);
-  margin-bottom: var(--space-1);
+  margin-bottom: var(--space-2);
+  text-wrap: balance;
 }
 
+/* Role set as a small tracked eyebrow rather than muted body text — it
+   stops reading as a second sentence and starts reading as a title.
+   gold-600 (#007a94), not the lighter cyan, to hold AA contrast on white. */
 .about-board__card p {
-  color: var(--color-text-muted);
-  font-size: var(--font-size-sm);
+  font-family: var(--font-heading);
+  font-size: var(--font-size-2xs);
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--color-gold-600);
 }

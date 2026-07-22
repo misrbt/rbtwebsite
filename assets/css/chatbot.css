@@ -43,7 +43,8 @@
   flex-direction: column;
   width: 22rem;
   max-width: calc(100vw - var(--space-8));
-  height: 28rem;
+  /* Taller than the original 28rem to pay for the second row of chips. */
+  height: 31rem;
   max-height: 70vh;
   background: var(--color-white);
   border-radius: var(--radius-lg);
@@ -123,6 +124,9 @@
 
 .chatbot__message p {
   margin: 0;
+  /* Requirement lists are written as newline-separated bullets in
+     chatbot.js — without this they'd collapse into one run-on paragraph. */
+  white-space: pre-line;
 }
 
 .chatbot__message--bot {
@@ -154,6 +158,8 @@
 
 .chatbot__chips {
   display: flex;
+  /* Wrapped, so every quick reply is visible at once — the labels are kept
+     short enough to land in two rows and leave the messages room to breathe. */
   flex-wrap: wrap;
   flex-shrink: 0;
   gap: var(--space-2);
@@ -162,6 +168,8 @@
 }
 
 .chatbot__chip {
+  flex: 0 0 auto;
+  white-space: nowrap;
   padding: var(--space-2) var(--space-4);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-full);

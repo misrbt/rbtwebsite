@@ -385,8 +385,20 @@
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
+    /* The desktop panel runs 40px/48px — too generous once it stacks. */
+    gap: var(--space-6);
+    padding: var(--space-8) var(--space-6);
   }
 
+  .properties-inquire__heading {
+    font-size: var(--font-size-xl);
+  }
+
+  .properties-inquire__text {
+    max-width: 100%;
+  }
+
+  /* display:none still wins over the absolute positioning it now carries. */
   .properties-inquire__art {
     display: none;
   }
@@ -651,8 +663,62 @@
     flex: none;
   }
 
-  .events-timeline__grid {
-    grid-template-columns: 1fr;
+  /* Coverflow on a phone: narrower cards, and the neighbours tucked further
+     back so the centre album stays the obvious subject. Swiping still works. */
+  .events-albums {
+    --album-w: min(16rem, 74vw);
+    --album-gap: calc(var(--album-w) * 0.7);
+    border-radius: var(--radius-md);
+  }
+
+  .events-albums__arrow {
+    width: 38px;
+    height: 38px;
+  }
+
+  .events-albums__arrow--prev {
+    left: var(--space-2);
+  }
+
+  .events-albums__arrow--next {
+    right: var(--space-2);
+  }
+
+  .album-lightbox__head {
+    padding: var(--space-6) var(--space-4) var(--space-4);
+  }
+
+  .album-lightbox__stage {
+    padding-inline: var(--space-2);
+    gap: var(--space-2);
+  }
+
+  /* Full-width photo on a phone — float the controls over it instead of
+     letting them eat a third of the row. */
+  .album-lightbox__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    flex: none;
+    width: 42px;
+    height: 42px;
+    background: rgba(0, 0, 0, 0.55);
+  }
+
+  .album-lightbox__nav--prev {
+    left: var(--space-2);
+  }
+
+  .album-lightbox__nav--next {
+    right: var(--space-2);
+  }
+
+  .album-lightbox__foot {
+    padding: var(--space-3) var(--space-4) var(--space-5);
+  }
+
+  .album-lightbox__caption {
+    font-size: var(--font-size-2xs);
   }
 
   .events-highlights__carousel {

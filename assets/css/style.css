@@ -64,19 +64,40 @@
   --space-2: 0.5rem;
   --space-3: 0.75rem;
   --space-4: 1rem;
+  --space-5: 1.25rem;
   --space-6: 1.5rem;
   --space-8: 2rem;
   --space-10: 2.5rem;
   --space-12: 3rem;
   --space-16: 4rem;
+  --space-20: 5rem;
   --space-24: 6rem;
   --space-32: 8rem;
 
-  /* Elevation + glass */
-  --shadow-sm: 0 2px 8px rgba(7, 26, 47, 0.06);
-  --shadow-md: 0 8px 24px rgba(7, 26, 47, 0.1);
-  --shadow-lg: 0 20px 48px rgba(7, 26, 47, 0.16);
-  --shadow-gold: 0 8px 24px rgba(0, 180, 216, 0.25);
+  /* Elevation + glass
+     Two-layer shadows: a tight contact shadow grounds the element, a wide
+     soft one gives it height. A single blur reads flat and cheap by
+     comparison — this is the biggest low-effort lift in the whole system.
+     Tinted with the brand navy rather than neutral black so elevation
+     feels part of the palette instead of a grey wash over it. */
+  --shadow-sm:
+    0 1px 2px rgba(3, 4, 94, 0.06),
+    0 2px 8px rgba(3, 4, 94, 0.05);
+  --shadow-md:
+    0 2px 4px rgba(3, 4, 94, 0.05),
+    0 10px 28px rgba(3, 4, 94, 0.1);
+  --shadow-lg:
+    0 4px 10px rgba(3, 4, 94, 0.06),
+    0 24px 56px rgba(3, 4, 94, 0.16);
+  --shadow-xl:
+    0 8px 18px rgba(3, 4, 94, 0.08),
+    0 44px 88px rgba(3, 4, 94, 0.2);
+  --shadow-gold: 0 2px 6px rgba(0, 180, 216, 0.2), 0 12px 28px rgba(0, 180, 216, 0.28);
+
+  /* Hairline rings — pair with a shadow to define an edge without the
+     wireframe look a full 1px border gives every surface. */
+  --ring: inset 0 0 0 1px rgba(0, 119, 182, 0.1);
+  --ring-strong: 0 0 0 3px rgba(0, 119, 182, 0.16);
 
   --glass-bg: rgba(255, 255, 255, 0.65);
   --glass-bg-dark: rgba(7, 26, 47, 0.55);
@@ -88,12 +109,19 @@
   --radius-lg: 24px;
   --radius-full: 999px;
 
-  /* Motion */
+  /* Motion
+     --ease-emphasized leaves fast and settles slowly (Material's emphasized
+     curve): the right default for anything entering the screen.
+     --ease-spring overshoots slightly — reserve it for small, playful
+     confirmations, never for large surfaces on a bank site. */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
   --duration-fast: 150ms;
   --duration-base: 250ms;
   --duration-slow: 450ms;
+  --duration-slower: 700ms;
 
   --nav-height: 108px;
   --nav-height-shrunk: 92px;
@@ -169,10 +197,20 @@ ul {
   list-style: none;
 }
 
-/* Visible, consistent focus state for keyboard users. */
+/* Visible, consistent focus state for keyboard users. The soft halo behind
+   the hard outline keeps it legible on both white and navy surfaces. */
 :focus-visible {
   outline: 2px solid var(--color-blue);
   outline-offset: 2px;
+  box-shadow: var(--ring-strong);
+}
+
+/* On dark sections the blue outline sinks into the background — go white. */
+.section--dark :focus-visible,
+.site-header.is-scrolled :focus-visible,
+.site-footer :focus-visible {
+  outline-color: var(--color-white);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.22);
 }
 
 /* Cross-document View Transitions — zero JS, zero dependency. Degrades
@@ -274,7 +312,10 @@ section {
   width: 56px;
   height: 3px;
   margin: var(--space-4) auto 0;
-  background: var(--color-navy);
+  /* Gradient rather than flat navy, fading into the cyan accent — the same
+     brand gradient the primary buttons use, so the accent reads as one
+     system rather than a decorative stripe. */
+  background: linear-gradient(90deg, var(--color-navy) 0%, var(--color-gold) 100%);
   border-radius: var(--radius-full);
 }
 
@@ -296,14 +337,65 @@ section {
   font-family: var(--font-heading);
   font-size: var(--font-size-sm);
   font-weight: 600;
+  letter-spacing: 0.01em;
+  /* Set by initMagneticButtons in main.js — the button leans a few pixels
+     toward the cursor. Falls back to 0 with JS off. */
+  --btn-pull-x: 0px;
+  --btn-pull-y: 0px;
+  transform: translate3d(var(--btn-pull-x), var(--btn-pull-y), 0);
   transition:
-    transform var(--duration-fast) var(--ease-out),
-    box-shadow var(--duration-fast) var(--ease-out),
-    background-color var(--duration-fast) var(--ease-out);
+    transform var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    filter var(--duration-fast) var(--ease-out);
+}
+
+/* Sheen — a soft highlight that sweeps across on hover. Skewed so it reads
+   as light catching a surface rather than a bar sliding past. */
+.btn::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -75%;
+  width: 50%;
+  height: 200%;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.28) 50%,
+    transparent 100%
+  );
+  transform: translateX(0) skewX(-18deg);
+  opacity: 0;
+  transition: transform var(--duration-slower) var(--ease-out), opacity var(--duration-fast) linear;
+}
+
+.btn:hover::after {
+  transform: translateX(420%) skewX(-18deg);
+  opacity: 1;
+}
+
+/* Arrows and glyphs lean toward the direction of travel. */
+.btn svg {
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.btn:hover svg {
+  transform: translateX(2px);
 }
 
 .btn:active {
-  transform: scale(0.97);
+  transform: translate3d(var(--btn-pull-x), var(--btn-pull-y), 0) scale(0.97);
+  transition-duration: var(--duration-fast);
+}
+
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  opacity: 0.5;
+  filter: saturate(0.6);
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .btn--primary {
@@ -317,8 +409,9 @@ section {
 }
 
 .btn--primary:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
+  filter: brightness(1.06);
+  transform: translate3d(var(--btn-pull-x), calc(var(--btn-pull-y) - 2px), 0);
 }
 
 .btn--gold {
@@ -332,7 +425,9 @@ section {
 }
 
 .btn--gold:hover {
-  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
+  filter: brightness(1.06);
+  transform: translate3d(var(--btn-pull-x), calc(var(--btn-pull-y) - 2px), 0);
 }
 
 .btn--ghost {
@@ -366,8 +461,20 @@ section {
 }
 
 .btn--navy:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
+  filter: brightness(1.12);
+  transform: translate3d(var(--btn-pull-x), calc(var(--btn-pull-y) - 2px), 0);
+}
+
+/* Outline/ghost buttons have no fill for a sheen to catch. */
+.btn--outline::after,
+.btn--ghost::after {
+  display: none;
+}
+
+.btn--outline:hover {
+  border-color: var(--color-blue);
+  box-shadow: var(--shadow-sm);
 }
 
 /* Ripple effect — element added by assets/js/main.js on click */

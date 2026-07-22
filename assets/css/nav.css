@@ -29,9 +29,21 @@
    than a one-off color choice. */
 .site-header.is-scrolled {
   height: var(--nav-height-shrunk);
-  background: var(--color-navy);
+  /* Slightly translucent + blurred rather than flat navy: content passing
+     underneath stays faintly perceptible, which is what makes a sticky bar
+     read as a layer above the page instead of a lid on top of it. Falls
+     back to near-solid navy where backdrop-filter isn't supported. */
+  background: rgba(3, 4, 94, 0.9);
+  backdrop-filter: blur(14px) saturate(1.3);
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
   border-bottom-color: transparent;
   box-shadow: var(--shadow-lg);
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .site-header.is-scrolled {
+    background: var(--color-navy);
+  }
 }
 
 .site-header.is-scrolled .site-nav__logo-text,
@@ -40,8 +52,10 @@
   color: var(--color-text-inverse);
 }
 
+/* On the navy scrolled bar the blue end of the gradient disappears — run
+   it cyan-to-white instead so both ends stay visible. */
 .site-header.is-scrolled .site-nav__links a::after {
-  background: var(--color-gold);
+  background: linear-gradient(90deg, var(--color-gold) 0%, var(--color-tint-light) 100%);
 }
 
 .site-header.is-scrolled .site-nav__links a:hover {
@@ -130,17 +144,22 @@
   transition: color var(--duration-base) var(--ease-out);
 }
 
+/* Animating a scaled transform rather than width keeps the indicator on the
+   compositor — width animation relayouts the link on every frame. */
 .site-nav__links a::after {
   content: "";
   position: absolute;
   left: 0;
   bottom: 0;
   height: 2px;
-  width: 0;
-  background: var(--color-blue);
+  width: 100%;
+  border-radius: var(--radius-full);
+  background: linear-gradient(90deg, var(--color-blue) 0%, var(--color-gold) 100%);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
   transition:
-    width var(--duration-base) var(--ease-out),
-    background-color var(--duration-base) var(--ease-out);
+    transform var(--duration-base) var(--ease-emphasized),
+    background var(--duration-base) var(--ease-out);
 }
 
 .site-nav__links a:hover {
@@ -149,7 +168,13 @@
 
 .site-nav__links a:hover::after,
 .site-nav__links a[aria-current="page"]::after {
-  width: 100%;
+  transform: scaleX(1);
+}
+
+/* Leaving a link retracts the underline toward the right, so it exits the
+   way the pointer left rather than snapping back to where it entered. */
+.site-nav__links a:not(:hover):not([aria-current="page"])::after {
+  transform-origin: 100% 50%;
 }
 
 .site-nav__actions {

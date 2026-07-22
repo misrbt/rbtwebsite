@@ -217,8 +217,302 @@
           employees to travel and experience other cultures beyond the country.
         </p>
 
+        <!-- Album carousel — coverflow of social-post style cards. The centre
+             card sits face-on, neighbours fall back in 3D. "Learn more" opens
+             the album in the fullscreen viewer below.
+             Driven by assets/js/events-albums.js (deliberately not Swiper). -->
+        <div class="events-albums" data-events-albums data-aos="fade-up">
+          <div class="events-albums__stage" data-albums-stage tabindex="0" role="group"
+            aria-label="Albums of events — use the arrow keys to browse">
+            <ul class="events-albums__track" data-albums-track>
+              <li class="events-albums__slide">
+                <article class="album-card" data-album data-album-year="2015" data-album-place="Singapore">
+                  <div class="album-card__media">
+                    <img class="album-card__photo" src="assets/images/events/EVENTS%20TIMELINE/2015/Picture1.png"
+                      alt="RBT Bank officers and employees at Universal Studios during the 2015 Singapore trip"
+                      loading="lazy" />
+                  </div>
 
+                  <span class="album-card__badge">
+                    <img class="album-card__avatar" src="assets/images/rbt-logo.png" alt="" aria-hidden="true" />
+                    <span class="album-card__meta">
+                      <span class="album-card__brand">RBT BANK INC.</span>
+                      <span class="album-card__when">2015 &middot; Singapore</span>
+                    </span>
+                  </span>
 
+                  <img class="album-card__platform" src="assets/icons/favebook.webp" alt="" aria-hidden="true" />
+
+                  <div class="album-card__panel">
+                    <p class="album-card__desc">
+                      The Bank's first overseas incentive trip took officers and
+                      employees to Gardens by the Bay and Universal Studios
+                      Singapore.
+                    </p>
+                    <button type="button" class="album-card__more" data-album-open>
+                      Learn more
+                    </button>
+                  </div>
+
+                  <div class="album-card__gallery" data-album-gallery hidden>
+                    <img src="assets/images/events/EVENTS%20TIMELINE/2015/Picture1.png"
+                      alt="RBT Bank team at Universal Studios, Singapore" />
+                    <img src="assets/images/events/EVENTS%20TIMELINE/2015/Picture2.png"
+                      alt="RBT Bank team at Gardens by the Bay, Singapore" />
+                  </div>
+                </article>
+              </li>
+
+              <li class="events-albums__slide">
+                <article class="album-card" data-album data-album-year="2017" data-album-place="Hong Kong">
+                  <div class="album-card__media">
+                    <img class="album-card__photo" src="assets/images/events/EVENTS%20TIMELINE/2017/Picture3.png"
+                      alt="RBT Bank team along Victoria Harbour during the 2017 Hong Kong trip" loading="lazy" />
+                  </div>
+
+                  <span class="album-card__badge">
+                    <img class="album-card__avatar" src="assets/images/rbt-logo.png" alt="" aria-hidden="true" />
+                    <span class="album-card__meta">
+                      <span class="album-card__brand">RBT BANK INC.</span>
+                      <span class="album-card__when">2017 &middot; Hong Kong</span>
+                    </span>
+                  </span>
+
+                  <img class="album-card__platform" src="assets/icons/favebook.webp" alt="" aria-hidden="true" />
+
+                  <div class="album-card__panel">
+                    <p class="album-card__desc">
+                      A second incentive trip brought the team to Victoria
+                      Harbour and the city's landmark attractions.
+                    </p>
+                    <button type="button" class="album-card__more" data-album-open>
+                      Learn more
+                    </button>
+                  </div>
+
+                  <div class="album-card__gallery" data-album-gallery hidden>
+                    <img src="assets/images/events/EVENTS%20TIMELINE/2017/Picture3.png"
+                      alt="RBT Bank team along Victoria Harbour, Hong Kong" />
+                    <img src="assets/images/events/EVENTS%20TIMELINE/2017/Picture4.png"
+                      alt="RBT Bank team at a park during the 2017 Hong Kong trip" />
+                  </div>
+                </article>
+              </li>
+
+              <li class="events-albums__slide">
+                <article class="album-card" data-album data-album-year="2019" data-album-place="South Korea">
+                  <div class="album-card__media">
+                    <img class="album-card__photo" src="assets/images/events/EVENTS%20TIMELINE/2019/Picture5.png"
+                      alt="RBT Bank team at a traditional Korean village during the 2019 South Korea trip"
+                      loading="lazy" />
+                  </div>
+
+                  <span class="album-card__badge">
+                    <img class="album-card__avatar" src="assets/images/rbt-logo.png" alt="" aria-hidden="true" />
+                    <span class="album-card__meta">
+                      <span class="album-card__brand">RBT BANK INC.</span>
+                      <span class="album-card__when">2019 &middot; South Korea</span>
+                    </span>
+                  </span>
+
+                  <img class="album-card__platform" src="assets/icons/favebook.webp" alt="" aria-hidden="true" />
+
+                  <div class="album-card__panel">
+                    <p class="album-card__desc">
+                      Employees explored traditional Korean villages and
+                      cultural sites, broadening their perspective beyond the
+                      country.
+                    </p>
+                    <button type="button" class="album-card__more" data-album-open>
+                      Learn more
+                    </button>
+                  </div>
+
+                  <div class="album-card__gallery" data-album-gallery hidden>
+                    <img src="assets/images/events/EVENTS%20TIMELINE/2019/Picture5.png"
+                      alt="RBT Bank team at a traditional Korean village" />
+                    <img src="assets/images/events/EVENTS%20TIMELINE/2019/Picture6.png"
+                      alt="RBT Bank team during the 2019 South Korea trip" />
+                  </div>
+                </article>
+              </li>
+
+              <li class="events-albums__slide">
+                <article class="album-card" data-album data-album-year="2023" data-album-place="Japan">
+                  <div class="album-card__media">
+                    <img class="album-card__photo" src="assets/images/events/EVENTS%20TIMELINE/2023/JAPAN/Picture10.png"
+                      alt="RBT Bank team on a Japanese city street during the 2023 Japan trip" loading="lazy" />
+                  </div>
+
+                  <span class="album-card__badge">
+                    <img class="album-card__avatar" src="assets/images/rbt-logo.png" alt="" aria-hidden="true" />
+                    <span class="album-card__meta">
+                      <span class="album-card__brand">RBT BANK INC.</span>
+                      <span class="album-card__when">2023 &middot; Japan</span>
+                    </span>
+                  </span>
+
+                  <img class="album-card__platform" src="assets/icons/favebook.webp" alt="" aria-hidden="true" />
+
+                  <div class="album-card__panel">
+                    <p class="album-card__desc">
+                      After the pandemic pause, the Bank resumed its overseas
+                      trips with a milestone journey to Japan.
+                    </p>
+                    <button type="button" class="album-card__more" data-album-open>
+                      Learn more
+                    </button>
+                  </div>
+
+                  <div class="album-card__gallery" data-album-gallery hidden>
+                    <img src="assets/images/events/EVENTS%20TIMELINE/2023/JAPAN/Picture7.png"
+                      alt="RBT Bank team during the 2023 Japan trip" />
+                    <img src="assets/images/events/EVENTS%20TIMELINE/2023/JAPAN/Picture8.png"
+                      alt="RBT Bank team during the 2023 Japan trip" />
+                    <img src="assets/images/events/EVENTS%20TIMELINE/2023/JAPAN/Picture9.png"
+                      alt="RBT Bank team during the 2023 Japan trip" />
+                    <img src="assets/images/events/EVENTS%20TIMELINE/2023/JAPAN/Picture10.png"
+                      alt="RBT Bank team on a Japanese city street at night" />
+                    <img src="assets/images/events/EVENTS%20TIMELINE/2023/JAPAN/Picture11.png"
+                      alt="RBT Bank team during the 2023 Japan trip" />
+                    <img src="assets/images/events/EVENTS%20TIMELINE/2023/JAPAN/Picture12.png"
+                      alt="RBT Bank team during the 2023 Japan trip" />
+                  </div>
+                </article>
+              </li>
+
+              <li class="events-albums__slide">
+                <article class="album-card" data-album data-album-year="2023" data-album-place="Bohol, Philippines">
+                  <div class="album-card__media">
+                    <img class="album-card__photo" src="assets/images/events/EVENTS%20TIMELINE/2023/BOHOL/Picture16.png"
+                      alt="RBT Bank team at the I Love Bohol landmark during the 2023 Bohol trip" loading="lazy" />
+                  </div>
+
+                  <span class="album-card__badge">
+                    <img class="album-card__avatar" src="assets/images/rbt-logo.png" alt="" aria-hidden="true" />
+                    <span class="album-card__meta">
+                      <span class="album-card__brand">RBT BANK INC.</span>
+                      <span class="album-card__when">2023 &middot; Bohol</span>
+                    </span>
+                  </span>
+
+                  <img class="album-card__platform" src="assets/icons/favebook.webp" alt="" aria-hidden="true" />
+
+                  <div class="album-card__panel">
+                    <p class="album-card__desc">
+                      A local getaway to Bohol gave the team time to recharge
+                      and celebrate the year's milestones together.
+                    </p>
+                    <button type="button" class="album-card__more" data-album-open>
+                      Learn more
+                    </button>
+                  </div>
+
+                  <div class="album-card__gallery" data-album-gallery hidden>
+                    <img src="assets/images/events/EVENTS%20TIMELINE/2023/BOHOL/Picture16.png"
+                      alt="RBT Bank team at the I Love Bohol landmark" />
+                  </div>
+                </article>
+              </li>
+
+              <li class="events-albums__slide">
+                <article class="album-card" data-album data-album-year="2024" data-album-place="Da Nang, Vietnam">
+                  <div class="album-card__media">
+                    <img class="album-card__photo" src="assets/images/events/EVENTS%20TIMELINE/2024/Picture13.png"
+                      alt="RBT Bank team at Sun World Ba Na Hills, Da Nang during the 2024 Vietnam trip"
+                      loading="lazy" />
+                  </div>
+
+                  <span class="album-card__badge">
+                    <img class="album-card__avatar" src="assets/images/rbt-logo.png" alt="" aria-hidden="true" />
+                    <span class="album-card__meta">
+                      <span class="album-card__brand">RBT BANK INC.</span>
+                      <span class="album-card__when">2024 &middot; Da Nang</span>
+                    </span>
+                  </span>
+
+                  <img class="album-card__platform" src="assets/icons/favebook.webp" alt="" aria-hidden="true" />
+
+                  <div class="album-card__panel">
+                    <p class="album-card__desc">
+                      The team travelled to Sun World Ba Na Hills in Da Nang,
+                      another reward for a year of dedicated service.
+                    </p>
+                    <button type="button" class="album-card__more" data-album-open>
+                      Learn more
+                    </button>
+                  </div>
+
+                  <div class="album-card__gallery" data-album-gallery hidden>
+                    <img src="assets/images/events/EVENTS%20TIMELINE/2024/Picture13.png"
+                      alt="RBT Bank team at the Golden Gate of Sun World Ba Na Hills, Da Nang" />
+                    <img src="assets/images/events/EVENTS%20TIMELINE/2024/Picture14.png"
+                      alt="RBT Bank team at the Sun World entrance in Da Nang, Vietnam" />
+                    <img src="assets/images/events/EVENTS%20TIMELINE/2024/Picture15.png"
+                      alt="RBT Bank team during the 2024 Vietnam trip" />
+                  </div>
+                </article>
+              </li>
+
+              <li class="events-albums__slide">
+                <article class="album-card" data-album data-album-year="2025"
+                  data-album-place="Account Officers' Trip">
+                  <div class="album-card__media">
+                    <img class="album-card__photo" src="assets/images/events/EVENTS%20TIMELINE/2025/AO/Picture19.png"
+                      alt="RBT Bank account officers on their 2025 team trip" loading="lazy" />
+                  </div>
+
+                  <span class="album-card__badge">
+                    <img class="album-card__avatar" src="assets/images/rbt-logo.png" alt="" aria-hidden="true" />
+                    <span class="album-card__meta">
+                      <span class="album-card__brand">RBT BANK INC.</span>
+                      <span class="album-card__when">2025 &middot; Account Officers</span>
+                    </span>
+                  </span>
+
+                  <img class="album-card__platform" src="assets/icons/favebook.webp" alt="" aria-hidden="true" />
+
+                  <div class="album-card__panel">
+                    <p class="album-card__desc">
+                      The Bank's account officers were recognised with a
+                      dedicated trip for their work out in the field.
+                    </p>
+                    <button type="button" class="album-card__more" data-album-open>
+                      Learn more
+                    </button>
+                  </div>
+
+                  <div class="album-card__gallery" data-album-gallery hidden>
+                    <img src="assets/images/events/EVENTS%20TIMELINE/2025/AO/Picture17.png"
+                      alt="RBT Bank account officers gathered during their 2025 trip" />
+                    <img src="assets/images/events/EVENTS%20TIMELINE/2025/AO/Picture18.png"
+                      alt="RBT Bank account officers at an aquarium during their 2025 trip" />
+                    <img src="assets/images/events/EVENTS%20TIMELINE/2025/AO/Picture19.png"
+                      alt="RBT Bank account officers on their 2025 team trip" />
+                  </div>
+                </article>
+              </li>
+            </ul>
+
+            <button type="button" class="events-albums__arrow events-albums__arrow--prev" data-albums-prev
+              aria-label="Previous album">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+            <button type="button" class="events-albums__arrow events-albums__arrow--next" data-albums-next
+              aria-label="Next album">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9 6l6 6-6 6" />
+              </svg>
+            </button>
+          </div>
+
+          <div class="events-albums__dots" data-albums-dots role="tablist" aria-label="Choose an album"></div>
+        </div>
+        </div>
       </div>
     </section>
   </main>
@@ -357,6 +651,58 @@
     </div>
   </footer>
 
+  <!-- ==================== Album lightbox ====================
+       Fullscreen single-photo viewer. Populated from the clicked album
+       card's hidden gallery; step through with the prev/next controls,
+       arrow keys, or a swipe. -->
+  <div class="album-lightbox" data-album-lightbox hidden role="dialog" aria-modal="true"
+    aria-labelledby="album-lightbox-title">
+    <div class="album-lightbox__backdrop" data-album-close>
+      <div class="album-lightbox__blur" data-album-blur aria-hidden="true"></div>
+    </div>
+
+    <header class="album-lightbox__head">
+      <img class="album-lightbox__avatar" src="assets/images/rbt-logo.png" alt="" aria-hidden="true" />
+      <div class="album-lightbox__heading">
+        <h3 id="album-lightbox-title" data-album-title></h3>
+        <p class="album-lightbox__subtitle" data-album-subtitle></p>
+      </div>
+      <button type="button" class="album-lightbox__close" data-album-close aria-label="Close album">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      </button>
+    </header>
+
+    <div class="album-lightbox__stage" data-album-stage>
+      <button type="button" class="album-lightbox__nav album-lightbox__nav--prev" data-album-prev
+        aria-label="Previous photo">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </button>
+
+      <figure class="album-lightbox__figure">
+        <img data-album-image alt="" />
+      </figure>
+
+      <button type="button" class="album-lightbox__nav album-lightbox__nav--next" data-album-next
+        aria-label="Next photo">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M9 6l6 6-6 6" />
+        </svg>
+      </button>
+    </div>
+
+    <footer class="album-lightbox__foot">
+      <p class="album-lightbox__caption" data-album-caption></p>
+      <p class="album-lightbox__counter" data-album-counter aria-live="polite"></p>
+    </footer>
+  </div>
+
   <button type="button" class="back-to-top" data-back-to-top aria-label="Back to top">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
       stroke-linecap="round" stroke-linejoin="round">
@@ -393,10 +739,12 @@
       </div>
 
       <div class="chatbot__chips">
-        <button type="button" class="chatbot__chip" data-chatbot-chip>Branch hours</button>
-        <button type="button" class="chatbot__chip" data-chatbot-chip>Loan products</button>
-        <button type="button" class="chatbot__chip" data-chatbot-chip>Deposit accounts</button>
-        <button type="button" class="chatbot__chip" data-chatbot-chip>Contact us</button>
+        <button type="button" class="chatbot__chip" data-chatbot-chip>Requirements</button>
+        <button type="button" class="chatbot__chip" data-chatbot-chip>Loans</button>
+        <button type="button" class="chatbot__chip" data-chatbot-chip>Deposits</button>
+        <button type="button" class="chatbot__chip" data-chatbot-chip>Remittance</button>
+        <button type="button" class="chatbot__chip" data-chatbot-chip>Events</button>
+        <button type="button" class="chatbot__chip" data-chatbot-chip>Contact</button>
       </div>
 
       <form class="chatbot__form" data-chatbot-form>
@@ -416,6 +764,7 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
   <script src="assets/js/slider.js"></script>
+  <script src="assets/js/events-albums.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/chatbot.js"></script>
   <script src="assets/js/animations.js"></script>

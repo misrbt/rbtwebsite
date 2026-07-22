@@ -208,131 +208,534 @@
   /* subtle blue shadow */
 }
 
-.events-timeline__feature {
-  background: var(--color-light-gray);
-  border-radius: var(--radius-xl);
-  padding: var(--space-8);
-  margin-bottom: var(--space-10);
-  box-shadow: inset 0 0 0 1px var(--color-border);
+
+/* ── Album carousel (coverflow) ────────────────────────────────────────────
+   Social-post cards on a 3D carousel: the centre album faces the viewer,
+   its neighbours are pushed back along Z and angled inward. JS sets only
+   --offset / --abs per slide; all the geometry lives here. */
+
+.events-albums {
+  --album-w: clamp(15rem, 21vw, 19rem);
+  /* 4:5 rather than a taller portrait — these are landscape group photos,
+     and anything narrower crops the people out of frame. */
+  --album-h: calc(var(--album-w) * 1.25);
+  /* Sideways step between neighbours, before perspective foreshortening. */
+  --album-gap: calc(var(--album-w) * 0.98);
+
+  background: var(--color-section-tint);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8) 0 var(--space-6);
+  overflow: hidden;
 }
 
-.events-timeline__feature-frame {
+.events-albums__stage {
   position: relative;
-  max-width: 22rem;
-  margin-inline: auto;
-  background: var(--color-white);
-  border-radius: var(--radius-lg);
-  padding: var(--space-6);
-  box-shadow: var(--shadow-md);
+  height: calc(var(--album-h) + var(--space-4));
 }
 
-.events-timeline__feature-year {
+.events-albums__track {
   position: absolute;
-  top: var(--space-4);
-  right: var(--space-4);
-  z-index: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 3.25rem;
-  padding: var(--space-1) var(--space-3);
-  border-radius: var(--radius-full);
-  background: linear-gradient(135deg,
-      var(--color-navy) 0%,
-      var(--color-blue) 100%);
-  color: var(--color-white);
-  font-family: var(--font-heading);
-  font-size: var(--font-size-sm);
-  font-weight: 700;
-  box-shadow: var(--shadow-sm);
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  perspective: 1400px;
+  transform-style: preserve-3d;
 }
 
-.events-timeline__feature-frame img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: var(--radius-md);
-}
+.events-albums__slide {
+  --offset: 0;
+  --abs: 0;
 
-.events-timeline__grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-5);
-}
-
-.events-timeline-card {
-  display: flex;
-  align-items: stretch;
-  gap: var(--space-4);
-  width: 100%;
-  padding: var(--space-4);
-  text-align: left;
-  background: var(--color-white);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: var(--album-w);
+  height: var(--album-h);
+  transform:
+    translateX(-50%)
+    translateX(calc(var(--offset) * var(--album-gap)))
+    translateZ(calc(var(--abs) * -11rem))
+    rotateY(calc(var(--offset) * -13deg));
+  /* Nearer the centre = nearer the front. */
+  z-index: calc(10 - var(--abs));
+  opacity: calc(1 - var(--abs) * 0.12);
   transition:
-    border-color var(--duration-fast) var(--ease-out),
-    box-shadow var(--duration-fast) var(--ease-out),
-    transform var(--duration-fast) var(--ease-out);
+    transform var(--duration-slow) var(--ease-out),
+    opacity var(--duration-slow) var(--ease-out);
 }
 
-.events-timeline-card:hover {
-  border-color: rgba(0, 119, 182, 0.35);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
+/* Far enough out to be irrelevant — keep it out of the way and untabbable. */
+.events-albums__slide.is-far {
+  opacity: 0;
+  pointer-events: none;
 }
 
-.events-timeline-card.is-active {
-  border-color: var(--color-blue);
-  box-shadow: 0 0 0 2px rgba(0, 119, 182, 0.15);
+.events-albums__slide:not(.is-active) {
+  cursor: pointer;
 }
 
-.events-timeline-card__thumb {
-  flex: 0 0 5.5rem;
+/* ── Album card ───────────────────────────────────────────────────────────── */
+
+.album-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
   border-radius: var(--radius-md);
   overflow: hidden;
-  background: var(--color-section-tint);
+  background: var(--color-navy);
+  box-shadow: 0 6px 20px rgba(7, 26, 47, 0.16);
+  transition: box-shadow var(--duration-base) var(--ease-out);
 }
 
-.events-timeline-card__thumb img {
+.events-albums__slide.is-active .album-card {
+  box-shadow: 0 18px 44px rgba(7, 26, 47, 0.3);
+}
+
+.album-card__media {
+  position: absolute;
+  inset: 0;
+}
+
+.album-card__photo {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  aspect-ratio: 1;
+  display: block;
 }
 
-.events-timeline-card__body {
-  flex: 1;
+/* Brand pill, top-left — the "posted by" line of a social card. */
+.album-card__badge {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: calc(100% - 4.25rem);
+  padding: 0.3rem 0.75rem 0.3rem 0.3rem;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 2px 10px rgba(7, 26, 47, 0.18);
+}
+
+.album-card__avatar {
+  flex: 0 0 1.75rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  object-fit: contain;
+  background: var(--color-white);
+}
+
+.album-card__meta {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.25;
+}
+
+.album-card__brand {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.album-card__when {
+  font-size: 0.625rem;
+  color: var(--color-text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Platform mark, top-right — mirrors the source feed. */
+.album-card__platform {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  z-index: 2;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 0.5rem;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(7, 26, 47, 0.35));
+}
+
+/* Frosted caption panel over the foot of the photo. */
+.album-card__panel {
+  position: absolute;
+  right: var(--space-3);
+  bottom: var(--space-3);
+  left: var(--space-3);
+  z-index: 2;
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(7, 26, 47, 0.18);
+}
+
+.album-card__desc {
+  margin: 0 0 var(--space-3);
+  font-size: var(--font-size-2xs);
+  color: var(--color-text);
+  line-height: 1.5;
+  /* Three lines then trail off, like the reference feed. */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.album-card__more {
+  display: block;
+  width: 100%;
+  /* 44px keeps it a comfortable touch target. */
+  min-height: 44px;
+  padding: var(--space-2) var(--space-4);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: rgba(0, 119, 182, 0.1);
+  color: var(--color-blue);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  text-align: center;
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.album-card__more:hover {
+  background: var(--color-blue);
+  color: var(--color-white);
+}
+
+.album-card__more:active {
+  transform: scale(0.98);
+}
+
+/* ── Carousel arrows ──────────────────────────────────────────────────────── */
+
+.events-albums__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  /* Above every card, including the centre one. */
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--color-white);
+  color: var(--color-navy);
+  box-shadow: 0 4px 14px rgba(7, 26, 47, 0.2);
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    opacity var(--duration-fast) var(--ease-out);
+}
+
+.events-albums__arrow:hover:not(:disabled) {
+  color: var(--color-blue);
+  box-shadow: 0 6px 20px rgba(7, 26, 47, 0.28);
+}
+
+.events-albums__arrow:active:not(:disabled) {
+  transform: translateY(-50%) scale(0.94);
+}
+
+.events-albums__arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.events-albums__arrow--prev {
+  left: var(--space-6);
+}
+
+.events-albums__arrow--next {
+  right: var(--space-6);
+}
+
+/* ── Year pills (also the carousel's position indicator) ──────────────────── */
+
+.events-albums__dots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+  padding-inline: var(--space-4);
+}
+
+.events-albums__dot {
+  padding: 0.3rem var(--space-4);
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-full);
+  background: var(--color-white);
+  color: var(--color-text-muted);
+  font-family: var(--font-heading);
+  font-size: var(--font-size-2xs);
+  font-weight: 600;
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
+}
+
+.events-albums__dot:hover {
+  color: var(--color-blue);
+  border-color: var(--color-blue);
+}
+
+.events-albums__dot.is-active {
+  background: var(--color-blue);
+  color: var(--color-white);
+}
+
+/* ── Album lightbox — fullscreen, one photo at a time ─────────────────────── */
+
+body.has-album-open {
+  overflow: hidden;
+}
+
+.album-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.album-lightbox[hidden] {
+  display: none;
+}
+
+.album-lightbox__backdrop {
+  position: absolute;
+  inset: 0;
+  /* Semi-transparent black, not solid — the page stays faintly visible
+     behind, and backdrop-filter blurs it so it never competes with the
+     photo in front. */
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(16px);
+  /* Clips the over-sized blur layer inside. */
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity var(--duration-base) var(--ease-out);
+}
+
+.album-lightbox.is-open .album-lightbox__backdrop {
+  opacity: 1;
+}
+
+/* Blurred copy of the photo on screen, set by events-albums.js. */
+.album-lightbox__blur {
+  position: absolute;
+  /* Bleeds past the edges — a blur samples outside itself and would
+     otherwise leave a pale border all the way round. */
+  inset: -10%;
+  background-position: center;
+  background-size: cover;
+  filter: blur(56px) saturate(1.4);
+  /* Low, so it tints the overlay rather than making it opaque again. */
+  opacity: 0.3;
+  transform: scale(1.1);
+  transition: opacity var(--duration-slow) var(--ease-out);
+}
+
+/* Light black wash over the blur, so white text and controls stay legible
+   whatever the photo underneath happens to be. */
+.album-lightbox__backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.album-lightbox__head,
+.album-lightbox__stage,
+.album-lightbox__foot {
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
+}
+
+.album-lightbox.is-open .album-lightbox__head,
+.album-lightbox.is-open .album-lightbox__stage,
+.album-lightbox.is-open .album-lightbox__foot {
+  opacity: 1;
+  transform: none;
+}
+
+.album-lightbox__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  /* Extra room up top so the logo and title clear the screen edge (and any
+     browser/notch chrome) rather than sitting flush against it. */
+  padding: var(--space-8) var(--space-6) var(--space-5);
+}
+
+.album-lightbox__avatar {
+  flex: 0 0 2.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  object-fit: contain;
+  background: var(--color-white);
+}
+
+.album-lightbox__heading {
   min-width: 0;
 }
 
-.events-timeline-card__year {
-  display: block;
-  font-family: var(--font-heading);
+.album-lightbox__heading h3 {
+  margin: 0;
   font-size: var(--font-size-lg);
-  font-weight: 700;
-  color: var(--color-blue);
-  line-height: 1.2;
+  color: var(--color-white);
+  line-height: 1.25;
 }
 
-.events-timeline-card__place {
-  display: block;
-  font-size: var(--font-size-xs);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--color-navy);
-  margin-bottom: var(--space-2);
-}
-
-.events-timeline-card__desc {
+.album-lightbox__subtitle {
+  margin: 0;
   font-size: var(--font-size-2xs);
-  color: var(--color-text-muted);
-  line-height: 1.55;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.album-lightbox__close {
+  margin-left: auto;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-white);
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+.album-lightbox__close:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: var(--color-white);
+}
+
+.album-lightbox__stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  min-height: 0;
+  padding-inline: var(--space-4);
+}
+
+.album-lightbox__figure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  margin: 0;
+}
+
+/* Fill the stage rather than sit at the photo's natural size — these are
+   small source files and would otherwise float in the middle of the screen.
+   object-fit keeps them undistorted. */
+.album-lightbox__figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  opacity: 0;
+}
+
+.album-lightbox__figure img.is-loaded {
+  opacity: 1;
+}
+
+.album-lightbox__nav {
+  flex: 0 0 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-white);
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+.album-lightbox__nav:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: var(--color-white);
+}
+
+.album-lightbox__nav:active {
+  transform: scale(0.94);
+}
+
+.album-lightbox__nav[hidden] {
+  display: none;
+}
+
+.album-lightbox__foot {
+  padding: var(--space-4) var(--space-6) var(--space-6);
+  text-align: center;
+}
+
+.album-lightbox__caption {
+  max-width: 46rem;
+  margin: 0 auto var(--space-2);
+  font-size: var(--font-size-sm);
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.5;
+}
+
+.album-lightbox__counter {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: var(--font-size-2xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* The carousel's depth and the viewer's fades are decoration, not state. */
+@media (prefers-reduced-motion: reduce) {
+
+  .events-albums__slide,
+  .album-card,
+  .album-lightbox__backdrop,
+  .album-lightbox__head,
+  .album-lightbox__stage,
+  .album-lightbox__foot,
+  .album-lightbox__figure img {
+    transition: none;
+  }
+
+  .album-lightbox__figure img {
+    opacity: 1;
+  }
 }

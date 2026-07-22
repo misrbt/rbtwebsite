@@ -7,38 +7,70 @@
 /* ---- Why Join RBT Bank? ---- */
 
 .careers-why {
-  background: var(--color-white);
+  background:
+    radial-gradient(52rem 26rem at 50% 0%, rgba(0, 180, 216, 0.08) 0%, transparent 70%),
+    var(--color-white);
 }
 
 .careers-why__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-10);
+  gap: var(--space-8);
 }
 
 .careers-why__item {
   text-align: center;
+  padding: var(--space-6) var(--space-4);
+  border-radius: var(--radius-lg);
+  transition: background-color var(--duration-base) var(--ease-out);
 }
 
+.careers-why__item:hover {
+  background: var(--color-section-tint);
+}
+
+/* The icons were bare 72px navy outlines floating in whitespace, which read
+   as unfinished. Housing them in a tinted tile gives each benefit a solid
+   anchor and somewhere for a hover state to live. */
 .careers-why__icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 112px;
-  height: 112px;
-  color: var(--color-navy);
+  width: 92px;
+  height: 92px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, rgba(0, 180, 216, 0.16) 0%, rgba(0, 119, 182, 0.1) 100%);
+  box-shadow: var(--ring), var(--shadow-sm);
+  color: var(--color-blue);
   margin-bottom: var(--space-5);
+  transition:
+    transform var(--duration-base) var(--ease-spring),
+    background var(--duration-base) var(--ease-out),
+    color var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
+}
+
+.careers-why__item:hover .careers-why__icon {
+  background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-blue) 100%);
+  color: var(--color-white);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-6px) rotate(-4deg);
 }
 
 .careers-why__icon svg {
-  width: 72px;
-  height: 72px;
+  width: 44px;
+  height: 44px;
+  transition: transform var(--duration-base) var(--ease-spring);
+}
+
+.careers-why__item:hover .careers-why__icon svg {
+  transform: rotate(4deg) scale(1.08);
 }
 
 .careers-why__item h3 {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-base);
   text-transform: uppercase;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.06em;
   margin-bottom: var(--space-3);
 }
 
@@ -91,32 +123,58 @@
 }
 
 .job-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   background: var(--color-white);
   border-radius: var(--radius-lg);
-  padding: var(--space-8) var(--space-6);
-  box-shadow: var(--shadow-sm);
+  /* Extra top padding clears the accent bar below. */
+  padding: var(--space-10) var(--space-6) var(--space-8);
+  overflow: hidden;
+  box-shadow: var(--ring), var(--shadow-sm);
   transition: box-shadow var(--duration-base) var(--ease-out);
+}
+
+/* Accent bar across the top of each card. Absolutely positioned, NOT a
+   flex item — .job-card is a flex column, so a static pseudo would be laid
+   out as a row at the end of the card instead. ::after because the
+   pointer-tracked spotlight in animations.css owns ::before here. */
+.job-card::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-navy) 0%, var(--color-blue) 50%, var(--color-gold) 100%);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform var(--duration-slow) var(--ease-emphasized);
+}
+
+.job-card:hover::after {
+  transform: scaleX(1);
 }
 
 /* Shadow deepens alongside the JS-driven lift (data-hover-lift, wired in
    animations.js) — the transform is handled there, this is just the
    matching shadow half of the effect. */
-.job-card[data-hover-lift]:hover {
-  box-shadow: var(--shadow-lg);
+.job-card[data-hover-lift]:hover,
+.job-card:hover {
+  box-shadow: var(--ring), var(--shadow-lg);
 }
 
-/* font-size-sm (not the larger default heading size) + nowrap — the
-   longest title in this grid ("Business Development Officer") wrapped to
-   two lines at the larger size within the card's ~242px content width,
-   making that one card's header a different height from the rest. Sized
-   down until it fits on one line at any title length instead. */
+/* The title was shrunk to 15px with white-space:nowrap purely so the
+   longest one ("Business Development Officer") couldn't wrap and throw the
+   card headers out of alignment. That traded the most important text on
+   the card for tidy rows. Restored to a proper heading size and allowed to
+   wrap — a min-height reserves two lines so every header still lines up. */
 .job-card h3 {
-  font-size: var(--font-size-sm);
-  white-space: nowrap;
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-tight);
+  min-height: 4.25rem;
   text-align: center;
   color: var(--color-navy);
+  text-wrap: balance;
   margin-bottom: var(--space-5);
 }
 
@@ -128,17 +186,22 @@
   content: "";
   display: block;
   width: 40px;
-  height: 2px;
+  height: 3px;
   margin: var(--space-3) auto 0;
-  background: var(--color-gold);
+  background: linear-gradient(90deg, var(--color-blue) 0%, var(--color-gold) 100%);
   border-radius: var(--radius-full);
 }
 
+/* "Qualifications:" set as a tracked eyebrow rather than bold body text,
+   so it reads as a section label instead of the first line of the list. */
 .job-card__label {
   padding-block: var(--space-2);
+  font-family: var(--font-heading);
   font-weight: 700;
-  font-size: var(--font-size-sm);
-  color: var(--color-navy);
+  font-size: var(--font-size-2xs);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--color-gold-600);
   margin-bottom: var(--space-3);
 }
 
@@ -151,25 +214,31 @@
 
 .job-card__list li {
   position: relative;
-  padding-left: var(--space-4);
-  margin-bottom: var(--space-2);
+  padding-left: var(--space-6);
+  margin-bottom: var(--space-3);
   color: var(--color-text-muted);
   font-size: var(--font-size-sm);
+  line-height: 1.5;
 }
 
+/* Ticks rather than dots: on a job ad each line is something you either
+   meet or you don't, and a checklist reads that way at a glance.
+   Drawn as a CSS mark so no markup changes are needed. */
 .job-card__list li::before {
   content: "";
   position: absolute;
   left: 0;
-  top: 0.6em;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--color-blue);
+  top: 0.45em;
+  width: 6px;
+  height: 10px;
+  border: solid var(--color-blue);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  border-radius: 1px;
 }
 
 .job-card__cta {
-  align-self: flex-start;
+  align-self: stretch;
   margin-top: auto;
 }
 
@@ -179,29 +248,55 @@
   background: var(--color-white);
 }
 
+/* Was centred text floating on white — the final step of the funnel with
+   no more presence than a caption. Boxed as a panel so it reads as the
+   instruction it is. */
 .careers-apply__body {
-  max-width: 44rem;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  max-width: 48rem;
   margin-inline: auto;
+  padding: var(--space-10) var(--space-12);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--color-navy) 0%, #023e6b 100%);
+  box-shadow: var(--shadow-lg);
   text-align: center;
 }
 
+.careers-apply__body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(26rem 18rem at 15% 12%, rgba(0, 180, 216, 0.26) 0%, transparent 65%),
+    radial-gradient(24rem 16rem at 85% 88%, rgba(0, 119, 182, 0.3) 0%, transparent 65%);
+}
+
 .careers-apply__body p {
-  color: var(--color-text-muted);
-  margin-bottom: var(--space-3);
+  color: var(--color-text-inverse-muted);
+  margin-bottom: var(--space-4);
 }
 
 .careers-apply__org {
+  display: inline-block;
   font-family: var(--font-heading);
   font-weight: 700;
-  color: var(--color-navy);
+  color: var(--color-text-inverse);
   font-size: var(--font-size-lg);
 }
 
+/* tint-light, not the cyan accent: cyan only manages ~3.3:1 against the
+   lighter end of this gradient, below AA. */
 .careers-apply__body a {
   font-weight: 700;
-  color: var(--color-blue);
+  color: var(--color-tint-light);
+  transition: color var(--duration-fast) var(--ease-out);
 }
 
 .careers-apply__body a:hover {
+  color: var(--color-white);
   text-decoration: underline;
 }

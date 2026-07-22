@@ -529,29 +529,6 @@ function initRegionMapTooltip(list, items) {
   window.addEventListener("resize", hide);
 }
 
-function initEventsTimeline() {
-  const root = document.querySelector("[data-events-timeline]");
-  if (!root) return;
-
-  const featureImg = root.querySelector("[data-events-feature-img]");
-  const featureYear = root.querySelector("[data-events-feature-year]");
-  const items = root.querySelectorAll("[data-events-timeline-item]");
-  if (!featureImg || !featureYear || !items.length) return;
-
-  function select(item) {
-    items.forEach((el) => {
-      el.classList.toggle("is-active", el === item);
-    });
-    featureImg.src = item.dataset.featureImg;
-    featureImg.alt = item.dataset.featureAlt || "";
-    featureYear.textContent = item.dataset.year;
-  }
-
-  items.forEach((item) => {
-    item.addEventListener("click", () => select(item));
-  });
-}
-
 function initContactForm() {
   const form = document.querySelector("[data-contact-form]");
   if (!form) return;
@@ -579,6 +556,178 @@ function initContactForm() {
   });
 }
 
+
+/* ==========================================================================
+   Interaction layer — pairs with the "Interaction layer" block in
+   assets/css/animations.css.
+
+   Every function here is progressive enhancement: it decorates markup that
+   already works, attaches nothing on touch-only devices where a hover
+   effect can never fire, and bails entirely under reduced-motion. The page
+   is complete and usable if none of it runs.
+   ========================================================================== */
+
+function motionAllowed() {
+  return !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+// Pointer effects are meaningless without a hover-capable pointer, and on
+// touch they'd fire on tap and stick. Gate them here rather than per-effect.
+function hasFinePointer() {
+  return window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+}
+
+/* Hairline progress bar showing position through the document. */
+function initScrollProgress() {
+  if (!motionAllowed()) return;
+
+  const bar = document.createElement("div");
+  bar.className = "scroll-progress";
+  bar.setAttribute("aria-hidden", "true");
+  document.body.appendChild(bar);
+
+  let ticking = false;
+
+  function update() {
+    ticking = false;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = max > 0 ? window.scrollY / max : 0;
+    bar.style.setProperty("--scroll-progress", Math.min(1, Math.max(0, progress)).toFixed(4));
+  }
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+  update();
+}
+
+/* Cards: a soft highlight that tracks the cursor across the surface.
+   Applied to the card classes the site already uses — no markup changes. */
+const MOTION_CARD_SELECTOR = [
+  ".loan-card",
+  ".service-photo-card",
+  ".products-trust__card",
+  ".about-mission__card",
+  ".about-history__card",
+  ".about-board__card",
+  ".home-property-card",
+  ".property-card",
+  ".branch-card",
+  ".job-card",
+  ".event-card",
+  ".events-highlight-card",
+].join(",");
+
+function initCardSpotlight() {
+  if (!motionAllowed() || !hasFinePointer()) return;
+
+  document.querySelectorAll(MOTION_CARD_SELECTOR).forEach((card) => {
+    card.setAttribute("data-spotlight", "");
+
+    let frame = null;
+    card.addEventListener(
+      "pointermove",
+      (e) => {
+        if (frame) return;
+        frame = requestAnimationFrame(() => {
+          frame = null;
+          const rect = card.getBoundingClientRect();
+          card.style.setProperty("--mx", ((e.clientX - rect.left) / rect.width) * 100 + "%");
+          card.style.setProperty("--my", ((e.clientY - rect.top) / rect.height) * 100 + "%");
+        });
+      },
+      { passive: true }
+    );
+  });
+}
+
+/* Genuine 3D tilt, deliberately limited to a few feature surfaces rather
+   than every card — a whole grid of tilting panels reads as a gimmick, and
+   on a bank that costs more trust than the effect is worth. */
+// One feature surface per page, each a single instance — not a grid. The QR
+// panel is deliberately excluded: people scan it off-screen with a phone,
+// and a panel that tips away under the cursor gets in the way of that.
+const MOTION_TILT_SELECTOR = [
+  ".home-about__visual",
+  ".about-history__card--wide",
+  ".products-trust__card",
+].join(",");
+
+function initTilt() {
+  if (!motionAllowed() || !hasFinePointer()) return;
+
+  const MAX_DEG = 5; // Small on purpose — enough to read as depth, not as a toy.
+
+  document.querySelectorAll(MOTION_TILT_SELECTOR).forEach((el) => {
+    el.setAttribute("data-tilt", "");
+
+    let frame = null;
+
+    el.addEventListener("pointerenter", () => el.classList.add("is-tilting"));
+
+    el.addEventListener(
+      "pointermove",
+      (e) => {
+        if (frame) return;
+        frame = requestAnimationFrame(() => {
+          frame = null;
+          const rect = el.getBoundingClientRect();
+          const px = (e.clientX - rect.left) / rect.width - 0.5;
+          const py = (e.clientY - rect.top) / rect.height - 0.5;
+          // Invert X so the surface tips *toward* the cursor.
+          el.style.setProperty("--tilt-x", (-py * MAX_DEG).toFixed(2) + "deg");
+          el.style.setProperty("--tilt-y", (px * MAX_DEG).toFixed(2) + "deg");
+        });
+      },
+      { passive: true }
+    );
+
+    el.addEventListener("pointerleave", () => {
+      el.classList.remove("is-tilting");
+      el.style.setProperty("--tilt-x", "0deg");
+      el.style.setProperty("--tilt-y", "0deg");
+    });
+  });
+}
+
+/* Primary CTAs lean a few pixels toward the cursor as it approaches.
+   Capped tight — a button that chases the pointer too far stops feeling
+   like a button. */
+function initMagneticButtons() {
+  if (!motionAllowed() || !hasFinePointer()) return;
+
+  const PULL = 4;
+
+  document.querySelectorAll(".btn--primary, .btn--gold, .btn--navy").forEach((btn) => {
+    let frame = null;
+
+    btn.addEventListener(
+      "pointermove",
+      (e) => {
+        if (frame) return;
+        frame = requestAnimationFrame(() => {
+          frame = null;
+          const rect = btn.getBoundingClientRect();
+          const px = (e.clientX - rect.left) / rect.width - 0.5;
+          const py = (e.clientY - rect.top) / rect.height - 0.5;
+          btn.style.setProperty("--btn-pull-x", (px * PULL * 2).toFixed(2) + "px");
+          btn.style.setProperty("--btn-pull-y", (py * PULL).toFixed(2) + "px");
+        });
+      },
+      { passive: true }
+    );
+
+    btn.addEventListener("pointerleave", () => {
+      btn.style.setProperty("--btn-pull-x", "0px");
+      btn.style.setProperty("--btn-pull-y", "0px");
+    });
+  });
+}
 document.addEventListener("DOMContentLoaded", () => {
   initNavScroll();
   initNavToggle();
@@ -590,9 +739,14 @@ document.addEventListener("DOMContentLoaded", () => {
   initBranchSearch();
   initBranchMapModal();
   initPropertyMapModal();
-  initEventsTimeline();
   initRegionMap();
   initContactForm();
   initAdvancedSearchToggle();
   initPropertySearch();
+
+  // Interaction layer — decoration only, safe to run last.
+  initScrollProgress();
+  initCardSpotlight();
+  initTilt();
+  initMagneticButtons();
 });
