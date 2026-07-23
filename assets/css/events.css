@@ -501,241 +501,368 @@
   color: var(--color-white);
 }
 
-/* ── Album lightbox — fullscreen, one photo at a time ─────────────────────── */
+/* ── Album Social-Post Popup ─────────────────────────────────────────────────
+   Matches the EmbedSocial / Instagram-style card design:
+   Left half = full photo  |  Right half = avatar · name · year · description
+   Opens when "Learn more" is clicked on a Timeline card.                     */
 
-body.has-album-open {
-  overflow: hidden;
-}
+body.has-album-open { overflow: hidden; }
 
-.album-lightbox {
+/* ── Outer wrapper (viewport overlay) ── */
+.album-popup {
   position: fixed;
   inset: 0;
-  z-index: 200;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-}
-
-.album-lightbox[hidden] {
-  display: none;
-}
-
-.album-lightbox__backdrop {
-  position: absolute;
-  inset: 0;
-  /* Semi-transparent black, not solid — the page stays faintly visible
-     behind, and backdrop-filter blurs it so it never competes with the
-     photo in front. */
-  background: rgba(0, 0, 0, 0.72);
-  backdrop-filter: blur(16px);
-  /* Clips the over-sized blur layer inside. */
-  overflow: hidden;
-  opacity: 0;
-  transition: opacity var(--duration-base) var(--ease-out);
-}
-
-.album-lightbox.is-open .album-lightbox__backdrop {
-  opacity: 1;
-}
-
-/* Blurred copy of the photo on screen, set by events-albums.js. */
-.album-lightbox__blur {
-  position: absolute;
-  /* Bleeds past the edges — a blur samples outside itself and would
-     otherwise leave a pale border all the way round. */
-  inset: -10%;
-  background-position: center;
-  background-size: cover;
-  filter: blur(56px) saturate(1.4);
-  /* Low, so it tints the overlay rather than making it opaque again. */
-  opacity: 0.3;
-  transform: scale(1.1);
-  transition: opacity var(--duration-slow) var(--ease-out);
-}
-
-/* Light black wash over the blur, so white text and controls stay legible
-   whatever the photo underneath happens to be. */
-.album-lightbox__backdrop::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.25);
-}
-
-.album-lightbox__head,
-.album-lightbox__stage,
-.album-lightbox__foot {
-  position: relative;
-  z-index: 1;
-  opacity: 0;
-  transform: translateY(8px);
-  transition:
-    opacity var(--duration-base) var(--ease-out),
-    transform var(--duration-base) var(--ease-out);
-}
-
-.album-lightbox.is-open .album-lightbox__head,
-.album-lightbox.is-open .album-lightbox__stage,
-.album-lightbox.is-open .album-lightbox__foot {
-  opacity: 1;
-  transform: none;
-}
-
-.album-lightbox__head {
+  z-index: 300;
   display: flex;
   align-items: center;
-  gap: var(--space-4);
-  /* Extra room up top so the logo and title clear the screen edge (and any
-     browser/notch chrome) rather than sitting flush against it. */
-  padding: var(--space-8) var(--space-6) var(--space-5);
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease;
 }
 
-.album-lightbox__avatar {
-  flex: 0 0 2.5rem;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  object-fit: contain;
-  background: var(--color-white);
+.album-popup[hidden] { display: none; }
+
+.album-popup.is-open {
+  opacity: 1;
+  pointer-events: auto;
 }
 
-.album-lightbox__heading {
-  min-width: 0;
+/* Dark blurred backdrop */
+.album-popup__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 12, 24, 0.80);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  cursor: pointer;
 }
 
-.album-lightbox__heading h3 {
-  margin: 0;
-  font-size: var(--font-size-lg);
-  color: var(--color-white);
-  line-height: 1.25;
-}
-
-.album-lightbox__subtitle {
-  margin: 0;
-  font-size: var(--font-size-2xs);
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.album-lightbox__close {
-  margin-left: auto;
-  flex-shrink: 0;
+/* ── Floating × dismiss button (outside the card, top-right corner) ── */
+.album-popup__dismiss {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background: transparent;
-  color: var(--color-white);
-  transition:
-    background-color var(--duration-fast) var(--ease-out),
-    border-color var(--duration-fast) var(--ease-out);
+  border: 0;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: background 0.15s ease, transform 0.15s ease;
 }
 
-.album-lightbox__close:hover {
-  background: rgba(255, 255, 255, 0.14);
-  border-color: var(--color-white);
+.album-popup__dismiss:hover {
+  background: rgba(255, 255, 255, 0.28);
+  transform: scale(1.1);
 }
 
-.album-lightbox__stage {
+/* ── The white card ── */
+.album-popup__card {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: min(88vw, 820px);
+  height: min(85vh, 560px);
+  background: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, 0.50),
+    0 6px 20px rgba(0, 0, 0, 0.25);
+  transform: scale(0.92) translateY(14px);
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.album-popup.is-open .album-popup__card {
+  transform: scale(1) translateY(0);
+}
+
+/* ════════════════════════════════════════
+   LEFT — Photo side
+   ════════════════════════════════════════ */
+.album-popup__photo-side {
+  position: relative;
+  flex: 0 0 55%;
+  background: #111;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-4);
-  min-height: 0;
-  padding-inline: var(--space-4);
 }
 
-.album-lightbox__figure {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-  min-width: 0;
-  height: 100%;
+/* Thin vertical separator between photo and panel */
+.album-popup__photo-side::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  right: 0;
+  width: 1px;
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.album-popup__figure {
   margin: 0;
+  width: 100%;
+  height: 100%;
 }
 
-/* Fill the stage rather than sit at the photo's natural size — these are
-   small source files and would otherwise float in the middle of the screen.
-   object-fit keeps them undistorted. */
-.album-lightbox__figure img {
+.album-popup__img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  border-radius: var(--radius-sm);
+  display: block;
   opacity: 0;
+  transition: opacity 0.28s ease;
 }
 
-.album-lightbox__figure img.is-loaded {
-  opacity: 1;
-}
+.album-popup__img.is-loaded { opacity: 1; }
 
-.album-lightbox__nav {
-  flex: 0 0 52px;
+/* Prev/Next arrows — shown only with multiple photos */
+.album-popup__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 4;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 52px;
-  height: 52px;
-  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--color-white);
-  transition:
-    background-color var(--duration-fast) var(--ease-out),
-    border-color var(--duration-fast) var(--ease-out);
+  border: 0;
+  background: rgba(255, 255, 255, 0.90);
+  color: #111;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
 }
 
-.album-lightbox__nav:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: var(--color-white);
+.album-popup__nav:hover {
+  background: #fff;
+  transform: translateY(-50%) scale(1.1);
 }
 
-.album-lightbox__nav:active {
-  transform: scale(0.94);
+.album-popup__nav[hidden] { display: none; }
+.album-popup__nav--prev  { left: 10px; }
+.album-popup__nav--next  { right: 10px; }
+
+/* Dot indicators at bottom of photo */
+.album-popup__dots {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+  pointer-events: none;
 }
 
-.album-lightbox__nav[hidden] {
-  display: none;
+.album-popup__dots .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
-.album-lightbox__foot {
-  padding: var(--space-4) var(--space-6) var(--space-6);
-  text-align: center;
+.album-popup__dots .dot.is-active {
+  background: #fff;
+  transform: scale(1.3);
 }
 
-.album-lightbox__caption {
-  max-width: 46rem;
-  margin: 0 auto var(--space-2);
-  font-size: var(--font-size-sm);
-  color: rgba(255, 255, 255, 0.85);
-  line-height: 1.5;
+/* ════════════════════════════════════════
+   RIGHT — Post detail panel
+   ════════════════════════════════════════ */
+.album-popup__panel {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #fff;
 }
 
-.album-lightbox__counter {
+/* ── Header: avatar · name/year · brand icon ── */
+.album-popup__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  flex-shrink: 0;
+}
+
+/* Circular avatar with a gradient ring (mirrors Instagram story ring) */
+.album-popup__avatar-ring {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  padding: 2px;
+  background: linear-gradient(135deg, #1a3a6e 0%, #0077b6 60%, #48cae4 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.album-popup__avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: contain;
+  background: #fff;
+  display: block;
+}
+
+/* Name + year stacked */
+.album-popup__meta {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.album-popup__name {
+  font-size: 0.825rem;
+  font-weight: 700;
+  color: #0d1b2e;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.album-popup__year {
+  font-size: 0.7rem;
+  color: #8c96a2;
+  display: block;
+}
+
+/* Brand icon — top-right, styled like the Instagram icon mark */
+.album-popup__brand-icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #1a3a6e 0%, #0077b6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 119, 182, 0.35);
+}
+
+.album-popup__brand-icon img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  filter: brightness(10);
+}
+
+/* ── Thin horizontal rule ── */
+.album-popup__rule {
+  height: 1px;
+  background: #eff2f5;
+  flex-shrink: 0;
   margin: 0;
-  font-family: var(--font-heading);
-  font-size: var(--font-size-2xs);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  color: rgba(255, 255, 255, 0.6);
 }
 
-/* The carousel's depth and the viewer's fades are decoration, not state. */
-@media (prefers-reduced-motion: reduce) {
+/* ── Scrollable description body ── */
+.album-popup__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 16px 12px;
+  scrollbar-width: thin;
+  scrollbar-color: #d8dde3 transparent;
+}
 
+.album-popup__dest {
+  margin: 0 0 10px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #0d1b2e;
+  line-height: 1.35;
+}
+
+.album-popup__desc {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: #3d4a57;
+  line-height: 1.7;
+}
+
+/* ── Footer: photo counter · "View original post →" ── */
+.album-popup__footer {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px 12px;
+  border-top: 1px solid #eff2f5;
+}
+
+.album-popup__counter {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  color: #8c96a2;
+  text-transform: uppercase;
+}
+
+.album-popup__view-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.775rem;
+  font-weight: 600;
+  color: #0077b6;
+  text-decoration: none;
+  transition: color 0.15s ease, gap 0.15s ease;
+}
+
+.album-popup__view-link:hover {
+  color: #005f8e;
+  gap: 7px;
+  text-decoration: underline;
+}
+
+/* ── Responsive: stack on narrow screens ── */
+@media (max-width: 640px) {
+  .album-popup { padding: 10px; }
+
+  .album-popup__card {
+    flex-direction: column;
+    width: 96vw;
+    height: 90vh;
+    border-radius: 12px;
+  }
+
+  .album-popup__photo-side {
+    flex: 0 0 46%;
+  }
+
+  .album-popup__photo-side::after { display: none; }
+}
+
+/* Respect reduced-motion */
+@media (prefers-reduced-motion: reduce) {
   .events-albums__slide,
   .album-card,
-  .album-lightbox__backdrop,
-  .album-lightbox__head,
-  .album-lightbox__stage,
-  .album-lightbox__foot,
-  .album-lightbox__figure img {
+  .album-popup,
+  .album-popup__card,
+  .album-popup__img {
     transition: none;
   }
 
-  .album-lightbox__figure img {
-    opacity: 1;
-  }
+  .album-popup__img { opacity: 1; }
 }
+
+

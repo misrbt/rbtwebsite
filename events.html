@@ -651,56 +651,92 @@
     </div>
   </footer>
 
-  <!-- ==================== Album lightbox ====================
-       Fullscreen single-photo viewer. Populated from the clicked album
-       card's hidden gallery; step through with the prev/next controls,
-       arrow keys, or a swipe. -->
-  <div class="album-lightbox" data-album-lightbox hidden role="dialog" aria-modal="true"
-    aria-labelledby="album-lightbox-title">
-    <div class="album-lightbox__backdrop" data-album-close>
-      <div class="album-lightbox__blur" data-album-blur aria-hidden="true"></div>
-    </div>
+  <!-- ==================== Album Social-Post Popup ====================
+       Instagram / EmbedSocial-style social post popup. Opens when
+       "Learn more" is clicked on a Timeline album card.
+       Left = photo gallery | Right = post header + description. -->
+  <div class="album-popup" data-album-popup hidden role="dialog" aria-modal="true"
+    aria-labelledby="album-popup-brand">
 
-    <header class="album-lightbox__head">
-      <img class="album-lightbox__avatar" src="assets/images/rbt-logo.png" alt="" aria-hidden="true" />
-      <div class="album-lightbox__heading">
-        <h3 id="album-lightbox-title" data-album-title></h3>
-        <p class="album-lightbox__subtitle" data-album-subtitle></p>
+    <!-- Dark blurred backdrop — click to close -->
+    <div class="album-popup__overlay" data-album-close></div>
+
+    <!-- Floating × to close (outside the card, top-right corner) -->
+    <button type="button" class="album-popup__dismiss" data-album-close aria-label="Close">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18" />
+      </svg>
+    </button>
+
+    <!-- The card -->
+    <div class="album-popup__card">
+
+      <!-- ── LEFT: photo viewer ── -->
+      <div class="album-popup__photo-side" data-album-stage>
+
+        <figure class="album-popup__figure">
+          <img class="album-popup__img" data-album-image alt="" />
+        </figure>
+
+        <!-- Prev/Next over the photo -->
+        <button type="button" class="album-popup__nav album-popup__nav--prev"
+          data-album-prev aria-label="Previous photo">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+        <button type="button" class="album-popup__nav album-popup__nav--next"
+          data-album-next aria-label="Next photo">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9 6l6 6-6 6" />
+          </svg>
+        </button>
+
+        <!-- Dot indicators -->
+        <div class="album-popup__dots" data-album-photo-dots aria-hidden="true"></div>
       </div>
-      <button type="button" class="album-lightbox__close" data-album-close aria-label="Close album">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-          stroke-linecap="round" aria-hidden="true">
-          <path d="M6 6l12 12M18 6L6 18" />
-        </svg>
-      </button>
-    </header>
 
-    <div class="album-lightbox__stage" data-album-stage>
-      <button type="button" class="album-lightbox__nav album-lightbox__nav--prev" data-album-prev
-        aria-label="Previous photo">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M15 18l-6-6 6-6" />
-        </svg>
-      </button>
+      <!-- ── RIGHT: post panel ── -->
+      <div class="album-popup__panel">
 
-      <figure class="album-lightbox__figure">
-        <img data-album-image alt="" />
-      </figure>
+        <!-- Header row: avatar · name+year · RBT brand icon -->
+        <div class="album-popup__header">
+          <!-- Avatar -->
+          <div class="album-popup__avatar-ring">
+            <img src="assets/images/rbt-logo.png" alt="RBT Bank" class="album-popup__avatar" />
+          </div>
 
-      <button type="button" class="album-lightbox__nav album-lightbox__nav--next" data-album-next
-        aria-label="Next photo">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M9 6l6 6-6 6" />
-        </svg>
-      </button>
+          <!-- Name + timestamp -->
+          <div class="album-popup__meta">
+            <strong class="album-popup__name" id="album-popup-brand">RBT BANK INC.</strong>
+            <span class="album-popup__year" data-album-subtitle></span>
+          </div>
+
+          <!-- RBT logo brand mark (top-right, like the Instagram icon) -->
+          <div class="album-popup__brand-icon" aria-hidden="true">
+            <img src="assets/images/rbt-logo.png" alt="" />
+          </div>
+        </div>
+
+        <div class="album-popup__rule"></div>
+
+        <!-- Scrollable body: destination heading + description -->
+        <div class="album-popup__body">
+          <p class="album-popup__dest" data-album-title></p>
+          <p class="album-popup__desc" data-album-desc></p>
+        </div>
+
+        <div class="album-popup__rule"></div>
+
+        <!-- Footer: photo counter only -->
+        <div class="album-popup__footer">
+          <span class="album-popup__counter" data-album-counter aria-live="polite"></span>
+        </div>
+      </div>
     </div>
-
-    <footer class="album-lightbox__foot">
-      <p class="album-lightbox__caption" data-album-caption></p>
-      <p class="album-lightbox__counter" data-album-counter aria-live="polite"></p>
-    </footer>
   </div>
 
   <button type="button" class="back-to-top" data-back-to-top aria-label="Back to top">

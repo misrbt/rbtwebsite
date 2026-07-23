@@ -178,78 +178,113 @@
     paint();
   }
 
-  /* ── Lightbox ───────────────────────────────────────────────────────────── */
+  /* ── Social-Post Popup ──────────────────────────────────────────────────── */
 
-  function initAlbumLightbox() {
-    const box = document.querySelector("[data-album-lightbox]");
+  /*
+   * Descriptions for each album — keyed by "YEAR|PLACE" so we can show a
+   * proper text body inside the Instagram-style right panel.
+   */
+  const ALBUM_DESCS = {
+    "2015|Singapore":
+      "The Bank's first overseas incentive trip brought officers and employees to the iconic Gardens by the Bay and the thrilling Universal Studios Singapore — an unforgettable milestone that sparked a tradition of rewarding excellence.",
+    "2017|Hong Kong":
+      "A second incentive trip took the team across Victoria Harbour and through Hong Kong's landmark attractions, celebrating another year of outstanding performance and dedication.",
+    "2019|South Korea":
+      "Employees explored traditional Korean villages, colourful cultural sites, and breathtaking landscapes — broadening perspectives and creating lasting memories beyond Philippine shores.",
+    "2023|Japan":
+      "After a pandemic pause, RBT Bank resumed its overseas trips with a milestone journey to Japan. The team experienced the unique blend of tradition and modernity that Japan is renowned for.",
+    "2023|Bohol, Philippines":
+      "A local getaway to Bohol gave the team time to recharge among pristine beaches and the famous Chocolate Hills, celebrating the year's milestones together.",
+    "2024|Da Nang, Vietnam":
+      "The team travelled to Sun World Ba Na Hills in Da Nang — crossing the iconic Golden Bridge and exploring the French Village — as a reward for another year of dedicated service.",
+    "2025|Account Officers' Trip":
+      "The Bank's account officers were recognised with a dedicated trip for their exceptional fieldwork and commitment to serving clients across all areas of operation.",
+  };
+
+  /* Returns the year as a plain label, e.g. "2015". */
+  function relativeYear(yearStr) {
+    return yearStr;
+  }
+
+  function initAlbumPopup() {
+    const box = document.querySelector("[data-album-popup]");
     if (!box) return;
 
-    const titleEl = box.querySelector("[data-album-title]");
+    const titleEl  = box.querySelector("[data-album-title]");
     const subtitleEl = box.querySelector("[data-album-subtitle]");
-    const imageEl = box.querySelector("[data-album-image]");
-    const captionEl = box.querySelector("[data-album-caption]");
+    const descEl   = box.querySelector("[data-album-desc]");
+    const imageEl  = box.querySelector("[data-album-image]");
     const counterEl = box.querySelector("[data-album-counter]");
-    const stageEl = box.querySelector("[data-album-stage]");
-    const blurEl = box.querySelector("[data-album-blur]");
-    const prevBtn = box.querySelector("[data-album-prev]");
-    const nextBtn = box.querySelector("[data-album-next]");
-    const closeBtn = box.querySelector(".album-lightbox__close");
+    const stageEl  = box.querySelector("[data-album-stage]");
+    const dotsWrap = box.querySelector("[data-album-photo-dots]");
+    const prevBtn  = box.querySelector("[data-album-prev]");
+    const nextBtn  = box.querySelector("[data-album-next]");
     if (!imageEl) return;
 
-    // Photos in the album currently on screen: [{ src, alt }, ...]
     let photos = [];
-    let index = 0;
+    let photoIndex = 0;
     let lastFocused = null;
+    let pendingDir = 0;
 
-    /* Slide the incoming photo in from the side it came from. Animating the
-       single <img> rather than a track keeps wrapping seamless — the last
-       photo flows into the first with no rewind. */
-    function slideIn(direction) {
+    /* Rebuild the row of indicator dots. */
+    function buildDots() {
+      if (!dotsWrap) return;
+      dotsWrap.innerHTML = "";
+      photos.forEach((_, i) => {
+        const d = document.createElement("span");
+        d.className = "dot" + (i === photoIndex ? " is-active" : "");
+        dotsWrap.appendChild(d);
+      });
+    }
+
+    function updateDots() {
+      if (!dotsWrap) return;
+      Array.from(dotsWrap.children).forEach((d, i) => {
+        d.classList.toggle("is-active", i === photoIndex);
+      });
+    }
+
+    function slideIn(dir) {
       imageEl.classList.add("is-loaded");
       if (reduceMotion.matches || !imageEl.animate) return;
-
       imageEl.animate(
         [
-          { opacity: 0, transform: "translateX(" + direction * 48 + "px)" },
+          { opacity: 0, transform: "translateX(" + dir * 40 + "px)" },
           { opacity: 1, transform: "none" },
         ],
-        { duration: 320, easing: "cubic-bezier(0.16, 1, 0.3, 1)" }
+        { duration: 280, easing: "cubic-bezier(0.16, 1, 0.3, 1)" }
       );
     }
 
-    function show(i, direction) {
+    function showPhoto(i, dir) {
       if (!photos.length) return;
-      // Wraps both ways, so the album never runs out of photos.
-      index = (i + photos.length) % photos.length;
-      const photo = photos[index];
+      photoIndex = (i + photos.length) % photos.length;
+      const photo = photos[photoIndex];
 
-      pendingDirection = direction || 0;
+      pendingDir = dir || 0;
       imageEl.classList.remove("is-loaded");
       imageEl.src = photo.src;
       imageEl.alt = photo.alt;
 
-      // Same photo, blurred, as the backdrop behind the black wash.
-      if (blurEl) {
-        blurEl.style.backgroundImage = 'url("' + photo.src + '")';
-      }
-
-      if (captionEl) captionEl.textContent = photo.alt;
       if (counterEl) {
-        counterEl.textContent = index + 1 + " / " + photos.length;
+        counterEl.textContent = photos.length > 1
+          ? (photoIndex + 1) + " / " + photos.length
+          : "";
       }
 
-      // A single-photo album has nothing to step to.
       const single = photos.length < 2;
       if (prevBtn) prevBtn.hidden = single;
       if (nextBtn) nextBtn.hidden = single;
+
+      updateDots();
     }
 
-    let pendingDirection = 0;
-    imageEl.addEventListener("load", () => slideIn(pendingDirection));
+    imageEl.addEventListener("load", () => slideIn(pendingDir));
 
     function open(card) {
-      const year = card.dataset.albumYear || "";
+      const year  = card.dataset.albumYear  || "";
       const place = card.dataset.albumPlace || "";
+      const key   = year + "|" + place;
       const source = card.querySelector("[data-album-gallery]");
 
       photos = source
@@ -260,22 +295,21 @@
         : [];
       if (!photos.length) return;
 
-      if (titleEl) titleEl.textContent = place;
-      if (subtitleEl) {
-        subtitleEl.textContent =
-          year +
-          " · " +
-          photos.length +
-          (photos.length === 1 ? " photo" : " photos");
-      }
+      // Populate right panel
+      if (titleEl)    titleEl.textContent    = place;
+      if (subtitleEl) subtitleEl.textContent = relativeYear(year);
+      if (descEl)     descEl.textContent     = ALBUM_DESCS[key] || "";
 
-      show(0, 0);
+      photoIndex = 0;
+      buildDots();
+      showPhoto(0, 0);
 
       lastFocused = document.activeElement;
       box.hidden = false;
-      // Next frame, so the opening transition has a start state to animate from.
       requestAnimationFrame(() => box.classList.add("is-open"));
       document.body.classList.add("has-album-open");
+
+      const closeBtn = box.querySelector(".album-popup__close");
       if (closeBtn) closeBtn.focus();
     }
 
@@ -286,21 +320,22 @@
       const finish = () => {
         box.hidden = true;
         imageEl.removeAttribute("src");
-        if (blurEl) blurEl.style.backgroundImage = "";
         photos = [];
+        if (dotsWrap) dotsWrap.innerHTML = "";
       };
 
       if (reduceMotion.matches) finish();
-      else setTimeout(finish, 200);
+      else setTimeout(finish, 280);
 
       if (lastFocused && typeof lastFocused.focus === "function") {
         lastFocused.focus();
       }
     }
 
-    if (prevBtn) prevBtn.addEventListener("click", () => show(index - 1, -1));
-    if (nextBtn) nextBtn.addEventListener("click", () => show(index + 1, 1));
+    if (prevBtn) prevBtn.addEventListener("click", () => showPhoto(photoIndex - 1, -1));
+    if (nextBtn) nextBtn.addEventListener("click", () => showPhoto(photoIndex + 1,  1));
 
+    // Open on "Learn more" / close on backdrop or close button
     document.addEventListener("click", (e) => {
       const opener = e.target.closest("[data-album-open]");
       if (opener) {
@@ -311,62 +346,35 @@
       if (e.target.closest("[data-album-close]")) close();
     });
 
-    /* Swipe between photos on touch devices. */
+    // Swipe between photos on touch devices
     if (stageEl) {
       let swipeX = null;
-      stageEl.addEventListener(
-        "touchstart",
-        (e) => {
-          swipeX = e.touches[0].clientX;
-        },
-        { passive: true }
-      );
-      stageEl.addEventListener(
-        "touchend",
-        (e) => {
-          if (swipeX === null) return;
-          const delta = e.changedTouches[0].clientX - swipeX;
-          swipeX = null;
-          if (Math.abs(delta) > 45) {
-            show(delta < 0 ? index + 1 : index - 1, delta < 0 ? 1 : -1);
-          }
-        },
-        { passive: true }
-      );
+      stageEl.addEventListener("touchstart", (e) => {
+        swipeX = e.touches[0].clientX;
+      }, { passive: true });
+      stageEl.addEventListener("touchend", (e) => {
+        if (swipeX === null) return;
+        const delta = e.changedTouches[0].clientX - swipeX;
+        swipeX = null;
+        if (Math.abs(delta) > 45)
+          showPhoto(photoIndex + (delta < 0 ? 1 : -1), delta < 0 ? 1 : -1);
+      }, { passive: true });
     }
 
+    // Keyboard navigation
     document.addEventListener("keydown", (e) => {
       if (box.hidden) return;
-
-      if (e.key === "Escape") {
-        close();
-        return;
-      }
-      if (e.key === "ArrowRight") {
-        e.preventDefault();
-        show(index + 1, 1);
-        return;
-      }
-      if (e.key === "ArrowLeft") {
-        e.preventDefault();
-        show(index - 1, -1);
-        return;
-      }
+      if (e.key === "Escape")      { close(); return; }
+      if (e.key === "ArrowRight")  { e.preventDefault(); showPhoto(photoIndex + 1,  1); return; }
+      if (e.key === "ArrowLeft")   { e.preventDefault(); showPhoto(photoIndex - 1, -1); return; }
 
       if (e.key !== "Tab") return;
-
-      // Keep focus inside the viewer while it's open.
-      const focusables = Array.from(
-        box.querySelectorAll("button:not([hidden])")
-      );
+      const focusables = Array.from(box.querySelectorAll("button:not([hidden])"));
       if (!focusables.length) return;
-
       const first = focusables[0];
-      const last = focusables[focusables.length - 1];
-
+      const last  = focusables[focusables.length - 1];
       if (e.shiftKey && document.activeElement === first) {
-        e.preventDefault();
-        last.focus();
+        e.preventDefault(); last.focus();
       } else if (!e.shiftKey && document.activeElement === last) {
         e.preventDefault();
         first.focus();
@@ -376,6 +384,6 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     initAlbumCarousel();
-    initAlbumLightbox();
+    initAlbumPopup();
   });
 })();
