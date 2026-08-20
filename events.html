@@ -2,11 +2,48 @@
 <html lang="en">
 
 <head>
+  <!-- Google tag (gtag.js) — replace G-XXXXXXXXXX with your real GA4 Measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", "G-XXXXXXXXXX");
+  </script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Events — RBT Bank, Inc.</title>
   <meta name="description"
     content="Community events, CSR highlights, branch openings, and the learning journey of RBT Bank Inc. — serving Filipino communities since 1966." />
+
+  <link rel="canonical" href="https://rbtbank.com/events" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="RBT Bank, Inc." />
+  <meta property="og:locale" content="en_PH" />
+  <meta property="og:url" content="https://rbtbank.com/events" />
+  <meta property="og:title" content="Events — RBT Bank, Inc." />
+  <meta property="og:description"
+    content="Community events, CSR highlights, branch openings, and the learning journey of RBT Bank Inc. — serving Filipino communities since 1966." />
+  <meta property="og:image" content="https://rbtbank.com/assets/images/rbt-logo.png" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Events — RBT Bank, Inc." />
+  <meta name="twitter:description"
+    content="Community events, CSR highlights, branch openings, and the learning journey of RBT Bank Inc. — serving Filipino communities since 1966." />
+  <meta name="twitter:image" content="https://rbtbank.com/assets/images/rbt-logo.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://rbtbank.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Events", "item": "https://rbtbank.com/events" }
+    ]
+  }
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -39,7 +76,7 @@
       </a>
 
       <ul class="site-nav__links" data-nav-links>
-        <li><a href="index.html">Home</a></li>
+        <li><a href="/">Home</a></li>
         <li><a href="about.html">About Us</a></li>
         <li><a href="products-services.html">Products &amp; Services</a></li>
         <li><a href="properties.html">Properties</a></li>

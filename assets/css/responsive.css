@@ -233,6 +233,10 @@
     grid-template-columns: 1fr 1fr;
   }
 
+  .loan-products-grid__layout {
+    grid-template-columns: 1fr 1fr;
+  }
+
   .home-about__layout {
     grid-template-columns: 1fr;
   }
@@ -594,6 +598,10 @@
 
   .careers-why__grid,
   .careers-jobs__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .loan-products-grid__layout {
     grid-template-columns: 1fr;
   }
 

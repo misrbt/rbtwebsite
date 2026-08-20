@@ -2,11 +2,37 @@
 <html lang="en">
 
 <head>
+  <!-- Google tag (gtag.js) — replace G-XXXXXXXXXX with your real GA4 Measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", "G-XXXXXXXXXX");
+  </script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RBT Bank, Inc. — A Rural Bank</title>
   <meta name="description"
     content="RBT Bank Inc., a rural bank serving Filipino communities since 1966. Deposit and loan products, regulated by the Bangko Sentral ng Pilipinas, deposits insured by PDIC." />
+
+  <link rel="canonical" href="https://rbtbank.com/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="RBT Bank, Inc." />
+  <meta property="og:locale" content="en_PH" />
+  <meta property="og:url" content="https://rbtbank.com/" />
+  <meta property="og:title" content="RBT Bank, Inc. — A Rural Bank" />
+  <meta property="og:description"
+    content="RBT Bank Inc., a rural bank serving Filipino communities since 1966. Deposit and loan products, regulated by the Bangko Sentral ng Pilipinas, deposits insured by PDIC." />
+  <meta property="og:image" content="https://rbtbank.com/assets/images/rbt-logo.png" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="RBT Bank, Inc. — A Rural Bank" />
+  <meta name="twitter:description"
+    content="RBT Bank Inc., a rural bank serving Filipino communities since 1966. Deposit and loan products, regulated by the Bangko Sentral ng Pilipinas, deposits insured by PDIC." />
+  <meta name="twitter:image" content="https://rbtbank.com/assets/images/rbt-logo.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -25,13 +51,40 @@
   <link rel="stylesheet" href="assets/css/chatbot.css" />
   <link rel="stylesheet" href="assets/css/responsive.css" />
   <link rel="stylesheet" href="assets/css/animations.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BankOrCreditUnion",
+    "name": "RBT Bank, Inc.",
+    "alternateName": "RBT Bank Inc., A Rural Bank",
+    "url": "https://rbtbank.com/",
+    "logo": "https://rbtbank.com/assets/images/rbt-logo.png",
+    "image": "https://rbtbank.com/assets/images/rbt-logo.png",
+    "description": "RBT Bank Inc., a rural bank serving Filipino communities since 1966. Regulated by the Bangko Sentral ng Pilipinas; deposits insured by PDIC.",
+    "foundingDate": "1966",
+    "telephone": "+63-935-188-0841",
+    "email": "headoffice@rbtbank.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Rizal St., Poblacion",
+      "addressLocality": "Talisayan",
+      "addressRegion": "Misamis Oriental",
+      "postalCode": "9012",
+      "addressCountry": "PH"
+    },
+    "sameAs": [
+      "https://www.facebook.com/Rbtbankinc"
+    ]
+  }
+  </script>
 </head>
 
 <body>
   <!-- ==================== Header / Navigation ==================== -->
   <header class="site-header" data-site-header>
     <nav class="site-nav container" aria-label="Primary">
-      <a href="index.html" class="site-nav__logo">
+      <a href="/" class="site-nav__logo">
         <img src="assets/images/rbt-logo.png" alt="RBT Bank, Inc. — A Rural Bank, est. 1966" />
         <span class="site-nav__logo-text">
           <strong>RBT BANK INC.</strong>
@@ -40,7 +93,7 @@
       </a>
 
       <ul class="site-nav__links" data-nav-links>
-        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="/" aria-current="page">Home</a></li>
         <li><a href="about.html">About Us</a></li>
         <li><a href="products-services.html">Products &amp; Services</a></li>
         <li><a href="properties.html">Properties</a></li>

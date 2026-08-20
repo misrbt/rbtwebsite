@@ -1,0 +1,191 @@
+/* ==========================================================================
+   RBT Bank — Loan Products page (loan-products.html)
+   Requires style.css to be loaded first (design tokens). Not in the main
+   nav (see CLAUDE.md's fixed 7-item nav) — reached from the loan-card
+   carousel on products-services.html#loan-products and linked back to it.
+   Title-band and dark-CTA-panel patterns intentionally mirror
+   contact.css/.contact-title and properties.css/.properties-inquire rather
+   than importing those files, to keep this page's stylesheet self-
+   contained (same duplication precedent as properties.css's own copy of
+   .map-modal — see that file's header comment).
+   ========================================================================== */
+
+.loan-products-title {
+  background: var(--color-section-tint);
+  padding-block: var(--space-16);
+  text-align: center;
+}
+
+.loan-products-title__crumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.loan-products-title__crumb a {
+  color: var(--color-blue);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.loan-products-title__crumb a:hover {
+  color: var(--color-navy);
+}
+
+.loan-products-title__heading {
+  font-size: var(--font-size-4xl);
+  color: var(--color-navy);
+}
+
+.loan-products-title__meta {
+  margin-top: var(--space-3);
+  color: var(--color-text-muted);
+}
+
+/* ---- Intro ---- */
+
+.loan-products-intro {
+  background: var(--color-white);
+}
+
+.loan-products-intro__text {
+  max-width: 42rem;
+  margin-inline: auto;
+  text-align: center;
+  color: var(--color-text-muted);
+  line-height: var(--line-height-base);
+}
+
+/* ---- Loan detail cards ---- */
+
+.loan-products-grid {
+  background: var(--color-white);
+}
+
+/* Base 3-col layout comes from the shared .grid.grid--3 utility
+   (style.css); responsive.css collapses .loan-products-grid__layout to 2
+   then 1 column at the project's standard breakpoints. */
+
+.loan-detail-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8) var(--space-6);
+  box-shadow: var(--ring), var(--shadow-sm);
+  transition:
+    box-shadow var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
+}
+
+.loan-detail-card:hover {
+  box-shadow: var(--ring), var(--shadow-md);
+  transform: translateY(-4px);
+}
+
+.loan-detail-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: var(--color-section-tint);
+  color: var(--color-blue);
+  margin-bottom: var(--space-6);
+}
+
+.loan-detail-card h3 {
+  font-size: var(--font-size-lg);
+  color: var(--color-navy);
+  margin-bottom: var(--space-3);
+}
+
+.loan-detail-card p {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-base);
+  margin-bottom: var(--space-6);
+}
+
+.loan-detail-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: auto;
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  color: var(--color-blue);
+  transition: gap var(--duration-fast) var(--ease-out);
+}
+
+.loan-detail-card__link:hover {
+  gap: var(--space-3);
+  color: var(--color-navy);
+}
+
+/* ---- Bottom CTA ---- */
+
+.loan-products-cta {
+  background: var(--color-section-tint);
+}
+
+.loan-products-cta__body {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  max-width: 48rem;
+  margin-inline: auto;
+  padding: var(--space-10) var(--space-12);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--color-navy) 0%, #023e6b 100%);
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+}
+
+.loan-products-cta__body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(26rem 18rem at 15% 12%, rgba(0, 180, 216, 0.26) 0%, transparent 65%),
+    radial-gradient(24rem 16rem at 85% 88%, rgba(0, 119, 182, 0.3) 0%, transparent 65%);
+}
+
+.loan-products-cta__body h2 {
+  color: var(--color-text-inverse);
+  margin-bottom: var(--space-3);
+}
+
+.loan-products-cta__body p {
+  color: var(--color-text-inverse-muted);
+  margin-bottom: var(--space-8);
+}
+
+.loan-products-cta__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+/* .btn--outline defaults to navy-on-transparent, unreadable on this dark
+   panel — inverse it the same way careers.css scopes link color for its
+   own dark CTA panel. */
+.loan-products-cta__actions .btn--outline {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: var(--color-text-inverse);
+}
+
+.loan-products-cta__actions .btn--outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--color-text-inverse);
+}

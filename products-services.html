@@ -1,6 +1,15 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Google tag (gtag.js) — replace G-XXXXXXXXXX with your real GA4 Measurement ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-XXXXXXXXXX");
+    </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Products &amp; Services — RBT Bank, Inc.</title>
@@ -8,6 +17,38 @@
       name="description"
       content="Explore RBT Bank Inc.'s deposit products, loan products, and digital services — savings and time deposits, agricultural, SME, microfinance, pensioner's and salary loans, GCash and Maya cash in/out, remittances, POS, and MORESCO II bill payments."
     />
+
+    <link rel="canonical" href="https://rbtbank.com/products-services" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="RBT Bank, Inc." />
+    <meta property="og:locale" content="en_PH" />
+    <meta property="og:url" content="https://rbtbank.com/products-services" />
+    <meta property="og:title" content="Products &amp; Services — RBT Bank, Inc." />
+    <meta
+      property="og:description"
+      content="Explore RBT Bank Inc.'s deposit products, loan products, and digital services — savings and time deposits, agricultural, SME, microfinance, pensioner's and salary loans, GCash and Maya cash in/out, remittances, POS, and MORESCO II bill payments."
+    />
+    <meta property="og:image" content="https://rbtbank.com/assets/images/rbt-logo.png" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Products &amp; Services — RBT Bank, Inc." />
+    <meta
+      name="twitter:description"
+      content="Explore RBT Bank Inc.'s deposit products, loan products, and digital services — savings and time deposits, agricultural, SME, microfinance, pensioner's and salary loans, GCash and Maya cash in/out, remittances, POS, and MORESCO II bill payments."
+    />
+    <meta name="twitter:image" content="https://rbtbank.com/assets/images/rbt-logo.png" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://rbtbank.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Products & Services", "item": "https://rbtbank.com/products-services" }
+      ]
+    }
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -248,7 +289,7 @@
             <div class="swiper" data-loan-slider>
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                  <article class="loan-card" data-aos="fade-up">
+                  <a class="loan-card" href="loan-products.html#agricultural-loan" data-aos="fade-up" aria-label="Agricultural Loan — view details">
                     <span class="loan-card__icon" aria-hidden="true">
                       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M12 20v-7" />
@@ -260,11 +301,11 @@
                     <h3>Agricultural Loan</h3>
                     <p>Assistance for farmers and agri-businesses.</p>
                     <span class="loan-card__rule" aria-hidden="true"></span>
-                  </article>
+                  </a>
                 </div>
 
                 <div class="swiper-slide">
-                  <article class="loan-card" data-aos="fade-up" data-aos-delay="50">
+                  <a class="loan-card" href="loan-products.html#sme-commercial-loan" data-aos="fade-up" data-aos-delay="50" aria-label="SME / Commercial Loan — view details">
                     <span class="loan-card__icon" aria-hidden="true">
                       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M4 8 5 4h14l1 4" />
@@ -276,11 +317,11 @@
                     <h3>SME / Commercial Loan</h3>
                     <p>Working capital and financing for small and medium enterprises.</p>
                     <span class="loan-card__rule" aria-hidden="true"></span>
-                  </article>
+                  </a>
                 </div>
 
                 <div class="swiper-slide">
-                  <article class="loan-card" data-aos="fade-up" data-aos-delay="100">
+                  <a class="loan-card" href="loan-products.html#microfinance-loan" data-aos="fade-up" data-aos-delay="100" aria-label="Microfinance Loan — view details">
                     <span class="loan-card__icon" aria-hidden="true">
                       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="15" r="6.5" />
@@ -293,11 +334,11 @@
                     <h3>Microfinance Loan</h3>
                     <p>Small loans that make a big difference.</p>
                     <span class="loan-card__rule" aria-hidden="true"></span>
-                  </article>
+                  </a>
                 </div>
 
                 <div class="swiper-slide">
-                  <article class="loan-card" data-aos="fade-up" data-aos-delay="150">
+                  <a class="loan-card" href="loan-products.html#pensioners-loan" data-aos="fade-up" data-aos-delay="150" aria-label="Pensioner's Loan — view details">
                     <span class="loan-card__icon" aria-hidden="true">
                       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M9 3v8" />
@@ -311,11 +352,11 @@
                     <h3>Pensioner's Loan</h3>
                     <p>Special loan program for our senior clients.</p>
                     <span class="loan-card__rule" aria-hidden="true"></span>
-                  </article>
+                  </a>
                 </div>
 
                 <div class="swiper-slide">
-                  <article class="loan-card" data-aos="fade-up" data-aos-delay="200">
+                  <a class="loan-card" href="loan-products.html#salary-loan" data-aos="fade-up" data-aos-delay="200" aria-label="Salary Loan — view details">
                     <span class="loan-card__icon" aria-hidden="true">
                       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M3 16c2.5-1.3 5-1.3 6.5-.3l2 1.3c1 .6 2 .6 3 0l3.5-2.3" />
@@ -326,7 +367,7 @@
                     <h3>Salary Loan</h3>
                     <p>Fast and convenient loans for our regular employees.</p>
                     <span class="loan-card__rule" aria-hidden="true"></span>
-                  </article>
+                  </a>
                 </div>
               </div>
             </div>
